@@ -1,0 +1,974 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Assimp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\CApi\CInterfaceIOWrapper.cpp">
+      <Filter>CApi</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Compression.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\BaseImporter.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\BaseProcess.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\PostStepRegistry.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\ImporterRegistry.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\DefaultIOStream.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\IOSystem.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\DefaultIOSystem.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\ZipArchiveIOSystem.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Importer.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\SGSpatialSort.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\VertexTriangleAdjacency.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\SpatialSort.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\SceneCombiner.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\ScenePreprocessor.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\SkeletonMeshBuilder.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\StandardShapes.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\TargetAnimation.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\RemoveComments.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Subdivision.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\scene.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Bitmap.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Version.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\CreateAnimMesh.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\simd.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\material.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\AssertHandler.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Exceptional.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Base64.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Geometry\GeometryUtils.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\DefaultLogger.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\CalcTangentsProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ComputeUVMappingProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ConvertToLHProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\EmbedTexturesProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\FindDegenerates.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\FindInstancesProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\FindInvalidDataProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\FixNormalsStep.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\DropFaceNormalsProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\GenFaceNormalsProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\GenVertexNormalsProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\PretransformVertices.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ImproveCacheLocality.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\JoinVerticesProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\LimitBoneWeightsProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\RemoveRedundantMaterials.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\RemoveVCProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\SortByPTypeProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\SplitLargeMeshes.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\TextureTransform.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\TriangulateProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ValidateDataStructure.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\OptimizeGraph.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\OptimizeMeshes.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\DeboneProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ProcessHelper.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\MakeVerboseFormat.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ScaleProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ArmaturePopulate.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\GenBoundingBoxesProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\SplitByBoneCountProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Material\MaterialSystem.cpp">
+      <Filter>MaterialSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\STEPParser\STEPFileReader.cpp">
+      <Filter>STEPParser</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\STEPParser\STEPFileEncoding.cpp">
+      <Filter>STEPParser</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTFCommon\glTFCommon.cpp">
+      <Filter>glTFCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\Obj\ObjFileImporter.cpp">
+      <Filter>AssetLib\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\Obj\ObjFileMtlImporter.cpp">
+      <Filter>AssetLib\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\Obj\ObjFileParser.cpp">
+      <Filter>AssetLib\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF\glTFImporter.cpp">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF2\glTF2Importer.cpp">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\unzip\ioapi.c">
+      <Filter>Contrib\unzip</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\unzip\unzip.c">
+      <Filter>Contrib\unzip</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\common\shapes.cc">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\sweep\advancing_front.cc">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\sweep\cdt.cc">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\sweep\sweep.cc">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\sweep\sweep_context.cc">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\clipper\clipper.cpp">
+      <Filter>Contrib\Clipper</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\code\OpenDDLParser.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\code\DDLNode.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\code\OpenDDLCommon.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\code\OpenDDLExport.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\code\Value.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\code\OpenDDLStream.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcArithmeticCodec.cpp">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcDynamicVectorDecoder.cpp">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcDynamicVectorEncoder.cpp">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcTools.cpp">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcTriangleFans.cpp">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\pugixml\src\pugixml.cpp">
+      <Filter>Contrib\Pugixml</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\CApi\CInterfaceIOWrapper.h">
+      <Filter>CApi</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\StbCommon.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Compression.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\BaseProcess.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Importer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\ScenePrivate.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\DefaultProgressHandler.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\PolyTools.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Maybe.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\IFF.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\VertexTriangleAdjacency.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\ScenePreprocessor.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\StackAllocator.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\StackAllocator.inl">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\TargetAnimation.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\simd.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Geometry\GeometryUtils.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\DefaultLogger.hpp">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\LogStream.hpp">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Logger.hpp">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\NullLogger.hpp">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\Win32DebugLogStream.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\FileLogStream.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Common\StdOStreamLogStream.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\CalcTangentsProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ComputeUVMappingProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ConvertToLHProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\EmbedTexturesProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\FindDegenerates.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\FindInstancesProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\FindInvalidDataProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\FixNormalsStep.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\DropFaceNormalsProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\GenFaceNormalsProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\GenVertexNormalsProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\PretransformVertices.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ImproveCacheLocality.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\JoinVerticesProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\LimitBoneWeightsProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\RemoveRedundantMaterials.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\RemoveVCProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\SortByPTypeProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\SplitLargeMeshes.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\TextureTransform.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\TriangulateProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ValidateDataStructure.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\OptimizeGraph.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\OptimizeMeshes.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\DeboneProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ProcessHelper.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\MakeVerboseFormat.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ScaleProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\ArmaturePopulate.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\GenBoundingBoxesProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\PostProcessing\SplitByBoneCountProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\Material\MaterialSystem.h">
+      <Filter>MaterialSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\STEPParser\STEPFileReader.h">
+      <Filter>STEPParser</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\STEPParser\STEPFileEncoding.h">
+      <Filter>STEPParser</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTFCommon\glTFCommon.h">
+      <Filter>glTFCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\Obj\ObjFileData.h">
+      <Filter>AssetLib\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\Obj\ObjFileImporter.h">
+      <Filter>AssetLib\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\Obj\ObjFileMtlImporter.h">
+      <Filter>AssetLib\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\Obj\ObjFileParser.h">
+      <Filter>AssetLib\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\Obj\ObjTools.h">
+      <Filter>AssetLib\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF\glTFAsset.h">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF\glTFAsset.inl">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF\glTFAssetWriter.h">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF\glTFAssetWriter.inl">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF\glTFImporter.h">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF2\glTF2Asset.h">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF2\glTF2Asset.inl">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF2\glTF2AssetWriter.h">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF2\glTF2AssetWriter.inl">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\code\AssetLib\glTF2\glTF2Importer.h">
+      <Filter>AssetLib\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\unzip\crypt.h">
+      <Filter>Contrib\unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\unzip\ioapi.h">
+      <Filter>Contrib\unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\unzip\unzip.h">
+      <Filter>Contrib\unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\common\shapes.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\common\utils.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\sweep\advancing_front.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\sweep\cdt.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\sweep\sweep.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\poly2tri\poly2tri\sweep\sweep_context.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\clipper\clipper.hpp">
+      <Filter>Contrib\Clipper</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\include\openddlparser\OpenDDLParser.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\include\openddlparser\OpenDDLParserUtils.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\include\openddlparser\OpenDDLCommon.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\include\openddlparser\OpenDDLExport.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\include\openddlparser\OpenDDLStream.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\include\openddlparser\DDLNode.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\openddlparser\include\openddlparser\Value.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcAdjacencyInfo.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcArithmeticCodec.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcBinaryStream.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcCommon.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcDVEncodeParams.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcDynamicVectorDecoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcDynamicVectorEncoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcDynamicVector.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcFIFO.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcIndexedFaceSet.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcIndexedFaceSet.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcSC3DMCDecoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcSC3DMCDecoder.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcSC3DMCEncodeParams.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcSC3DMCEncoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcSC3DMCEncoder.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcTimer.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcTriangleFans.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcTriangleListDecoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcTriangleListDecoder.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcTriangleListEncoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcTriangleListEncoder.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcVector.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\Open3DGC\o3dgcVector.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\pugixml\src\pugiconfig.hpp">
+      <Filter>Contrib\Pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\pugixml\src\pugixml.hpp">
+      <Filter>Contrib\Pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\contrib\stb\stb_image.h">
+      <Filter>Contrib\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\anim.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\aabb.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\ai_assert.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\camera.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\color4.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\color4.inl">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\build\libs\assimp\include\assimp\config.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\ColladaMetaData.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\commonMetaData.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\defs.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\cfileio.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\light.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\material.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\material.inl">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\matrix3x3.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\matrix3x3.inl">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\matrix4x4.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\matrix4x4.inl">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\mesh.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\ObjMaterial.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\pbrmaterial.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\GltfMaterial.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\postprocess.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\quaternion.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\quaternion.inl">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\scene.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\metadata.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\texture.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\types.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\vector2.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\vector2.inl">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\vector3.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\vector3.inl">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\version.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\cimport.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\AssertHandler.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\importerdesc.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Importer.hpp">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\ProgressHandler.hpp">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\IOStream.hpp">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\IOSystem.hpp">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\cexport.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Exporter.hpp">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\DefaultIOStream.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\DefaultIOSystem.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\ZipArchiveIOSystem.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\SceneCombiner.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\fast_atof.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\qnan.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\BaseImporter.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Hash.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\MemoryIOWrapper.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\ParsingUtils.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\StreamReader.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\StreamWriter.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\StringComparison.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\StringUtils.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\SGSpatialSort.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\GenericProperty.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\SpatialSort.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\SkeletonMeshBuilder.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\SmallVector.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\SmoothingGroups.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\SmoothingGroups.inl">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\StandardShapes.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\RemoveComments.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Subdivision.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Vertex.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\LineSplitter.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\TinyFormatter.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Profiler.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\LogAux.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Bitmap.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\XMLTools.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\IOStreamBuffer.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\CreateAnimMesh.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\XmlParser.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\BlobIOSystem.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\MathFunctions.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Exceptional.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\ByteSwapper.h">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Base64.hpp">
+      <Filter>include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Compiler\pushpack1.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Compiler\poppack1.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\assimp\include\assimp\Compiler\pstdint.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\libs\assimp\code\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="E:\dev\dx12RE\Sludge\libs\assimp\code\res\assimp.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="AssetLib">
+      <UniqueIdentifier>{66934210-1EBD-3AF0-8B6B-FA2500CE87F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AssetLib\GLTF">
+      <UniqueIdentifier>{A1060D11-72B3-3EDA-8E3C-B50D4F26633D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AssetLib\OBJ">
+      <UniqueIdentifier>{90B5561F-3B21-3E52-8A43-3DE0ED8FDD03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CApi">
+      <UniqueIdentifier>{1D12A46A-A4BF-3282-A616-1F618D82A585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{3F47A514-995C-3A22-90B8-B99A88A29CC5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compiler">
+      <UniqueIdentifier>{44A27A38-59DF-39C4-A133-F28866C45F9A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib">
+      <UniqueIdentifier>{B11AB98F-2951-3047-923D-206DE65F3C7F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\Clipper">
+      <UniqueIdentifier>{5E973A47-6D09-3DF1-9316-1A942F6C0652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\Poly2Tri">
+      <UniqueIdentifier>{DC96C368-89C0-343B-985F-A228BEC35BC0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\Pugixml">
+      <UniqueIdentifier>{6D714BA8-6776-355D-A6D3-54BB3B103074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\open3dgc">
+      <UniqueIdentifier>{BDF1A81F-CC88-3A4D-B1F7-AD626DDE7FFA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\openddl_parser">
+      <UniqueIdentifier>{DD21D4C4-CD9A-309A-8332-EFDB634215DC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\stb">
+      <UniqueIdentifier>{15FC2909-05D6-35FC-AD6A-8735146306BA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\unzip">
+      <UniqueIdentifier>{964F6F4E-B5F7-3521-BB48-D873335F43F4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{31B2106E-5DBE-335A-8F30-262CA6C1BD04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logging">
+      <UniqueIdentifier>{3BF5C1BE-2B5E-30EB-AB72-440A62804816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MaterialSystem">
+      <UniqueIdentifier>{C078A6C1-4632-3695-90B8-C3185D456281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PostProcessing">
+      <UniqueIdentifier>{1634848C-6424-379B-882E-C756E95D552D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STEPParser">
+      <UniqueIdentifier>{1D055F00-E556-3069-832A-7FCB43A202A7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0505C4E8-EBCB-3B3C-A823-4B9B03AD74B1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="glTFCommon">
+      <UniqueIdentifier>{D36C313C-11C9-3AC0-93CC-A810E83700B8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{5D1297D1-205F-396B-9D76-FCA35E8D6442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\assimp">
+      <UniqueIdentifier>{E6159C38-2630-3884-8406-25CEEBBF4C10}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

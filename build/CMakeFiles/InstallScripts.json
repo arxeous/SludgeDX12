@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"E:/dev/dx12RE/Sludge/build/cmake_install.cmake",
+		"E:/dev/dx12RE/Sludge/build/libs/assimp/cmake_install.cmake",
+		"E:/dev/dx12RE/Sludge/build/libs/assimp/contrib/zlib/cmake_install.cmake",
+		"E:/dev/dx12RE/Sludge/build/libs/assimp/code/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

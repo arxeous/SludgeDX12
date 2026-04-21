@@ -1,0 +1,16 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-4.2/Modules/BasicConfigVersion-SameMajorVersion.cmake.in
+C:/Program Files/CMake/share/cmake-4.2/Modules/CMakePackageConfigHelpers.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CheckFunctionExists.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CheckIncludeFileCXX.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CheckTypeSize.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/WriteBasicConfigVersionFile.cmake
+E:/dev/dx12RE/Sludge/libs/assimp/CMakeLists.txt
+E:/dev/dx12RE/Sludge/libs/assimp/assimp.pc.in
+E:/dev/dx12RE/Sludge/libs/assimp/cmake-modules/FindPkgMacros.cmake
+E:/dev/dx12RE/Sludge/libs/assimp/cmake-modules/PrecompiledHeader.cmake
+E:/dev/dx12RE/Sludge/libs/assimp/cmake-modules/assimp-plain-config.cmake.in
+E:/dev/dx12RE/Sludge/libs/assimp/cmake-modules/cmake_uninstall.cmake.in
+E:/dev/dx12RE/Sludge/libs/assimp/include/assimp/config.h.in
+E:/dev/dx12RE/Sludge/libs/assimp/include/assimp/revision.h.in

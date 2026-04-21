@@ -1,0 +1,9 @@
+libdir=C:/Program Files/SludgeDX12/lib
+includedir=C:/Program Files/SludgeDX12/include
+
+Name: SludgeDX12
+Description: Import various well-known 3D model formats in an uniform manner.
+Version: 6.0.2
+Libs: -L${libdir} -lassimp
+Libs.private:  
+Cflags: -I${includedir}

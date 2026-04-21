@@ -1,0 +1,13 @@
+E:/dev/dx12RE/Sludge/build/CMakeFiles/SludgeDX12.dir
+E:/dev/dx12RE/Sludge/build/CMakeFiles/INSTALL.dir
+E:/dev/dx12RE/Sludge/build/CMakeFiles/ALL_BUILD.dir
+E:/dev/dx12RE/Sludge/build/CMakeFiles/ZERO_CHECK.dir
+E:/dev/dx12RE/Sludge/build/libs/assimp/CMakeFiles/uninstall.dir
+E:/dev/dx12RE/Sludge/build/libs/assimp/CMakeFiles/UpdateAssimpLibsDebugSymbolsAndDLLs.dir
+E:/dev/dx12RE/Sludge/build/libs/assimp/CMakeFiles/INSTALL.dir
+E:/dev/dx12RE/Sludge/build/libs/assimp/CMakeFiles/ALL_BUILD.dir
+E:/dev/dx12RE/Sludge/build/libs/assimp/contrib/zlib/CMakeFiles/zlibstatic.dir
+E:/dev/dx12RE/Sludge/build/libs/assimp/contrib/zlib/CMakeFiles/INSTALL.dir
+E:/dev/dx12RE/Sludge/build/libs/assimp/contrib/zlib/CMakeFiles/ALL_BUILD.dir
+E:/dev/dx12RE/Sludge/build/libs/assimp/code/CMakeFiles/assimp.dir
+E:/dev/dx12RE/Sludge/build/libs/assimp/code/CMakeFiles/INSTALL.dir

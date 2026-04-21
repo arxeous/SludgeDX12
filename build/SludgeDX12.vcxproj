@@ -1,0 +1,1222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{360F6247-7943-3F30-9700-297D715F0740}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>SludgeDX12</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SludgeDX12.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SludgeDX12</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SludgeDX12.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SludgeDX12</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">SludgeDX12.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">SludgeDX12</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">SludgeDX12.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">SludgeDX12</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck>
+      </BufferSecurityCheck>
+      <CallingConvention>
+      </CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>
+      </FloatingPointModel>
+      <ForceConformanceInForLoopScope>
+      </ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild>
+      </MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData>
+      </RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SupportJustMyCode>
+      </SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType>
+      </TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_UNICODE;UNICODE;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_UNICODE;UNICODE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying Agility SDK DLLs from NuGet package</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/build/Debug/D3D12
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different E:/dev/dx12RE/Sludge/libs/DX12AgilitySDK/build/native/bin/x64/D3D12Core.dll E:/dev/dx12RE/Sludge/build/Debug/D3D12/
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different E:/dev/dx12RE/Sludge/libs/DX12AgilitySDK/build/native/bin/x64/d3d12SDKLayers.dll E:/dev/dx12RE/Sludge/build/Debug/D3D12/
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\Debug\assimp-vc143-mtd.lib;libs\assimp\contrib\zlib\Debug\zlibstaticd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers>
+      </ImageHasSafeExceptionHandlers>
+      <ImportLibrary>E:/dev/dx12RE/Sludge/build/Debug/SludgeDX12.lib</ImportLibrary>
+      <LinkErrorReporting>
+      </LinkErrorReporting>
+      <ProgramDataBaseFile>E:/dev/dx12RE/Sludge/build/Debug/SludgeDX12.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress>
+      </RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck>
+      </BufferSecurityCheck>
+      <CallingConvention>
+      </CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>
+      </FloatingPointModel>
+      <ForceConformanceInForLoopScope>
+      </ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild>
+      </MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData>
+      </RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode>
+      </SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType>
+      </TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying Agility SDK DLLs from NuGet package</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/build/Release/D3D12
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different E:/dev/dx12RE/Sludge/libs/DX12AgilitySDK/build/native/bin/x64/D3D12Core.dll E:/dev/dx12RE/Sludge/build/Release/D3D12/
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different E:/dev/dx12RE/Sludge/libs/DX12AgilitySDK/build/native/bin/x64/d3d12SDKLayers.dll E:/dev/dx12RE/Sludge/build/Release/D3D12/
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\Release\assimp-vc143-mt.lib;libs\assimp\contrib\zlib\Release\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers>
+      </ImageHasSafeExceptionHandlers>
+      <ImportLibrary>E:/dev/dx12RE/Sludge/build/Release/SludgeDX12.lib</ImportLibrary>
+      <LinkErrorReporting>
+      </LinkErrorReporting>
+      <ProgramDataBaseFile>E:/dev/dx12RE/Sludge/build/Release/SludgeDX12.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress>
+      </RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck>
+      </BufferSecurityCheck>
+      <CallingConvention>
+      </CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>
+      </FloatingPointModel>
+      <ForceConformanceInForLoopScope>
+      </ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild>
+      </MinimalRebuild>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData>
+      </RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode>
+      </SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType>
+      </TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying Agility SDK DLLs from NuGet package</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/build/MinSizeRel/D3D12
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different E:/dev/dx12RE/Sludge/libs/DX12AgilitySDK/build/native/bin/x64/D3D12Core.dll E:/dev/dx12RE/Sludge/build/MinSizeRel/D3D12/
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different E:/dev/dx12RE/Sludge/libs/DX12AgilitySDK/build/native/bin/x64/d3d12SDKLayers.dll E:/dev/dx12RE/Sludge/build/MinSizeRel/D3D12/
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\MinSizeRel\assimp-vc143-mt.lib;libs\assimp\contrib\zlib\MinSizeRel\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers>
+      </ImageHasSafeExceptionHandlers>
+      <ImportLibrary>E:/dev/dx12RE/Sludge/build/MinSizeRel/SludgeDX12.lib</ImportLibrary>
+      <LinkErrorReporting>
+      </LinkErrorReporting>
+      <ProgramDataBaseFile>E:/dev/dx12RE/Sludge/build/MinSizeRel/SludgeDX12.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress>
+      </RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck>
+      </BufferSecurityCheck>
+      <CallingConvention>
+      </CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>
+      </FloatingPointModel>
+      <ForceConformanceInForLoopScope>
+      </ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild>
+      </MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData>
+      </RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode>
+      </SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType>
+      </TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying Agility SDK DLLs from NuGet package</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/build/RelWithDebInfo/D3D12
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different E:/dev/dx12RE/Sludge/libs/DX12AgilitySDK/build/native/bin/x64/D3D12Core.dll E:/dev/dx12RE/Sludge/build/RelWithDebInfo/D3D12/
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different E:/dev/dx12RE/Sludge/libs/DX12AgilitySDK/build/native/bin/x64/d3d12SDKLayers.dll E:/dev/dx12RE/Sludge/build/RelWithDebInfo/D3D12/
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\RelWithDebInfo\assimp-vc143-mt.lib;libs\assimp\contrib\zlib\RelWithDebInfo\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers>
+      </ImageHasSafeExceptionHandlers>
+      <ImportLibrary>E:/dev/dx12RE/Sludge/build/RelWithDebInfo/SludgeDX12.lib</ImportLibrary>
+      <LinkErrorReporting>
+      </LinkErrorReporting>
+      <ProgramDataBaseFile>E:/dev/dx12RE/Sludge/build/RelWithDebInfo/SludgeDX12.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress>
+      </RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\vs.cso.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling shader: src/shaders/PBR/VertexShader.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/vs.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/VertexShader.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\VertexShader.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\vs.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compiling shader: src/shaders/PBR/VertexShader.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/vs.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/VertexShader.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\VertexShader.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\vs.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Compiling shader: src/shaders/PBR/VertexShader.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/vs.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/VertexShader.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\VertexShader.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\vs.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Compiling shader: src/shaders/PBR/VertexShader.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/vs.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/VertexShader.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\VertexShader.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\vs.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\ps.cso.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling shader: src/shaders/PBR/PixelShader.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/ps.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/PixelShader.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\PixelShader.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\ps.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compiling shader: src/shaders/PBR/PixelShader.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/ps.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/PixelShader.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\PixelShader.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\ps.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Compiling shader: src/shaders/PBR/PixelShader.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/ps.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/PixelShader.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\PixelShader.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\ps.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Compiling shader: src/shaders/PBR/PixelShader.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/ps.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/PixelShader.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\PixelShader.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\ps.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\osVS.cso.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling shader: src/shaders/Offscreen/OSVertex.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/osVS.cso E:/dev/dx12RE/Sludge/src/shaders/Offscreen/OSVertex.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\Offscreen\OSVertex.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\osVS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compiling shader: src/shaders/Offscreen/OSVertex.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/osVS.cso E:/dev/dx12RE/Sludge/src/shaders/Offscreen/OSVertex.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\Offscreen\OSVertex.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\osVS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Compiling shader: src/shaders/Offscreen/OSVertex.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/osVS.cso E:/dev/dx12RE/Sludge/src/shaders/Offscreen/OSVertex.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\Offscreen\OSVertex.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\osVS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Compiling shader: src/shaders/Offscreen/OSVertex.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/osVS.cso E:/dev/dx12RE/Sludge/src/shaders/Offscreen/OSVertex.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\Offscreen\OSVertex.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\osVS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\osPS.cso.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling shader: src/shaders/Offscreen/OSPixel.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/osPS.cso E:/dev/dx12RE/Sludge/src/shaders/Offscreen/OSPixel.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\Offscreen\OSPixel.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\osPS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compiling shader: src/shaders/Offscreen/OSPixel.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/osPS.cso E:/dev/dx12RE/Sludge/src/shaders/Offscreen/OSPixel.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\Offscreen\OSPixel.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\osPS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Compiling shader: src/shaders/Offscreen/OSPixel.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/osPS.cso E:/dev/dx12RE/Sludge/src/shaders/Offscreen/OSPixel.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\Offscreen\OSPixel.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\osPS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Compiling shader: src/shaders/Offscreen/OSPixel.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/osPS.cso E:/dev/dx12RE/Sludge/src/shaders/Offscreen/OSPixel.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\Offscreen\OSPixel.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\osPS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\sbVS.cso.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling shader: src/shaders/PBR/SkyBoxVS.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/sbVS.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/SkyBoxVS.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\SkyBoxVS.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\sbVS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compiling shader: src/shaders/PBR/SkyBoxVS.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/sbVS.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/SkyBoxVS.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\SkyBoxVS.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\sbVS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Compiling shader: src/shaders/PBR/SkyBoxVS.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/sbVS.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/SkyBoxVS.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\SkyBoxVS.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\sbVS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Compiling shader: src/shaders/PBR/SkyBoxVS.vs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T vs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/sbVS.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/SkyBoxVS.vs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\SkyBoxVS.vs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\sbVS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\sbPS.cso.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling shader: src/shaders/PBR/SkyBoxPS.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/sbPS.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/SkyBoxPS.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\SkyBoxPS.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\sbPS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compiling shader: src/shaders/PBR/SkyBoxPS.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/sbPS.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/SkyBoxPS.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\SkyBoxPS.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\sbPS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Compiling shader: src/shaders/PBR/SkyBoxPS.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/sbPS.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/SkyBoxPS.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\SkyBoxPS.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\sbPS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Compiling shader: src/shaders/PBR/SkyBoxPS.ps.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T ps_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/sbPS.cso E:/dev/dx12RE/Sludge/src/shaders/PBR/SkyBoxPS.ps.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\PBR\SkyBoxPS.ps.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\sbPS.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\skyboxCompute.cso.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling shader: src/shaders/Compute/Equirect2cube.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/skyboxCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/Equirect2cube.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\Equirect2cube.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\skyboxCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compiling shader: src/shaders/Compute/Equirect2cube.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/skyboxCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/Equirect2cube.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\Equirect2cube.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\skyboxCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Compiling shader: src/shaders/Compute/Equirect2cube.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/skyboxCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/Equirect2cube.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\Equirect2cube.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\skyboxCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Compiling shader: src/shaders/Compute/Equirect2cube.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/skyboxCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/Equirect2cube.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\Equirect2cube.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\skyboxCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\irradianceCompute.cso.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling shader: src/shaders/Compute/IrradianceConvolve.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/irradianceCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/IrradianceConvolve.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\IrradianceConvolve.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\irradianceCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compiling shader: src/shaders/Compute/IrradianceConvolve.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/irradianceCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/IrradianceConvolve.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\IrradianceConvolve.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\irradianceCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Compiling shader: src/shaders/Compute/IrradianceConvolve.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/irradianceCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/IrradianceConvolve.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\IrradianceConvolve.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\irradianceCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Compiling shader: src/shaders/Compute/IrradianceConvolve.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/irradianceCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/IrradianceConvolve.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\IrradianceConvolve.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\irradianceCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\prefilterCompute.cso.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling shader: src/shaders/Compute/PrefilteredEnv.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/prefilterCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/PrefilteredEnv.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\PrefilteredEnv.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\prefilterCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compiling shader: src/shaders/Compute/PrefilteredEnv.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/prefilterCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/PrefilteredEnv.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\PrefilteredEnv.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\prefilterCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Compiling shader: src/shaders/Compute/PrefilteredEnv.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/prefilterCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/PrefilteredEnv.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\PrefilteredEnv.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\prefilterCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Compiling shader: src/shaders/Compute/PrefilteredEnv.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/prefilterCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/PrefilteredEnv.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\PrefilteredEnv.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\prefilterCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\lutCompute.cso.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling shader: src/shaders/Compute/IntegrateBRDF.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/lutCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/IntegrateBRDF.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\IntegrateBRDF.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\lutCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compiling shader: src/shaders/Compute/IntegrateBRDF.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/lutCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/IntegrateBRDF.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\IntegrateBRDF.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\lutCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Compiling shader: src/shaders/Compute/IntegrateBRDF.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/lutCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/IntegrateBRDF.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\IntegrateBRDF.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\lutCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Compiling shader: src/shaders/Compute/IntegrateBRDF.cs.hlsl with defines: </Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory E:/dev/dx12RE/Sludge/src/shaders
+if %errorlevel% neq 0 goto :cmEnd
+E:\dev\dx12RE\Sludge\libs\dxc\bin\x64\dxc.exe -T cs_6_6 -E main -Fo E:/dev/dx12RE/Sludge/src/shaders/cso/lutCompute.cso E:/dev/dx12RE/Sludge/src/shaders/Compute/IntegrateBRDF.cs.hlsl
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\Compute\IntegrateBRDF.cs.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\Utils.hlsl;E:\dev\dx12RE\Sludge\src\shaders\Utils\LightingUtils.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\src\shaders\cso\lutCompute.cso</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/dev/dx12RE/Sludge/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/dev/dx12RE/Sludge -BE:/dev/dx12RE/Sludge/build --check-stamp-file E:/dev/dx12RE/Sludge/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\WindowsPaths.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeCCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeCXXCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeRCCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\dev\dx12RE\Sludge\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/dev/dx12RE/Sludge/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/dev/dx12RE/Sludge -BE:/dev/dx12RE/Sludge/build --check-stamp-file E:/dev/dx12RE/Sludge/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\WindowsPaths.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeCCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeCXXCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeRCCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\dev\dx12RE\Sludge\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule E:/dev/dx12RE/Sludge/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/dev/dx12RE/Sludge -BE:/dev/dx12RE/Sludge/build --check-stamp-file E:/dev/dx12RE/Sludge/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\WindowsPaths.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeCCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeCXXCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeRCCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\dev\dx12RE\Sludge\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule E:/dev/dx12RE/Sludge/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/dev/dx12RE/Sludge -BE:/dev/dx12RE/Sludge/build --check-stamp-file E:/dev/dx12RE/Sludge/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\WindowsPaths.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeCCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeCXXCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeRCCompiler.cmake;E:\dev\dx12RE\Sludge\build\CMakeFiles\4.2.0\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\dev\dx12RE\Sludge\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\entry\main.cpp" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\core\DirectXClasses.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\core\DirectXClasses.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\core\IContext.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\core\IContext.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\core\d3dApp.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\core\d3dApp.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\errors.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\CommandManager.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\CommandManager.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\ConstantBuffer.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\CubeMap.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\CubeMap.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\DepthStencilBuffer.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\DepthStencilBuffer.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\DescriptorHeap.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\DescriptorHeap.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\ImGuiRenderer.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\ImGuiRenderer.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\IndexBuffer.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\IndexBuffer.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Material.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Material.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Model.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Model.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Texture.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Texture.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\UploadBuffer.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\VertexBuffer.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\VertexBuffer.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\pch.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\thirdparty\MikkTSpace\mikktspace.c" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\thirdparty\MikkTSpace\mikktspace.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Camera.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Camera.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Handle.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Holder.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Holder.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Pool.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\ReadData.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Timer.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Timer.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\json.hpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\tiny_gltf.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\utils.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui.cpp" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_draw.cpp" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_tables.cpp" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_demo.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_win32.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_win32.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_dx12.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_dx12.cpp" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\vs.cso">
+    </None>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\ps.cso">
+    </None>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\osVS.cso">
+    </None>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\osPS.cso">
+    </None>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\sbVS.cso">
+    </None>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\sbPS.cso">
+    </None>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\skyboxCompute.cso">
+    </None>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\irradianceCompute.cso">
+    </None>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\prefilterCompute.cso">
+    </None>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\lutCompute.cso">
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="E:\dev\dx12RE\Sludge\build\ZERO_CHECK.vcxproj">
+      <Project>{A52F3369-1588-3696-8D63-519B4342B866}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="E:\dev\dx12RE\Sludge\build\libs\assimp\code\assimp.vcxproj">
+      <Project>{FBE2D878-12A4-370C-9B52-494F9C999DE5}</Project>
+      <Name>assimp</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\dev\dx12RE\Sludge\build\libs\assimp\contrib\zlib\zlibstatic.vcxproj">
+      <Project>{C508E163-CCB6-3945-B7AC-062512B4560B}</Project>
+      <Name>zlibstatic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

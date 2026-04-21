@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\entry\main.cpp">
+      <Filter>entry</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\core\DirectXClasses.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\core\IContext.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\core\d3dApp.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\CommandManager.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\CubeMap.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\DepthStencilBuffer.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\DescriptorHeap.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\ImGuiRenderer.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\IndexBuffer.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Material.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Model.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Texture.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\VertexBuffer.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\thirdparty\MikkTSpace\mikktspace.c">
+      <Filter>src\thirdparty\MikkTSpace</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Camera.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Holder.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Timer.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_win32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_dx12.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\core\DirectXClasses.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\core\IContext.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\core\d3dApp.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\errors.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\CommandManager.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\ConstantBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\CubeMap.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\DepthStencilBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\DescriptorHeap.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\ImGuiRenderer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\IndexBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Material.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Model.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Texture.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\UploadBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\VertexBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\pch.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\thirdparty\MikkTSpace\mikktspace.h">
+      <Filter>src\thirdparty\MikkTSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Camera.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Handle.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Holder.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Pool.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\ReadData.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Timer.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\json.hpp">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\tiny_gltf.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\utils.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_dx12.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\vs.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\ps.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\osVS.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\osPS.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\sbVS.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\sbPS.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\skyboxCompute.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\irradianceCompute.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\prefilterCompute.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\lutCompute.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\vs.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\ps.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\osVS.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\osPS.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\sbVS.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\sbPS.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\skyboxCompute.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\irradianceCompute.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\prefilterCompute.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\lutCompute.cso" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A5E02EAC-8DBA-3139-96EF-8816B237C12F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{E3B6C850-528C-3E79-BB8C-75E0F4A7CF79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0505C4E8-EBCB-3B3C-A823-4B9B03AD74B1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entry">
+      <UniqueIdentifier>{263835D5-7311-3FF9-BEA0-2F3AB54EFB98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{52F297C2-C239-3246-814B-68658EA052CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{FF6F62BB-E7CD-398F-959E-C0C09F95E3ED}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ldx">
+      <UniqueIdentifier>{9867D0D5-5AAF-3034-927A-979ACE96D003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thirdparty">
+      <UniqueIdentifier>{6F0CA744-E334-3A66-9234-1109639982FD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thirdparty\MikkTSpace">
+      <UniqueIdentifier>{74E5F47E-99A8-3A4D-B276-5FBFDD35410B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{1FDC2F5A-27D0-3BD6-ADCB-FD22B10D8089}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
