@@ -137,5 +137,54 @@ namespace sludge::utils
 		return { width, height };
 	}
 
+	struct ResourceIndices
+	{
+		uint32_t albedoID;
+		uint32_t roughnessID;
+		uint32_t VertexBufferID;
+		uint32_t passConstantID;
+		uint32_t modelConstantID;
+		uint32_t IrradianceID;
+		uint32_t PrefilterID;
+		uint32_t LutID;
+		uint32_t NormalID;
+		uint32_t EmissiveID;
+		uint32_t AoID;
+	};
+
+	struct SkyBoxIndices
+	{
+		uint32_t VertexBufferID;
+		uint32_t ModelConstantID;
+		uint32_t TextureID;
+	};
+
+	// Compute shader indices for root signature.
+	struct CubeFromEquirectIndices
+	{
+		uint32_t TextureID{};
+		uint32_t OutputTextureID{};
+	};
+
+	struct IrradianceIndices
+	{
+		uint32_t TextureID{};
+		uint32_t OutputTextureID{};
+	};
+
+	// Ill be real, I dont see any particular point in sending updating and creating a constant buffer if I know for a fact that 
+	// the only thing in there is going to be a single float. I can always just create a cb for the prefiltering later, but its just not worth making a whole
+	// structure for, especially since this is all being changed on a per for loop exectution basis for the output anyways
+	struct PrefilteredMapIndices
+	{
+		uint32_t TextureID{};
+		uint32_t OutputTextureID{};
+		float Roughness;
+	};
+
+	struct LutIndices
+	{
+		uint32_t TextureID{};
+	};
 
 }

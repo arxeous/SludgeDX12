@@ -290,7 +290,29 @@ float4 ComputeLighting(Light gLights[MaxLights], Material mat,
     float3 kD = lerp(float3(1.0f, 1.0f, 1.0f) - kS, float3(0.0f, 0.0f, 0.0f), mat.Metallicness);
     float3 ambient = kD * mat.Irradiance * lambertianDiffuse;
 
-    return float4(result + IBL + ambient, 1.0);
+    return float4(IBL, 1.0);
+    
+    //// TEST
+    //float3 F0 = float3(DIELECTRIC_SPECULAR, DIELECTRIC_SPECULAR, DIELECTRIC_SPECULAR);
+    //float3 albedo = mat.DiffuseAlbedo.xyz;
+    // gltf specs
+    //F0 = lerp(F0, albedo, mat.Metallicness);
+    //float cosLO = clamp(dot(normal, toEye), 1e-5, 1.0);
+    //float3 LR = reflect(-toEye, normal);
+
+    //float3 kS = FresnelSchlickRoughness(F0, toEye, normal, mat.Roughness);
+    //float3 kD = lerp(float3(1.0f, 1.0f, 1.0f) - kS, float3(0.0f, 0.0f, 0.0f), mat.Metallicness);
+
+    //float3 F = kS;
+    
+    //float3 diffuseIBL = mat.Irradiance * albedo;
+
+    //float3 specularIBL = mat.Radiance * (F0 * mat.LUT.x + mat.LUT.y);
+    
+    //float3 outgoingLight = (specularIBL + diffuseIBL * kD);
+
+    
+    //return float4(outgoingLight, 1.0f);
 }
 
 

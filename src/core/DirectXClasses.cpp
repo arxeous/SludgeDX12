@@ -94,10 +94,25 @@ namespace sludge
 		//	.AoID = textures_[L"Helmet AO"].SRVHandle().index(),
 		//};
 
-		ResourceIndices SphereIndices
+		//ResourceIndices PBRResourceIDs
+		//{
+		//	.albedoID = textures_[L"TS Albedo"].SRVHandle().index(),
+		//	.roughnessID = textures_[L"TS Roughness"].SRVHandle().index(),
+		//	.VertexBufferID = 0,
+		//	.passConstantID = passConstants[L"Test"].index(),
+		//	.modelConstantID = 0,
+		//	.IrradianceID = textures_[L"Irradiance Map UAV"].SRVHandle().index(),
+		//	.PrefilterID = textures_[L"Prefiltered UAV"].SRVHandle().index(),
+		//	.LutID = textures_[L"LUT UAV"].SRVHandle().index(),
+		//	.NormalID = 0,
+		//	.EmissiveID = 0,
+		//	.AoID = 0,
+		//};
+
+		ResourceIndices PBRResourceIDs
 		{
-			.albedoID = textures_[L"TS Albedo"].SRVHandle().index(),
-			.roughnessID = textures_[L"TS Roughness"].SRVHandle().index(),
+			.albedoID = 0,
+			.roughnessID = 0,
 			.VertexBufferID = 0,
 			.passConstantID = passConstants[L"Test"].index(),
 			.modelConstantID = 0,
@@ -109,21 +124,18 @@ namespace sludge
 			.AoID = 0,
 		};
 
-
-
 		// good old structured binding. Gotta love it for pairs n maps!
 		for (auto& [name, model] : models_)
 		{
-			//commandList_->SetGraphicsRootConstantBufferView(0, model.ConstantBufferGPUVirtualAddress(cbModelPool_));
-			SphereIndices.VertexBufferID = model.VertexHolder().index();
-			SphereIndices.modelConstantID = model.ModelConstantHolder().index();
-			commandList_->SetGraphicsRoot32BitConstants(0, 11, &SphereIndices, 0);
-			model.Draw(commandList_.Get());
+			model.DrawNodes(commandList_.Get(), PBRResourceIDs);
 		}
 
 		materials_[L"Skybox Material"].BindPSO(commandList_.Get());
 		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		skybox_.UpdateData(viewProj, cbModelPool_);
+
+		// The problem is that the rt index and the index of the other structured buffers (the first one) that hold the vertices are both 101. The latter overwrites the RT and so we get a 
+		// byte stride mismatch. SOLUTION: Forgot to delete the model level vertex holder, which is no longer valid. So we change the function to retrieve the correct vertex.
 		SkyBoxIndices skyboxIndices
 		{
 			.VertexBufferID = skybox_.VertexHolder().index(),
@@ -263,7 +275,7 @@ namespace sludge
 		// Swap chain count + 1 extra for the offscreen render target.
 		rtvHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, SwapChainBufferCount_ + 1, L"RTV Heap");
 		dsvHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, 1, L"DSV Heap");
-		cbvSrvUavHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, 500, L"CBV_SRV_UAV Heap");
+		cbvSrvUavHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, 10000, L"CBV_SRV_UAV Heap");
 		imGuiSrvHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, 64, L"ImGui Heap");
 		CreateRTVs();
 		CreateDSVs();
@@ -348,7 +360,7 @@ namespace sludge
 		cmdList->SetComputeRoot32BitConstants(0, 8, &II, 0);
 		cmdList->Dispatch(1, 1, 6);
 
-		// Another compute shader to get the prefiltered env map. Both the compute shader for this and the irradiance map are very similar, with the only big difference being their means of sampling
+		// Another compute shader to get the prefiltered env map aka radiance map. Both the compute shader for this and the irradiance map are very similar, with the only big difference being their means of sampling
 		// vectors. i.e. importance vs uniform, specular vs diffuse.
 		materials_[L"Prefiltered Compute Material"].BindComputeShader(cmdList);
 		PrefilteredMapIndices PI
@@ -371,7 +383,7 @@ namespace sludge
 			{
 				.TextureID = textures_[L"Skybox UAV"].SRVHandle().index(),
 				.OutputTextureID = textures_[L"Prefiltered UAV"].GetMipMapLevelIndex(i + 1),
-				.Roughness = 1.0f / (i + 1)
+				.Roughness = i / 4.0f
 			};
 
 			uint32_t threadGroupSize = std::max(1u, texSize / 32u);
@@ -417,8 +429,8 @@ namespace sludge
 		//textures_[L"Helmet Normals"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_,     "../assets/DamagedHelmet/glTF/Default_normal.jpg", L"Helmet Normals", texturePool_);
 		//textures_[L"Helmet AO"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_,          "../assets/DamagedHelmet/glTF/Default_AO.jpg", L"Helmet AO", texturePool_);
 
-		textures_[L"TS Albedo"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_, "../assets/MetalRoughSpheres/glTF/Spheres_BaseColor.png", L"TS Albedo", texturePool_);
-		textures_[L"TS Roughness"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_, "../assets/MetalRoughSpheres/glTF/Spheres_MetalRough.png", L"TS Rough", texturePool_);
+		//textures_[L"TS Albedo"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_, "../assets/MetalRoughSpheres/glTF/Spheres_BaseColor.png", L"TS Albedo", texturePool_);
+		//textures_[L"TS Roughness"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_, "../assets/MetalRoughSpheres/glTF/Spheres_MetalRough.png", L"TS Rough", texturePool_);
 		//textures_[L"Helmet Roughness"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_,   "../assets/DamagedHelmet/glTF/Default_metalRoughness.jpg", L"Helmet Roughness", texturePool_);
 		textures_[L"HDR Test"].CreateHDRTexture(device_.Get(), cmdList, cbvSrvUavHeap_,         "../assets/Environment/Environment.hdr", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, L"HDR Test", texturePool_);
 		textures_[L"Skybox UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, SKYBOX_RESOLUTION, SKYBOX_RESOLUTION, 6, 0, DXGI_FORMAT_R16G16B16A16_FLOAT, L"Skybox UAV", texturePool_, true);
@@ -436,13 +448,13 @@ namespace sludge
 		//models_["Helmet"].GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
 		//auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		//models_["Helmet"].UpdateData(viewProj, cbModelPool_);
-		models_["TestSpheres"].LoadModelTiny(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");
+		models_["TestSpheres"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");
 		models_["TestSpheres"].GetTransformData().Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
-		//models_["TestSpheres"].GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
+		models_["TestSpheres"].GetTransformData().Rotation = DirectX::XMFLOAT3(1.525, 0, 0);
 		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		models_["TestSpheres"].UpdateData(viewProj, cbModelPool_);
 
-		skybox_.LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, "../assets/Cube/glTF/Cube.gltf");
+		skybox_.LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/Cube/glTF/Cube.gltf");
 		//skybox_.GetTransformData().Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
 		//skybox_.GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
 		skybox_.UpdateData(viewProj, cbModelPool_);

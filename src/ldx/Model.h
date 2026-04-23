@@ -4,15 +4,38 @@
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
 #include "StructuredBuffer.h"
+#include "Texture.h"
 #include "ImGuiRenderer.h"
 #include "utils/Holder.h"
 #include "utils/Pool.h"
+#include "utils/utils.h"
 #include "thirdparty/MikkTSpace/mikktspace.h"
 #include "UploadBuffer.h"
-
+#include "utils/tiny_gltf.h"
+#define TINYGLTF_USE_CPP14
+#define TINYGLTF_NO_EXTERNAL_IMAGE
 
 namespace sludge
 {
+	struct PBRMaterial
+	{
+		Texture albedo{};
+		Texture normalMap{};
+		Texture aoMap{};
+		Texture metallicRoughnessMap{};
+	};
+	struct Mesh
+	{
+		IndexBuffer indexBuffer{};
+		utils::Holder<utils::GeometryHandle> vbHolder{};
+		// needed for mikktspace lib for tangent calculations
+		std::vector<Vertex> Vertices{};
+		std::vector<uint32_t> Indices{};
+
+		uint32_t vertexCount{};
+		uint32_t indexCount{};
+		PBRMaterial pbrResources{};
+	};
 	// Rather than have our constant buffers handled by the context, the model itself will keep track of that stuff
 	struct alignas(256) ModelConstants
 	{
@@ -33,31 +56,35 @@ namespace sludge
 	{
 	public:
 		void LoadModel(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool,
-			utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool, std::string_view modelPath);
+			utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, std::string_view modelPath);
 		void LoadModelTiny(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool,
-			utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool, std::string_view modelPath);
+			utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, std::string_view modelPath);
 		Transform& GetTransformData() { return transformData_; }
 		void UpdateData(DirectX::XMMATRIX viewProj, utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool);
 		void UpdateFromUI(std::string name, utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool);
 		void Draw(ID3D12GraphicsCommandList* const cmdList);
-		ID3D12Resource* const VertexStructuredBuffer() const { return vertexBuffer_.Buffer(); } 
+		void DrawNodes(ID3D12GraphicsCommandList* const cmdList, utils::ResourceIndices& modelResources);
 		D3D12_GPU_VIRTUAL_ADDRESS ConstantBufferGPUVirtualAddress(utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool);
-		D3D12_INDEX_BUFFER_VIEW IndexBufferView() { return indexBuffer_.IndexBufferView(); }
 		uint32_t IndexCount() const { return indexCount_; }
-		utils::Holder<utils::GeometryHandle>& VertexHolder() { return vbHolder_; }
+		utils::Holder<utils::GeometryHandle>& VertexHolder(int idx = 0) { return meshes_[idx].vbHolder; }
 		utils::Holder<utils::ModelConstantHandle>& ModelConstantHolder() { return cbHolder_; }
-		std::vector<Vertex> Vertices{};
-		std::vector<uint32_t> Indices{};
 
 	private:
-		StructuredBuffer vertexBuffer_{};
-		IndexBuffer indexBuffer_{};
+		void LoadNode(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool,
+			utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, uint32_t idx, tinygltf::Model& model);
+		void ProcessNode(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool,
+			utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, aiNode* node, const aiScene* scene);
+		Mesh ProcessMesh(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap,
+			utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool,
+			aiMesh* mesh, const aiScene* scene);
+		Texture ProcessMaterial(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, aiMaterial* mat, aiTextureType type, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool);
 		utils::Holder<utils::ModelConstantHandle> cbHolder_{};
-		utils::Holder<utils::GeometryHandle> vbHolder_{};
+		std::string modelName_{};
+		std::string modelDirectory_{};
 
 		uint32_t vertexCount_{};
 		uint32_t indexCount_{};
-
+		std::vector<Mesh> meshes_{};
 		Transform transformData_;
 	};
 } // sludge
