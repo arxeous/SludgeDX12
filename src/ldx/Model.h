@@ -19,10 +19,11 @@ namespace sludge
 {
 	struct PBRMaterial
 	{
-		Texture albedo{};
-		Texture normalMap{};
-		Texture aoMap{};
-		Texture metallicRoughnessMap{};
+		std::string albedo{};
+		std::string normalMap{};
+		std::string aoMap{};
+		std::string metallicRoughnessMap{};
+		std::string emissiveMap{};
 	};
 	struct Mesh
 	{
@@ -57,8 +58,6 @@ namespace sludge
 	public:
 		void LoadModel(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool,
 			utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, std::string_view modelPath);
-		void LoadModelTiny(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool,
-			utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, std::string_view modelPath);
 		Transform& GetTransformData() { return transformData_; }
 		void UpdateData(DirectX::XMMATRIX viewProj, utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool);
 		void UpdateFromUI(std::string name, utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool);
@@ -70,14 +69,12 @@ namespace sludge
 		utils::Holder<utils::ModelConstantHandle>& ModelConstantHolder() { return cbHolder_; }
 
 	private:
-		void LoadNode(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool,
-			utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, uint32_t idx, tinygltf::Model& model);
 		void ProcessNode(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool,
 			utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, aiNode* node, const aiScene* scene);
 		Mesh ProcessMesh(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap,
 			utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool,
 			aiMesh* mesh, const aiScene* scene);
-		Texture ProcessMaterial(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, aiMaterial* mat, aiTextureType type, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool);
+		std::string ProcessMaterial(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, aiMaterial* mat, aiTextureType type, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool);
 		utils::Holder<utils::ModelConstantHandle> cbHolder_{};
 		std::string modelName_{};
 		std::string modelDirectory_{};
@@ -86,5 +83,7 @@ namespace sludge
 		uint32_t indexCount_{};
 		std::vector<Mesh> meshes_{};
 		Transform transformData_;
+		// This single map will keep a hold of all our textures so we arent reuploading data more than once.
+		static inline  std::map<std::string_view, Texture> loadedTextures_;
 	};
 } // sludge

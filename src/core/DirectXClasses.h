@@ -71,7 +71,7 @@ namespace sludge
 
 		static constexpr uint32_t SKYBOX_RESOLUTION = 1024;
 		static constexpr uint32_t IRRADIANCE_MAP_DIMENSION = 32;
-		static constexpr uint32_t PREFILTERED_MAP_DIMENSION = 512;
+		static constexpr uint32_t PREFILTERED_MAP_DIMENSION = 1024u;
 		static constexpr uint16_t ROOT_SIG_CONSTANT_COUNT = 64;
 		static constexpr uint8_t SwapChainBufferCount_ = 3;
 		static constexpr uint32_t LUT_DIMENSION = 512;

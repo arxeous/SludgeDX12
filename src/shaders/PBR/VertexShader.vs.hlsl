@@ -24,14 +24,6 @@ VSOutput main(uint vertexID : SV_VertexID)
     output.tangent.w = input.tangent.w;
     output.tangent.xyz = mul(transpose((float3x3) modelConstant.InvWorld), input.tangent.xyz);
     
-    //float3 T = mul(transpose((float3x3) modelConstant.InvWorld), input.tangent.xyz);
-    //float3 B = cross(input.normal, T);
-    //B = mul(transpose((float3x3) modelConstant.InvWorld), B) * input.tangent.w;
-    //float3 N = output.normalW;
-    //N = normalize(N);
-    //T = normalize(T - dot(T, N) * N);
-    
-    //output.TBN = float3x3(T,B,N);
     output.world = (float3x3) modelConstant.World;
     return output;
 }

@@ -260,7 +260,7 @@ float4 ComputeLighting(Light gLights[MaxLights], Material mat,
     F0 = lerp(F0, albedo, mat.Metallicness);
     float3 LR = reflect(-toEye, normal);
     float3 halfVec = normalize(toEye + LR);
-    float VoH = saturate(dot(toEye, halfVec));
+    //float VoH = saturate(dot(toEye, halfVec));
     float NoV = clamp(dot(normal, toEye), 1e-5, 1.0);
     float3 diffuseColor = albedo * (1.0 - DIELECTRIC_SPECULAR) * (1.0 - mat.Metallicness);
 
@@ -269,7 +269,7 @@ float4 ComputeLighting(Light gLights[MaxLights], Material mat,
     // We use the above to more accurately model metals by accounting for the multiple scattering that occurs when materials become rougher
     // i.e. fixing metals getting darker the rougher they get.
     float3 ks = F0;
-    float3 Fr = max((1.0 - mat.Roughness), F0) - F0;
+    float3 Fr = max(float3(1.0 - mat.Roughness, 1.0 - mat.Roughness, 1.0 - mat.Roughness), F0) - F0;
     ks += Fr * pow(1.0 - NoV, 5.0);
     
     float3 FssEss = ks * mat.LUT.x + mat.LUT.y;
@@ -295,7 +295,7 @@ float4 ComputeLighting(Light gLights[MaxLights], Material mat,
     //// TEST
     //float3 F0 = float3(DIELECTRIC_SPECULAR, DIELECTRIC_SPECULAR, DIELECTRIC_SPECULAR);
     //float3 albedo = mat.DiffuseAlbedo.xyz;
-    // gltf specs
+    //// gltf specs
     //F0 = lerp(F0, albedo, mat.Metallicness);
     //float cosLO = clamp(dot(normal, toEye), 1e-5, 1.0);
     //float3 LR = reflect(-toEye, normal);

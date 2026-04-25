@@ -45,7 +45,7 @@ float4 main(VSOutput input) : SV_Target
     
     float4 diffuseAlbedo = testTexture.Sample(linearWrap, input.texCoord) * modelConstant.albedo;
     float4 roughMetal = testRoughness.Sample(linearWrap, input.texCoord);
-    float roughness = max(roughMetal.g, 0.045);
+    float roughness = roughMetal.g;
     float metalness = roughMetal.b;
     float4 emissiveLight = (0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -66,13 +66,14 @@ float4 main(VSOutput input) : SV_Target
         float3x3 tbn = float3x3(T, bitangent, input.normalW);
         
         N = normalTexture.Sample(anisotropic, input.texCoord).rgb * 2.0 - 1.0;
+        //return float4(normalTexture.Sample(anisotropic, input.texCoord).rgb, 1.0);
         N = normalize(mul(N, tbn));
     }
     
     if(emissiveID != 0)
     {
         Texture2D emissiveMap = ResourceDescriptorHeap[emissiveID];
-        emissiveLight = emissiveMap.Sample(linearWrap, input.texCoord);
+        emissiveLight = emissiveMap.Sample(anisotropic, input.texCoord);
     }
     
     // Vector from point being lit to eye. 
@@ -82,8 +83,7 @@ float4 main(VSOutput input) : SV_Target
     // Ambient light is now calculated in the compute lighting calculation using IBl.
     //float4 ambient = passConstant.AmbientLight * diffuseAlbedo;
     
-    Material mat = { diffuseAlbedo, metalness, roughness, 0, 0, 0, 0, 0, 0, 0, 0};
-    mat.Irradiance = irradianceMap.SampleLevel(linearWrap, N, 0.0f).xyz;
+
 
     // Specular BRDF
     uint textureWidth, textureHeight, mipmapLevels;
@@ -91,8 +91,19 @@ float4 main(VSOutput input) : SV_Target
 
     float nDotV = saturate(dot(N, toEyeW));
     float3 L = reflect(-toEyeW, N);
-    mat.Radiance = radianceMap.SampleLevel(linearWrap, L, roughness * (mipmapLevels)).xyz;
-    mat.LUT = LUT.Sample(linearWrap, float2(nDotV, roughness)).xy;
+    float preceptualRoughnessToLOD = mipmapLevels * roughness;
+    // Sufficiently small roughness will actually mess up our IBL calculations that accounts for 
+    // furnacing of metals. so we clamp it here. 
+    if (roughness <= 0.005)
+    {
+        roughness = 0.025;
+        preceptualRoughnessToLOD = mipmapLevels * roughness;
+    }
+
+    Material mat = { diffuseAlbedo, metalness, roughness, 0, 0, 0, 0, 0, 0, 0, 0 };
+    mat.Irradiance = irradianceMap.SampleLevel(anisotropic, N, 0.0f).xyz;
+    mat.Radiance = radianceMap.SampleLevel(anisotropic, L, preceptualRoughnessToLOD).xyz;
+    mat.LUT = LUT.Sample(anisotropic, float2(nDotV, roughness)).xy;
    
     float3 shadowFactor = 1.0f;
     float4 directLight = ComputeLighting(passConstant.Lights, mat, input.positionW,

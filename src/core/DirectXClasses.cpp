@@ -375,22 +375,40 @@ namespace sludge
 		cmdList->Dispatch(PREFILTERED_MAP_DIMENSION / 32, PREFILTERED_MAP_DIMENSION / 32, 6);
 
 		// Generate the mip maps ! note that the mip maps for prefiltered env maps store roughness ! and are not for lod in textures. theryre used for ibl calculations.
-		uint32_t texSize{ PREFILTERED_MAP_DIMENSION / 2};
-		for (uint32_t i = 0; i < 5; i++)
+		//uint32_t texSize{ PREFILTERED_MAP_DIMENSION / 2};
+		//for (uint32_t i = 0; i < 5; i++)
+		//{
+		//	textures_[L"Prefiltered UAV"].CreateMipLevelTexture(device_.Get(), cbvSrvUavHeap_, texturePool_, i + 1);
+		//	PrefilteredMapIndices MipLevelI
+		//	{
+		//		.TextureID = textures_[L"Skybox UAV"].SRVHandle().index(),
+		//		.OutputTextureID = textures_[L"Prefiltered UAV"].GetMipMapLevelIndex(i + 1),
+		//		.Roughness = i / 4.0f
+		//	};
+
+		//	uint32_t threadGroupSize = std::max(1u, texSize / 32u);
+		//	cmdList->SetComputeRoot32BitConstants(0, 3, &MipLevelI, 0);
+		//	cmdList->Dispatch(threadGroupSize, threadGroupSize, 6);
+		//	texSize /= 2;
+		//}
+		float maxMipLevel = std::log2(float(PREFILTERED_MAP_DIMENSION));
+		for (float mipLevel = 0; mipLevel < maxMipLevel; ++mipLevel)
 		{
-			textures_[L"Prefiltered UAV"].CreateMipLevelTexture(device_.Get(), cbvSrvUavHeap_, texturePool_, i + 1);
+			uint16_t mipWidth = PREFILTERED_MAP_DIMENSION >> uint16_t(mipLevel);
+			float roughness = mipLevel / maxMipLevel;
+			textures_[L"Prefiltered UAV"].CreateMipLevelTexture(device_.Get(), cbvSrvUavHeap_, texturePool_, mipLevel);
 			PrefilteredMapIndices MipLevelI
 			{
 				.TextureID = textures_[L"Skybox UAV"].SRVHandle().index(),
-				.OutputTextureID = textures_[L"Prefiltered UAV"].GetMipMapLevelIndex(i + 1),
-				.Roughness = i / 4.0f
+				.OutputTextureID = textures_[L"Prefiltered UAV"].GetMipMapLevelIndex(mipLevel + 1),
+				.Roughness = roughness
 			};
 
-			uint32_t threadGroupSize = std::max(1u, texSize / 32u);
+			uint32_t threadGroupSize = std::max(1u, mipWidth / 32u);
 			cmdList->SetComputeRoot32BitConstants(0, 3, &MipLevelI, 0);
 			cmdList->Dispatch(threadGroupSize, threadGroupSize, 6);
-			texSize /= 2;
 		}
+
 		materials_[L"LUT Material"].BindComputeShader(cmdList);
 
 		LutIndices LI
@@ -422,37 +440,28 @@ namespace sludge
 
 	void DirectXContext::LoadTextures(ID3D12GraphicsCommandList* cmdList)
 	{
-
-		//textures_[L"Helmet_Albedo"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_,      "../assets/DamagedHelmet/glTF/Default_albedo.jpg", L"Helmet_Albedo", texturePool_);
-		//textures_[L"Helmet Roughness"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_,   "../assets/DamagedHelmet/glTF/Default_metalRoughness.jpg", L"Helmet Roughness", texturePool_);
-		//textures_[L"Helmet Emissive"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_,    "../assets/DamagedHelmet/glTF/Default_emissive.jpg", L"Helmet Emissive", texturePool_);
-		//textures_[L"Helmet Normals"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_,     "../assets/DamagedHelmet/glTF/Default_normal.jpg", L"Helmet Normals", texturePool_);
-		//textures_[L"Helmet AO"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_,          "../assets/DamagedHelmet/glTF/Default_AO.jpg", L"Helmet AO", texturePool_);
-
-		//textures_[L"TS Albedo"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_, "../assets/MetalRoughSpheres/glTF/Spheres_BaseColor.png", L"TS Albedo", texturePool_);
-		//textures_[L"TS Roughness"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_, "../assets/MetalRoughSpheres/glTF/Spheres_MetalRough.png", L"TS Rough", texturePool_);
-		//textures_[L"Helmet Roughness"].CreateTexture(device_.Get(), cmdList, cbvSrvUavHeap_,   "../assets/DamagedHelmet/glTF/Default_metalRoughness.jpg", L"Helmet Roughness", texturePool_);
+		int maxMipLevel = std::log2(float(PREFILTERED_MAP_DIMENSION));
 		textures_[L"HDR Test"].CreateHDRTexture(device_.Get(), cmdList, cbvSrvUavHeap_,         "../assets/Environment/Environment.hdr", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, L"HDR Test", texturePool_);
 		textures_[L"Skybox UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, SKYBOX_RESOLUTION, SKYBOX_RESOLUTION, 6, 0, DXGI_FORMAT_R16G16B16A16_FLOAT, L"Skybox UAV", texturePool_, true);
 		//textures_[L"Environment UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, SKYBOX_RESOLUTION, SKYBOX_RESOLUTION, 6, 0, DXGI_FORMAT_R16G16B16A16_FLOAT, L"Environment UAV", texturePool_, true);
 		// Since the irradiance map doesnt have a lot of high frequency details, its actually fine to just store it in a small 32x32 texture.
 		textures_[L"Irradiance Map UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, IRRADIANCE_MAP_DIMENSION, IRRADIANCE_MAP_DIMENSION, 6, 0, DXGI_FORMAT_R16G16B16A16_FLOAT, L"Irradiance Map UAV", texturePool_, true);
-		textures_[L"Prefiltered UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, PREFILTERED_MAP_DIMENSION, PREFILTERED_MAP_DIMENSION, 6, 6, DXGI_FORMAT_R16G16B16A16_FLOAT, L"Prefiltered UAV", texturePool_, true);
+		textures_[L"Prefiltered UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, PREFILTERED_MAP_DIMENSION, PREFILTERED_MAP_DIMENSION, 6, maxMipLevel, DXGI_FORMAT_R16G16B16A16_FLOAT, L"Prefiltered UAV", texturePool_, true);
 		textures_[L"LUT UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, LUT_DIMENSION, LUT_DIMENSION, 1, 0, DXGI_FORMAT_R16G16B16A16_FLOAT, L"LUT UAV", texturePool_, true);
 	}
 
 	void DirectXContext::LoadModel(ID3D12GraphicsCommandList* cmdList)
 	{
-		//models_["Helmet"].LoadModelTiny(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_,"../assets/DamagedHelmet/glTF/DamagedHelmet.gltf");
-		//models_["Helmet"].GetTransformData().Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
-		//models_["Helmet"].GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
-		//auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
-		//models_["Helmet"].UpdateData(viewProj, cbModelPool_);
-		models_["TestSpheres"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");
-		models_["TestSpheres"].GetTransformData().Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
-		models_["TestSpheres"].GetTransformData().Rotation = DirectX::XMFLOAT3(1.525, 0, 0);
+		models_["Helmet"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/DamagedHelmet/glTF/DamagedHelmet.gltf");
+		models_["Helmet"].GetTransformData().Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
+		models_["Helmet"].GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
 		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
-		models_["TestSpheres"].UpdateData(viewProj, cbModelPool_);
+		models_["Helmet"].UpdateData(viewProj, cbModelPool_);
+		//models_["TestSpheres"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");
+		//models_["TestSpheres"].GetTransformData().Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
+		//models_["TestSpheres"].GetTransformData().Rotation = DirectX::XMFLOAT3(1.525, 0, 0);
+		//auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
+		//models_["TestSpheres"].UpdateData(viewProj, cbModelPool_);
 
 		skybox_.LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/Cube/glTF/Cube.gltf");
 		//skybox_.GetTransformData().Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);

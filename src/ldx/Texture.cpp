@@ -138,7 +138,7 @@ namespace sludge
 			};
 			// Currently we only generate mip maps for the prefiltered env map, so we set its mip level to 6 here. 
 			// at some point well implement compute mip map generation and just default set them to 6 above.
-			if (mipLevels == 6)
+			if (mipLevels > 0)
 			{
 				srvDesc.Texture2D.MipLevels = mipLevels;
 			}
