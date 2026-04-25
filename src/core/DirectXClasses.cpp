@@ -452,16 +452,16 @@ namespace sludge
 
 	void DirectXContext::LoadModel(ID3D12GraphicsCommandList* cmdList)
 	{
-		models_["Helmet"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/DamagedHelmet/glTF/DamagedHelmet.gltf");
-		models_["Helmet"].GetTransformData().Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
-		models_["Helmet"].GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
-		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
-		models_["Helmet"].UpdateData(viewProj, cbModelPool_);
-		//models_["TestSpheres"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");
-		//models_["TestSpheres"].GetTransformData().Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
-		//models_["TestSpheres"].GetTransformData().Rotation = DirectX::XMFLOAT3(1.525, 0, 0);
+		//models_["Helmet"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/DamagedHelmet/glTF/DamagedHelmet.gltf");
+		//models_["Helmet"].GetTransformData().Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
+		//models_["Helmet"].GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
 		//auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
-		//models_["TestSpheres"].UpdateData(viewProj, cbModelPool_);
+		//models_["Helmet"].UpdateData(viewProj, cbModelPool_);
+		models_["TestSpheres"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");
+		models_["TestSpheres"].GetTransformData().Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
+		models_["TestSpheres"].GetTransformData().Rotation = DirectX::XMFLOAT3(1.525, 0, 0);
+		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
+		models_["TestSpheres"].UpdateData(viewProj, cbModelPool_);
 
 		skybox_.LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/Cube/glTF/Cube.gltf");
 		//skybox_.GetTransformData().Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);

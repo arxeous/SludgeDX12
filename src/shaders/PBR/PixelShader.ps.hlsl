@@ -82,8 +82,6 @@ float4 main(VSOutput input) : SV_Target
 
     // Ambient light is now calculated in the compute lighting calculation using IBl.
     //float4 ambient = passConstant.AmbientLight * diffuseAlbedo;
-    
-
 
     // Specular BRDF
     uint textureWidth, textureHeight, mipmapLevels;
@@ -94,7 +92,7 @@ float4 main(VSOutput input) : SV_Target
     float preceptualRoughnessToLOD = mipmapLevels * roughness;
     // Sufficiently small roughness will actually mess up our IBL calculations that accounts for 
     // furnacing of metals. so we clamp it here. 
-    if (roughness <= 0.005)
+    if (roughness <= 0.015)
     {
         roughness = 0.025;
         preceptualRoughnessToLOD = mipmapLevels * roughness;
