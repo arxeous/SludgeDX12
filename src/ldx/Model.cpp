@@ -79,8 +79,6 @@ namespace sludge
 	void Model::LoadModel(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool,
 		utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, std::string_view modelPath)
 	{
-		// This will eventually be fleshed out to load full gltf scenes properly through node traversal but for now we just need some basic 
-		// mesh loading.
 		const aiScene* scene = aiImportFile(modelPath.data(), aiProcess_Triangulate | aiProcess_MakeLeftHanded | aiProcess_FlipUVs);
 
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -262,7 +260,14 @@ namespace sludge
 		modelMesh.Indices = indices;
 		modelMesh.vertexCount = vertices.size();
 		modelMesh.indexCount = indices.size();
-		calculateMikkTSpace(modelMesh);
+		if (mesh->mTangents != nullptr)
+		{
+			// MikkTspace is actually pretty costly to run all things considered.
+			// we will probably have to find a better way to determine when we want to use it,
+			// for now we just say that if this model doesn't have tangents, then we dont have a normal map
+			// and therefore dont need the tangents.
+			calculateMikkTSpace(modelMesh);
+		}
 		std::span<const uint32_t> indexSpan{ modelMesh.Indices };
 		std::span<const Vertex> vertexSpan{ modelMesh.Vertices };
 		modelMesh.indexBuffer.CreateIndexBuffer(device, cmdList, indexSpan, L"Index Buffer");
