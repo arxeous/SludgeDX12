@@ -34,6 +34,7 @@ namespace sludge
 		Microsoft::WRL::ComPtr<ID3D12Resource> currBackBuffer = swapChainBuffer_[currentBackBufferIndex_];
 
 		imGuiManager_.FrameStart();
+		imGuiManager_.Begin("Scene Control");
 		for (auto& [name, model] : models_)
 		{
 			model.UpdateFromUI(name.data(), cbModelPool_);
@@ -68,7 +69,6 @@ namespace sludge
 		CD3DX12_CPU_DESCRIPTOR_HANDLE rtv = offScreenRT_.RTVCPUDescriptorHandle();
 		CD3DX12_CPU_DESCRIPTOR_HANDLE dsv{ depthStencilBuffer_.BufferHandle() };
 
-		imGuiManager_.Begin("Settings");
 
 		static std::array<float, 4> clearColor{ 0.1f, 0.1f, 0.1f, 1.0f };
 		imGuiManager_.SetClearColor(clearColor);
@@ -77,37 +77,6 @@ namespace sludge
 		commandList_->OMSetRenderTargets(1, &rtv, FALSE, &dsv);
 		commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		auto passCB = cbPassPool_.get(passConstants[L"Test"]);
-		//commandList_->SetGraphicsRootConstantBufferView(1, passCB->ConstantBufferViewDesc().BufferLocation);
-		//commandList_->SetGraphicsRootConstantBufferView(2, MaterialCB->Resource()->GetGPUVirtualAddress());
-		//ResourceIndices indices
-		//{
-		//	.albedoID = textures_[L"Helmet_Albedo"].SRVHandle().index(),
-		//	.roughnessID = textures_[L"Helmet Roughness"].SRVHandle().index(),
-		//	.VertexBufferID = 0,
-		//	.passConstantID = passConstants[L"Test"].index(),
-		//	.modelConstantID = 0,
-		//	.IrradianceID = textures_[L"Irradiance Map UAV"].SRVHandle().index(),
-		//	.PrefilterID = textures_[L"Prefiltered UAV"].SRVHandle().index(),
-		//	.LutID = textures_[L"LUT UAV"].SRVHandle().index(),
-		//	.NormalID = textures_[L"Helmet Normals"].SRVHandle().index(),
-		//	.EmissiveID = textures_[L"Helmet Emissive"].SRVHandle().index(),
-		//	.AoID = textures_[L"Helmet AO"].SRVHandle().index(),
-		//};
-
-		//ResourceIndices PBRResourceIDs
-		//{
-		//	.albedoID = textures_[L"TS Albedo"].SRVHandle().index(),
-		//	.roughnessID = textures_[L"TS Roughness"].SRVHandle().index(),
-		//	.VertexBufferID = 0,
-		//	.passConstantID = passConstants[L"Test"].index(),
-		//	.modelConstantID = 0,
-		//	.IrradianceID = textures_[L"Irradiance Map UAV"].SRVHandle().index(),
-		//	.PrefilterID = textures_[L"Prefiltered UAV"].SRVHandle().index(),
-		//	.LutID = textures_[L"LUT UAV"].SRVHandle().index(),
-		//	.NormalID = 0,
-		//	.EmissiveID = 0,
-		//	.AoID = 0,
-		//};
 
 		ResourceIndices PBRResourceIDs
 		{
@@ -182,7 +151,7 @@ namespace sludge
 		// Present updates the index of the back buffer we will use for the NEXT frame.
 		ThrowIfFailed(swapChain_->Present(syncInterval, 0));
 
-		// So when we use this function, we get the next to draw into . 
+		// So when we use this function, we get the next back buffer to draw into . 
 		currentBackBufferIndex_ = swapChain_->GetCurrentBackBufferIndex();
 
 		// What we are waiting on here is NOT for whether this frames commands are done executing, but if the frame we will be rendering into on the NEXT passes
@@ -202,14 +171,7 @@ namespace sludge
 		projMatrix_ = DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(fov_), aspectRatio_, 0.1f, 1000.0f);
 
 		DirectX::XMMATRIX mvpMatrix = DirectX::XMMatrixMultiply(modelMatrix_, viewMatrix_);
-		//DirectX::XMMATRIX ViewProj{ DirectX::XMMatrixIdentity() };
 		// Set lighting data.
-		//passConstants_.EyePosW = camera_.CamPos();
-		//passConstants_.AmbientLight = { 0.4f, 0.4f, 0.4f, 1.0f };
-		//passConstants_.Lights[0].Direction = { 0.57735f, -0.57735f, 0.57735f };
-		//passConstants_.Lights[0].Strength = { 0.9f, 0.9f, 0.8f };
-		//PassCB->CopyData(0, passConstants_);
-
 		auto passCB = cbPassPool_.get(passConstants[L"Test"]);
 		passCB->ConstantBufferData().EyePosW = camera_.CamPos();
 		passCB->ConstantBufferData().AmbientLight = { 0.4f, 0.4f, 0.4f, 1.0f };
@@ -315,115 +277,143 @@ namespace sludge
 		LoadMaterials();
 		LoadModel(commandList_.Get());
 		LoadTextures(commandList_.Get());
-		LoadCubeMap(commandList_.Get());
+		std::thread IBLThread(std::bind(&DirectXContext::LoadIBLData, this));
 
 		frameCurrentFence_[currentBackBufferIndex_] = commandManager_.ExecuteCommandList(commandList_.Get());
 		commandManager_.FlushCommandQueue();
 
+		IBLThread.join();
 	}
 
-	void DirectXContext::LoadCubeMap(ID3D12GraphicsCommandList* cmdList)
+	void DirectXContext::LoadIBLData()
 	{
 		// Run compute shader to get our cube map texture from our hdr.
-		utils::TransitionResource(cmdList, textures_[L"Skybox UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
-		std::array<ID3D12DescriptorHeap*, 1> computeDescriptorHeaps
 		{
-			cbvSrvUavHeap_.GetDescriptorHeap()
-		};
-
-		cmdList->SetDescriptorHeaps(1u, computeDescriptorHeaps.data());
-		materials_[L"Equirect Compute Material"].BindComputeShader(cmdList);
-
-		CubeFromEquirectIndices CFE
-		{
-			.TextureID = textures_[L"HDR Test"].SRVHandle().index(),
-			.OutputTextureID = textures_[L"Skybox UAV"].UAVHandle().index()
-		};
-
-		cmdList->SetComputeRoot32BitConstants(0, 8, &CFE, 0);
-
-		// Recall that dispatch means were calling x * y *z groups total. The shader itself declares how large any given group will be.
-		cmdList->Dispatch(SKYBOX_RESOLUTION / 32, SKYBOX_RESOLUTION / 32, 6);
-
-		// compute shader for irradiance map calculation
-
-		materials_[L"Irradiance Compute Material"].BindComputeShader(cmdList);
-		IrradianceIndices II
-		{
-			.TextureID = textures_[L"Skybox UAV"].SRVHandle().index(),
-			.OutputTextureID = textures_[L"Irradiance Map UAV"].UAVHandle().index()
-		};
-		// DX12 just does not play well straight up with legacy resource states like D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE in compute shaders.
-		// Luckily for us common can acts as a srv for us when we need it in these contexts.
-		utils::TransitionResource(cmdList, textures_[L"Skybox UAV"].TextureResource(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON);
-		utils::TransitionResource(cmdList, textures_[L"Irradiance Map UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
-		cmdList->SetComputeRoot32BitConstants(0, 8, &II, 0);
-		cmdList->Dispatch(1, 1, 6);
-
-		// Another compute shader to get the prefiltered env map aka radiance map. Both the compute shader for this and the irradiance map are very similar, with the only big difference being their means of sampling
-		// vectors. i.e. importance vs uniform, specular vs diffuse.
-		materials_[L"Prefiltered Compute Material"].BindComputeShader(cmdList);
-		PrefilteredMapIndices PI
-		{
-			.TextureID = textures_[L"Skybox UAV"].SRVHandle().index(),
-			.OutputTextureID = textures_[L"Prefiltered UAV"].UAVHandle().index(),
-			.Roughness = 0
-		};
-		utils::TransitionResource(cmdList, textures_[L"Prefiltered UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
-
-		cmdList->SetComputeRoot32BitConstants(0, 3, &PI, 0);
-		cmdList->Dispatch(PREFILTERED_MAP_DIMENSION / 32, PREFILTERED_MAP_DIMENSION / 32, 6);
-
-		// Generate the mip maps ! note that the mip maps for prefiltered env maps store roughness ! and are not for lod in textures. theryre used for ibl calculations.
-		//uint32_t texSize{ PREFILTERED_MAP_DIMENSION / 2};
-		//for (uint32_t i = 0; i < 5; i++)
-		//{
-		//	textures_[L"Prefiltered UAV"].CreateMipLevelTexture(device_.Get(), cbvSrvUavHeap_, texturePool_, i + 1);
-		//	PrefilteredMapIndices MipLevelI
-		//	{
-		//		.TextureID = textures_[L"Skybox UAV"].SRVHandle().index(),
-		//		.OutputTextureID = textures_[L"Prefiltered UAV"].GetMipMapLevelIndex(i + 1),
-		//		.Roughness = i / 4.0f
-		//	};
-
-		//	uint32_t threadGroupSize = std::max(1u, texSize / 32u);
-		//	cmdList->SetComputeRoot32BitConstants(0, 3, &MipLevelI, 0);
-		//	cmdList->Dispatch(threadGroupSize, threadGroupSize, 6);
-		//	texSize /= 2;
-		//}
-		float maxMipLevel = std::log2(float(PREFILTERED_MAP_DIMENSION));
-		for (float mipLevel = 0; mipLevel < maxMipLevel; ++mipLevel)
-		{
-			uint16_t mipWidth = PREFILTERED_MAP_DIMENSION >> uint16_t(mipLevel);
-			float roughness = mipLevel / maxMipLevel;
-			textures_[L"Prefiltered UAV"].CreateMipLevelTexture(device_.Get(), cbvSrvUavHeap_, texturePool_, mipLevel);
-			PrefilteredMapIndices MipLevelI
+			auto command = commandManager_.GetCommandList();
+			auto cmdList = command.Get();
+			utils::TransitionResource(cmdList, textures_[L"Skybox UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
+			std::array<ID3D12DescriptorHeap*, 1> computeDescriptorHeaps
 			{
-				.TextureID = textures_[L"Skybox UAV"].SRVHandle().index(),
-				.OutputTextureID = textures_[L"Prefiltered UAV"].GetMipMapLevelIndex(mipLevel + 1),
-				.Roughness = roughness
+				cbvSrvUavHeap_.GetDescriptorHeap()
 			};
 
-			uint32_t threadGroupSize = std::max(1u, mipWidth / 32u);
-			cmdList->SetComputeRoot32BitConstants(0, 3, &MipLevelI, 0);
-			cmdList->Dispatch(threadGroupSize, threadGroupSize, 6);
+			cmdList->SetDescriptorHeaps(1u, computeDescriptorHeaps.data());
+			materials_[L"Equirect Compute Material"].BindComputeShader(cmdList);
+
+			CubeFromEquirectIndices CFE
+			{
+				.TextureID = textures_[L"HDR Test"].SRVHandle().index(),
+				.OutputTextureID = textures_[L"Skybox UAV"].UAVHandle().index()
+			};
+
+			cmdList->SetComputeRoot32BitConstants(0, 8, &CFE, 0);
+
+			// Recall that dispatch means were calling x * y *z groups total. The shader itself declares how large any given group will be.
+			cmdList->Dispatch(SKYBOX_RESOLUTION / 32, SKYBOX_RESOLUTION / 32, 6);
+			utils::TransitionResource(cmdList, textures_[L"Skybox UAV"].TextureResource(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON);
+			commandManager_.ExecuteCommandList(cmdList);
+			commandManager_.FlushCommandQueue();
+		}
+		
+
+		{
+			auto command = commandManager_.GetCommandList();
+			auto cmdList = command.Get();
+			// compute shader for irradiance map calculation
+			std::array<ID3D12DescriptorHeap*, 1> computeDescriptorHeaps
+			{
+				cbvSrvUavHeap_.GetDescriptorHeap()
+			};
+			cmdList->SetDescriptorHeaps(1u, computeDescriptorHeaps.data());
+			materials_[L"Irradiance Compute Material"].BindComputeShader(cmdList);
+			IrradianceIndices II
+			{
+				.TextureID = textures_[L"Skybox UAV"].SRVHandle().index(),
+				.OutputTextureID = textures_[L"Irradiance Map UAV"].UAVHandle().index()
+			};
+			// DX12 just does not play well straight up with legacy resource states like D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE in compute shaders.
+			// Luckily for us common can acts as a srv for us when we need it in these contexts.
+
+			utils::TransitionResource(cmdList, textures_[L"Irradiance Map UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
+			cmdList->SetComputeRoot32BitConstants(0, 8, &II, 0);
+			cmdList->Dispatch(1, 1, 6);
+			commandManager_.ExecuteCommandList(cmdList);
+			commandManager_.FlushCommandQueue();
+		}
+		
+
+		{
+			auto command = commandManager_.GetCommandList();
+			auto cmdList = command.Get();
+			// Another compute shader to get the prefiltered env map aka radiance map. Both the compute shader for this and the irradiance map are very similar, with the only big difference being their means of sampling
+			// vectors. i.e. importance vs uniform, specular vs diffuse.
+			std::array<ID3D12DescriptorHeap*, 1> computeDescriptorHeaps
+			{
+				cbvSrvUavHeap_.GetDescriptorHeap()
+			};
+			cmdList->SetDescriptorHeaps(1u, computeDescriptorHeaps.data());
+			materials_[L"Prefiltered Compute Material"].BindComputeShader(cmdList);
+			PrefilteredMapIndices PI
+			{
+				.TextureID = textures_[L"Skybox UAV"].SRVHandle().index(),
+				.OutputTextureID = textures_[L"Prefiltered UAV"].UAVHandle().index(),
+				.Roughness = 0
+			};
+			utils::TransitionResource(cmdList, textures_[L"Prefiltered UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
+
+			cmdList->SetComputeRoot32BitConstants(0, 3, &PI, 0);
+			cmdList->Dispatch(PREFILTERED_MAP_DIMENSION / 32, PREFILTERED_MAP_DIMENSION / 32, 6);
+			// Generate the mip maps ! note that the mip maps for prefiltered env maps store roughness ! and are not for lod in textures. theryre used for ibl calculations.
+			float maxMipLevel = std::log2(float(PREFILTERED_MAP_DIMENSION));
+			for (float mipLevel = 0; mipLevel < maxMipLevel; ++mipLevel)
+			{
+				uint16_t mipWidth = PREFILTERED_MAP_DIMENSION >> uint16_t(mipLevel);
+				float roughness = mipLevel / maxMipLevel;
+				textures_[L"Prefiltered UAV"].CreateMipLevelTexture(device_.Get(), cbvSrvUavHeap_, texturePool_, mipLevel);
+				PrefilteredMapIndices MipLevelI
+				{
+					.TextureID = textures_[L"Skybox UAV"].SRVHandle().index(),
+					.OutputTextureID = textures_[L"Prefiltered UAV"].GetMipMapLevelIndex(mipLevel + 1),
+					.Roughness = roughness
+				};
+
+				uint32_t threadGroupSize = std::max(1u, mipWidth / 32u);
+				cmdList->SetComputeRoot32BitConstants(0, 3, &MipLevelI, 0);
+				cmdList->Dispatch(threadGroupSize, threadGroupSize, 6);
+			}
+			commandManager_.ExecuteCommandList(cmdList);
+			commandManager_.FlushCommandQueue();
 		}
 
-		materials_[L"LUT Material"].BindComputeShader(cmdList);
 
-		LutIndices LI
 		{
-			.TextureID = textures_[L"LUT UAV"].UAVHandle().index(),
-		};
-		utils::TransitionResource(cmdList, textures_[L"LUT UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
+			auto command = commandManager_.GetCommandList();
+			auto cmdList = command.Get();
+			std::array<ID3D12DescriptorHeap*, 1> computeDescriptorHeaps
+			{
+				cbvSrvUavHeap_.GetDescriptorHeap()
+			};
+			cmdList->SetDescriptorHeaps(1u, computeDescriptorHeaps.data());
+			materials_[L"LUT Material"].BindComputeShader(cmdList);
 
-		cmdList->SetComputeRoot32BitConstants(0, 1, &LI, 0);
-		cmdList->Dispatch(LUT_DIMENSION / 32, LUT_DIMENSION / 32, 1);
+			LutIndices LI
+			{
+				.TextureID = textures_[L"LUT UAV"].UAVHandle().index(),
+			};
+			utils::TransitionResource(cmdList, textures_[L"LUT UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
 
-		utils::TransitionResource(cmdList, textures_[L"Prefiltered UAV"].TextureResource(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
-		utils::TransitionResource(cmdList, textures_[L"Irradiance Map UAV"].TextureResource(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
-		utils::TransitionResource(cmdList, textures_[L"Skybox UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
-		utils::TransitionResource(cmdList, textures_[L"LUT UAV"].TextureResource(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+			cmdList->SetComputeRoot32BitConstants(0, 1, &LI, 0);
+			cmdList->Dispatch(LUT_DIMENSION / 32, LUT_DIMENSION / 32, 1);
+
+			utils::TransitionResource(cmdList, textures_[L"Prefiltered UAV"].TextureResource(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+			utils::TransitionResource(cmdList, textures_[L"Irradiance Map UAV"].TextureResource(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+			utils::TransitionResource(cmdList, textures_[L"Skybox UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+			utils::TransitionResource(cmdList, textures_[L"LUT UAV"].TextureResource(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+
+			commandManager_.ExecuteCommandList(cmdList);
+			commandManager_.FlushCommandQueue();
+		}
+
 	}
 
 	void DirectXContext::LoadMaterials()

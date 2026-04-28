@@ -60,7 +60,7 @@ namespace sludge
 		void LoadMaterials();
 		void LoadTextures(ID3D12GraphicsCommandList* cmdList);
 		void LoadModel(ID3D12GraphicsCommandList* cmdList);
-		void LoadCubeMap(ID3D12GraphicsCommandList* cmdList);
+		void LoadIBLData();
 		void EnableDebugLayer();
 		void SelectAdapter();
 		void CreateDevice();

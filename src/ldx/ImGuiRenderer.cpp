@@ -73,6 +73,10 @@ namespace sludge
 
 	void ImGuiRenderer::SetClearColor(std::span<float> clearColor)
 	{
-		ImGui::ColorEdit3("Clear Color", clearColor.data());
+		if (ImGui::TreeNode("Clear Color"))
+		{
+			ImGui::ColorEdit3("Clear Color", clearColor.data());
+			ImGui::TreePop();
+		}
 	}
 }

@@ -83,6 +83,7 @@ namespace sludge
 		uint32_t indexCount_{};
 		std::vector<Mesh> meshes_{};
 		Transform transformData_;
+		bool uniformScale{ false };
 		// This single map will keep a hold of all our textures so we arent reuploading data more than once.
 		static inline  std::map<std::string_view, Texture> loadedTextures_;
 	};

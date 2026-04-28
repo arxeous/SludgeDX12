@@ -122,16 +122,26 @@ namespace sludge
 	// null terminated, we play it safe and use plain ol string.
 	void Model::UpdateFromUI(std::string name, utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool)
 	{
-		ImGui::Begin(name.c_str());
+		if (ImGui::TreeNode(name.c_str()))
+		{
+			// Since the struct has our floats lined up in contiguous order, we send the address of the first element
+			// with the understanding that the the proceeding elements will be gathered in memory appropriately.
+			ImGui::SliderFloat3("Translate", &transformData_.Translation.x, -10.0f, 10.0f);
+			ImGui::SliderFloat3("Rotation", &transformData_.Rotation.x, -90.0f, 90.0f);
+			ImGui::SliderFloat3("Scale", &transformData_.Scale.x, 0.1f, 10.0f);
+			ImGui::Checkbox("Uniform Scale", &uniformScale);
+			if (uniformScale)
+			{
+				// Little wonky for uniform scale but gets the job done. Ill change it down the road
+				transformData_.Scale.y = transformData_.Scale.x;
+				transformData_.Scale.z = transformData_.Scale.x;
+			}
+			auto cb = cbPool.get(cbHolder_);
+			ImGui::ColorEdit3("Model Diffuse Color", &cb->ConstantBufferData().albedo.x);
+			
+			ImGui::TreePop();
+		}
 
-		// Since the struct has our floats lined up in contiguous order, we send the address of the first element
-		// with the understanding that the the proceeding elements will be gathered in memory appropriately.
-		ImGui::SliderFloat3("Translate", &transformData_.Translation.x, -10.0f, 10.0f);
-		ImGui::SliderFloat3("Rotation", &transformData_.Rotation.x, -90.0f, 90.0f);
-		auto cb = cbPool.get(cbHolder_);
-		ImGui::ColorEdit3("Model Diffuse Color", &cb->ConstantBufferData().albedo.x);
-
-		ImGui::End();
 	}
 
 	void Model::Draw(ID3D12GraphicsCommandList* const cmdList)
