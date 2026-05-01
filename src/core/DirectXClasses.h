@@ -4,8 +4,6 @@
 #include "IContext.h"
 #include "d3dApp.h"
 
-
-
 // Alot of our initial set up mimics the set up for lvk,lightweight vulkan, because I really like 
 // the Vulkan 3D graphics Rendering Cookbook despite the fact that I'm writing this whole thing in DX12.
 // its a good book for expert level techniques that you dont get to see everyday.
@@ -112,6 +110,8 @@ namespace sludge
 
 		CommandManager commandManager_{};
 		ImGuiRenderer imGuiManager_{};
+		Scene scene_{};
+		ModelData modelData_;
 
 		//MaterialConstants matConstants_{};
 		//PassConstants passConstants_{};

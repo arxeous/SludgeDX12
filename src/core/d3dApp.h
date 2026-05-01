@@ -18,6 +18,8 @@
 #include "ldx/CubeMap.h"
 #include "ldx/Material.h"
 #include "ldx/DepthStencilBuffer.h"
+#include "ldx/Scene.h"
+#include "utils/ModelData.h"
 
 namespace sludge
 {

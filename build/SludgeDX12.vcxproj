@@ -89,29 +89,21 @@
       <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <BufferSecurityCheck>
-      </BufferSecurityCheck>
-      <CallingConvention>
-      </CallingConvention>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <FloatingPointModel>
-      </FloatingPointModel>
-      <ForceConformanceInForLoopScope>
-      </ForceConformanceInForLoopScope>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <MinimalRebuild>
-      </MinimalRebuild>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RemoveUnreferencedCodeData>
-      </RemoveUnreferencedCodeData>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <SupportJustMyCode>
-      </SupportJustMyCode>
-      <TreatWChar_tAsBuiltInType>
-      </TreatWChar_tAsBuiltInType>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_UNICODE;UNICODE;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -149,19 +141,15 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\Debug\assimp-vc143-mtd.lib;libs\assimp\contrib\zlib\Debug\zlibstaticd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention></DataExecutionPrevention>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImageHasSafeExceptionHandlers>
-      </ImageHasSafeExceptionHandlers>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
       <ImportLibrary>E:/dev/dx12RE/Sludge/build/Debug/SludgeDX12.lib</ImportLibrary>
-      <LinkErrorReporting>
-      </LinkErrorReporting>
+      <LinkErrorReporting></LinkErrorReporting>
       <ProgramDataBaseFile>E:/dev/dx12RE/Sludge/build/Debug/SludgeDX12.pdb</ProgramDataBaseFile>
-      <RandomizedBaseAddress>
-      </RandomizedBaseAddress>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
@@ -173,28 +161,20 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <BufferSecurityCheck>
-      </BufferSecurityCheck>
-      <CallingConvention>
-      </CallingConvention>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <FloatingPointModel>
-      </FloatingPointModel>
-      <ForceConformanceInForLoopScope>
-      </ForceConformanceInForLoopScope>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <MinimalRebuild>
-      </MinimalRebuild>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RemoveUnreferencedCodeData>
-      </RemoveUnreferencedCodeData>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <SupportJustMyCode>
-      </SupportJustMyCode>
-      <TreatWChar_tAsBuiltInType>
-      </TreatWChar_tAsBuiltInType>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -234,19 +214,15 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\Release\assimp-vc143-mt.lib;libs\assimp\contrib\zlib\Release\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention></DataExecutionPrevention>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImageHasSafeExceptionHandlers>
-      </ImageHasSafeExceptionHandlers>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
       <ImportLibrary>E:/dev/dx12RE/Sludge/build/Release/SludgeDX12.lib</ImportLibrary>
-      <LinkErrorReporting>
-      </LinkErrorReporting>
+      <LinkErrorReporting></LinkErrorReporting>
       <ProgramDataBaseFile>E:/dev/dx12RE/Sludge/build/Release/SludgeDX12.pdb</ProgramDataBaseFile>
-      <RandomizedBaseAddress>
-      </RandomizedBaseAddress>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
@@ -258,28 +234,20 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <BufferSecurityCheck>
-      </BufferSecurityCheck>
-      <CallingConvention>
-      </CallingConvention>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <FloatingPointModel>
-      </FloatingPointModel>
-      <ForceConformanceInForLoopScope>
-      </ForceConformanceInForLoopScope>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <MinimalRebuild>
-      </MinimalRebuild>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>MinSpace</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RemoveUnreferencedCodeData>
-      </RemoveUnreferencedCodeData>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <SupportJustMyCode>
-      </SupportJustMyCode>
-      <TreatWChar_tAsBuiltInType>
-      </TreatWChar_tAsBuiltInType>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -319,19 +287,15 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\MinSizeRel\assimp-vc143-mt.lib;libs\assimp\contrib\zlib\MinSizeRel\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention></DataExecutionPrevention>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImageHasSafeExceptionHandlers>
-      </ImageHasSafeExceptionHandlers>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
       <ImportLibrary>E:/dev/dx12RE/Sludge/build/MinSizeRel/SludgeDX12.lib</ImportLibrary>
-      <LinkErrorReporting>
-      </LinkErrorReporting>
+      <LinkErrorReporting></LinkErrorReporting>
       <ProgramDataBaseFile>E:/dev/dx12RE/Sludge/build/MinSizeRel/SludgeDX12.pdb</ProgramDataBaseFile>
-      <RandomizedBaseAddress>
-      </RandomizedBaseAddress>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
@@ -343,29 +307,21 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <BufferSecurityCheck>
-      </BufferSecurityCheck>
-      <CallingConvention>
-      </CallingConvention>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <FloatingPointModel>
-      </FloatingPointModel>
-      <ForceConformanceInForLoopScope>
-      </ForceConformanceInForLoopScope>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <MinimalRebuild>
-      </MinimalRebuild>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RemoveUnreferencedCodeData>
-      </RemoveUnreferencedCodeData>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <SupportJustMyCode>
-      </SupportJustMyCode>
-      <TreatWChar_tAsBuiltInType>
-      </TreatWChar_tAsBuiltInType>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -403,19 +359,15 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\RelWithDebInfo\assimp-vc143-mt.lib;libs\assimp\contrib\zlib\RelWithDebInfo\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
+      <DataExecutionPrevention></DataExecutionPrevention>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImageHasSafeExceptionHandlers>
-      </ImageHasSafeExceptionHandlers>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
       <ImportLibrary>E:/dev/dx12RE/Sludge/build/RelWithDebInfo/SludgeDX12.lib</ImportLibrary>
-      <LinkErrorReporting>
-      </LinkErrorReporting>
+      <LinkErrorReporting></LinkErrorReporting>
       <ProgramDataBaseFile>E:/dev/dx12RE/Sludge/build/RelWithDebInfo/SludgeDX12.pdb</ProgramDataBaseFile>
-      <RandomizedBaseAddress>
-      </RandomizedBaseAddress>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
@@ -1147,9 +1099,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Model.h" />
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.cpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Scene.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.cpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.h" />
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Texture.cpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Texture.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\TextureUAV.cpp" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\TextureUAV.h" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\UploadBuffer.h" />
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\VertexBuffer.cpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\VertexBuffer.h" />
@@ -1161,8 +1117,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Handle.h" />
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Holder.cpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Holder.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\ModelData.h" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Pool.h" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\ReadData.h" />
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\SceneUtils.h" />
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Timer.cpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Timer.h" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\json.hpp" />

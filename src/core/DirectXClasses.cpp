@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "DirectXClasses.h"
 #include "utils/ReadData.h"
+#include "utils/SceneUtils.h"
 
 // Exports for the agility SDK
 extern "C" { __declspec(dllexport) extern const UINT D3D12SDKVersion = 618; }
@@ -447,6 +448,7 @@ namespace sludge
 		//models_["Helmet"].GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
 		//auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		//models_["Helmet"].UpdateData(viewProj, cbModelPool_);
+		utils::loadMeshFile(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf", modelData_, scene_);
 		models_["TestSpheres"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");
 		models_["TestSpheres"].GetTransformData().Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
 		models_["TestSpheres"].GetTransformData().Rotation = DirectX::XMFLOAT3(1.525, 0, 0);

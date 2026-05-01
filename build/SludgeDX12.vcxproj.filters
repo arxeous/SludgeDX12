@@ -40,7 +40,13 @@
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.cpp">
       <Filter>src\ldx</Filter>
     </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Texture.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\TextureUAV.cpp">
       <Filter>src\ldx</Filter>
     </ClCompile>
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\VertexBuffer.cpp">
@@ -123,10 +129,16 @@
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.h">
       <Filter>src\ldx</Filter>
     </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Scene.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.h">
       <Filter>src\ldx</Filter>
     </ClInclude>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Texture.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\TextureUAV.h">
       <Filter>src\ldx</Filter>
     </ClInclude>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\UploadBuffer.h">
@@ -150,10 +162,16 @@
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Holder.h">
       <Filter>src\utils</Filter>
     </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\ModelData.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Pool.h">
       <Filter>src\utils</Filter>
     </ClInclude>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\ReadData.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\SceneUtils.h">
       <Filter>src\utils</Filter>
     </ClInclude>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Timer.h">
