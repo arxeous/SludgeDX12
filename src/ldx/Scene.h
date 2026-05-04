@@ -24,7 +24,7 @@ namespace sludge
 		// debugging helpers
 		std::unordered_map<uint32_t, uint32_t> nameForNode{};
 		std::vector<std::string> nodeNames{};
-		std::vector<std::string> modelNames{};
+		std::vector<std::string> materialNames{};
 
 	};
 }

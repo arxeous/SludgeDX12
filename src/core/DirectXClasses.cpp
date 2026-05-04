@@ -33,15 +33,22 @@ namespace sludge
 		// have finished executing on the GPU. Multiple allocators means we dont stall.
 		auto commandList_ = commandManager_.GetCommandList();
 		Microsoft::WRL::ComPtr<ID3D12Resource> currBackBuffer = swapChainBuffer_[currentBackBufferIndex_];
-
+		int selectedNode = -1;
 		imGuiManager_.FrameStart();
-		imGuiManager_.Begin("Scene Control");
-		for (auto& [name, model] : models_)
-		{
-			model.UpdateFromUI(name.data(), cbModelPool_);
-			auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
-			model.UpdateData(viewProj, cbModelPool_);
+		imGuiManager_.Begin("Scene Graph");
+		ImGui::Separator();
+
+		auto node = RenderSceneTreeUI(scene_, 0, selectedNode);
+		if (node > -1) {
+			selectedNode = node;
 		}
+
+		//for (auto& [name, model] : models_)
+		//{
+		//	model.UpdateFromUI(name.data(), cbModelPool_);
+		//	auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
+		//	model.UpdateData(viewProj, cbModelPool_);
+		//}
 
 		//ImGui::Begin("Material Data");
 		//ImGui::SliderFloat4("Albedo", &matConstants_.DiffuseAlbedo.x, 0.0f, 1.0f);
@@ -79,29 +86,31 @@ namespace sludge
 		commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		auto passCB = cbPassPool_.get(passConstants[L"Test"]);
 
-		ResourceIndices PBRResourceIDs
-		{
-			.albedoID = 0,
-			.roughnessID = 0,
-			.VertexBufferID = 0,
-			.passConstantID = passConstants[L"Test"].index(),
-			.modelConstantID = 0,
-			.IrradianceID = textures_[L"Irradiance Map UAV"].SRVHandle().index(),
-			.PrefilterID = textures_[L"Prefiltered UAV"].SRVHandle().index(),
-			.LutID = textures_[L"LUT UAV"].SRVHandle().index(),
-			.NormalID = 0,
-			.EmissiveID = 0,
-			.AoID = 0,
-		};
+		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
+		updateModelData(modelData_, viewProj, cbModelPool_);
+		RenderScene(commandList_.Get(), scene_, modelData_, 0);
+		//ResourceIndices PBRResourceIDs
+		//{
+		//	.albedoID = 0,
+		//	.roughnessID = 0,
+		//	.VertexBufferID = 0,
+		//	.passConstantID = passConstants[L"Test"].index(),
+		//	.modelConstantID = 0,
+		//	.IrradianceID = textures_[L"Irradiance Map UAV"].SRVHandle().index(),
+		//	.PrefilterID = textures_[L"Prefiltered UAV"].SRVHandle().index(),
+		//	.LutID = textures_[L"LUT UAV"].SRVHandle().index(),
+		//	.NormalID = 0,
+		//	.EmissiveID = 0,
+		//	.AoID = 0,
+		//};
 
-		// good old structured binding. Gotta love it for pairs n maps!
-		for (auto& [name, model] : models_)
-		{
-			model.DrawNodes(commandList_.Get(), PBRResourceIDs);
-		}
+		//// good old structured binding. Gotta love it for pairs n maps!
+		//for (auto& [name, model] : models_)
+		//{
+		//	model.DrawNodes(commandList_.Get(), PBRResourceIDs);
+		//}
 
 		materials_[L"Skybox Material"].BindPSO(commandList_.Get());
-		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		skybox_.UpdateData(viewProj, cbModelPool_);
 
 		// The problem is that the rt index and the index of the other structured buffers (the first one) that hold the vertices are both 101. The latter overwrites the RT and so we get a 
@@ -448,12 +457,17 @@ namespace sludge
 		//models_["Helmet"].GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
 		//auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		//models_["Helmet"].UpdateData(viewProj, cbModelPool_);
-		utils::loadMeshFile(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf", modelData_, scene_);
-		models_["TestSpheres"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");
-		models_["TestSpheres"].GetTransformData().Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
-		models_["TestSpheres"].GetTransformData().Rotation = DirectX::XMFLOAT3(1.525, 0, 0);
+		utils::loadMeshFile(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, texturePool_, cbModelPool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf", modelData_, scene_);
 		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
-		models_["TestSpheres"].UpdateData(viewProj, cbModelPool_);
+		modelData_.transform.Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
+		modelData_.transform.Rotation = DirectX::XMFLOAT3(1.525, 0, 0);
+		updateModelData(modelData_, viewProj, cbModelPool_);
+
+		//models_["TestSpheres"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");
+		//models_["TestSpheres"].GetTransformData().Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
+		//models_["TestSpheres"].GetTransformData().Rotation = DirectX::XMFLOAT3(1.525, 0, 0);
+
+		//models_["TestSpheres"].UpdateData(viewProj, cbModelPool_);
 
 		skybox_.LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/Cube/glTF/Cube.gltf");
 		//skybox_.GetTransformData().Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
@@ -599,7 +613,74 @@ namespace sludge
 	void DirectXContext::CreateDSVs()
 	{
 		depthStencilBuffer_.CreateDepthStencilBuffer(device_.Get(), dsvHeap_, width_, height_, L"Depth Stencil View");
-	}	
+	}
 
+	void DirectXContext::RenderScene(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node)
+	{
+		if (scene.meshForNode.find(node) != scene.meshForNode.end())
+		{
+			int meshIdx = scene.meshForNode.at(node);
+			int materialIdx = scene.materialForNode.at(node);
+			auto ibv = modelData.meshes[meshIdx].indexBuffer.IndexBufferView();
+			cmdList->IASetIndexBuffer(&ibv);
+			ResourceIndices PBRResourceIDs
+			{
+				.albedoID = !modelData.materials[materialIdx].albedo.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].albedo].SRVHandle().index() : 0,
+				.roughnessID = !modelData.materials[materialIdx].metallicRoughnessMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].metallicRoughnessMap].SRVHandle().index() : 0,
+				.VertexBufferID = modelData.meshes[meshIdx].vbHolder.index(),
+				.passConstantID = passConstants[L"Test"].index(),
+				.modelConstantID = modelData.cbHolder.index(),
+				.IrradianceID = textures_[L"Irradiance Map UAV"].SRVHandle().index(),
+				.PrefilterID = textures_[L"Prefiltered UAV"].SRVHandle().index(),
+				.LutID = textures_[L"LUT UAV"].SRVHandle().index(),
+				.NormalID = !modelData.materials[materialIdx].normalMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].normalMap].SRVHandle().index() : 0,
+				.EmissiveID = !modelData.materials[materialIdx].emissiveMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].emissiveMap].SRVHandle().index() : 0,
+				.AoID = !modelData.materials[materialIdx].aoMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].aoMap].SRVHandle().index() : 0,
+			};
+			cmdList->SetGraphicsRoot32BitConstants(0, 11, &PBRResourceIDs, 0);
+			cmdList->DrawIndexedInstanced(modelData.meshes[meshIdx].indexCount, 1, 0, 0, 0);
+		}
+		
+		for (int child = scene.hierarchy[node].firstChild; child != -1; child = scene.hierarchy[child].nextSibling)
+		{
+			RenderScene(cmdList, scene, modelData, child);
+		}
+	}
 
+	int DirectXContext::RenderSceneTreeUI(const Scene& scene, int node, int selectedNode)
+	{
+
+		int strID = scene.nameForNode.contains(node) ? scene.nameForNode.at(node) : -1;
+		const std::string name = strID > -1 ? scene.nodeNames[strID] : std::string{};
+		const std::string label = name.empty() ? (std::string("Node") + std::to_string(node)) : name;
+		const bool isLeaf = scene.hierarchy[node].firstChild < 0;
+		ImGuiTreeNodeFlags flags = isLeaf ? ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_Bullet : 0;
+		if (node == selectedNode)
+		{
+			flags |= ImGuiTreeNodeFlags_Selected;
+		}
+		ImVec4 color = isLeaf ? ImVec4(0, 1, 0, 1) : ImVec4(1, 1, 1, 1);
+		ImGui::PushStyleColor(ImGuiCol_Text, color);
+		const bool isOpened = ImGui::TreeNodeEx(&scene.hierarchy[node], flags, "%s", label.c_str());
+		ImGui::PopStyleColor();
+		ImGui::PushID(node);
+		if (ImGui::IsItemHovered() && isLeaf)
+		{
+			selectedNode = node;
+		}
+		if (isOpened)
+		{
+			for (int child = scene.hierarchy[node].firstChild; child != -1; child = scene.hierarchy[child].nextSibling)
+			{
+				if (int subNode = RenderSceneTreeUI(scene, child, selectedNode); subNode > -1)
+				{
+					selectedNode = subNode;
+				}
+			}
+			ImGui::TreePop();
+		}
+		ImGui::PopID();
+		return selectedNode;
+
+	}
 } // sludge

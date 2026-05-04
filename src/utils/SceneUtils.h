@@ -13,6 +13,100 @@
 
 namespace sludge::utils
 {
+	int MikkGetNumFaces(const SMikkTSpaceContext* pContext)
+	{
+		const ModelMesh& m{ *(ModelMesh*)(pContext->m_pUserData) };
+		return m.indexCount / 3;
+	}
+	int MikkGetNumVerticesOfFace([[maybe_unused]] const SMikkTSpaceContext* pContext, [[maybe_unused]] const int iFace)
+	{
+		return 3;
+	}
+
+	void MikkGetPosition(const SMikkTSpaceContext* pContext, float fvPosOut[], const int iFace, const int iVert)
+	{
+		const ModelMesh& m{ *(ModelMesh*)(pContext->m_pUserData) };
+		const uint32_t index{ m.Indices[iFace * 3 + iVert] };
+		const DirectX::XMFLOAT3 pos{ m.Vertices[index].Pos };
+		fvPosOut[0] = pos.x;
+		fvPosOut[1] = pos.y;
+		fvPosOut[2] = pos.z;
+	}
+
+	void MikkGetNormal(const SMikkTSpaceContext* pContext, float fvNormOut[], const int iFace, const int iVert)
+	{
+		const ModelMesh& m{ *(ModelMesh*)(pContext->m_pUserData) };
+		const uint32_t index{ m.Indices[iFace * 3 + iVert] };
+		const DirectX::XMFLOAT3 normal{ m.Vertices[index].Normal };
+		fvNormOut[0] = normal.x;
+		fvNormOut[1] = normal.y;
+		fvNormOut[2] = normal.z;
+
+	}
+	void MikkGetTexCoord(const SMikkTSpaceContext* pContext, float fvTexcOut[], const int iFace, const int iVert)
+	{
+		const ModelMesh& m{ *(ModelMesh*)(pContext->m_pUserData) };
+		const uint32_t index{ m.Indices[iFace * 3 + iVert] };
+		const DirectX::XMFLOAT2 texC{ m.Vertices[index].TexC };
+		fvTexcOut[0] = texC.x;
+		fvTexcOut[1] = texC.y;
+	}
+	void MikkGetTSpaceBasic(const SMikkTSpaceContext* pContext, const float fvTangent[], const float fSign, const int iFace, const int iVert)
+	{
+		ModelMesh& m{ *(ModelMesh*)(pContext->m_pUserData) };
+		const uint32_t index{ m.Indices[iFace * 3 + iVert] };
+		m.Vertices[index].Tangent.x = fvTangent[0];
+		m.Vertices[index].Tangent.y = fvTangent[1];
+		m.Vertices[index].Tangent.z = fvTangent[2];
+		m.Vertices[index].Tangent.w = fSign;
+
+	}
+
+	void calculateMikkTSpace(ModelMesh& m)
+	{
+		SMikkTSpaceInterface mikkInterface{};
+		mikkInterface.m_getNumFaces = MikkGetNumFaces;
+		mikkInterface.m_getNumVerticesOfFace = MikkGetNumVerticesOfFace;
+		mikkInterface.m_getPosition = MikkGetPosition;
+		mikkInterface.m_getNormal = MikkGetNormal;
+		mikkInterface.m_getTexCoord = MikkGetTexCoord;
+		mikkInterface.m_setTSpace = nullptr;
+		mikkInterface.m_setTSpaceBasic = MikkGetTSpaceBasic;
+
+		SMikkTSpaceContext ctx{};
+		ctx.m_pInterface = &mikkInterface;
+		ctx.m_pUserData = (void*)&m;
+
+		genTangSpaceDefault(&ctx);
+
+	}
+
+	DirectX::XMMATRIX aiMatrixToXMMATRIX(const aiMatrix4x4& from)
+	{
+		// as it turns out DX12 doesnt give you direct access to XMMATRIX, so we need to use a xmfloat4x4
+		// to pass into the load fcn to get back a matrix;
+
+		DirectX::XMFLOAT4X4 to;
+		to.m[0][0] = (float)from.a1;
+		to.m[0][1] = (float)from.a2;
+		to.m[0][2] = (float)from.a3;
+		to.m[0][3] = (float)from.a4;
+		to.m[1][0] = (float)from.b1;
+		to.m[1][1] = (float)from.b2;
+		to.m[1][2] = (float)from.b3;
+		to.m[1][3] = (float)from.b4;
+		to.m[2][0] = (float)from.c1;
+		to.m[2][1] = (float)from.c2;
+		to.m[2][2] = (float)from.c3;
+		to.m[2][3] = (float)from.c4;
+		to.m[3][0] = (float)from.d1;
+		to.m[3][1] = (float)from.d2;
+		to.m[3][2] = (float)from.d3;
+		to.m[3][3] = (float)from.d4;
+
+		return DirectX::XMLoadFloat4x4(&to);
+	}
+
 	int addNode(Scene& scene, int parent, int level)
 	{
 		const int node = (int)scene.hierarchy.size();
@@ -94,6 +188,11 @@ namespace sludge::utils
 
 		modelMesh.Vertices = vertices;
 		modelMesh.Indices = indices;
+		if (mesh->mTangents != nullptr)
+		{
+			calculateMikkTSpace(modelMesh);
+		}
+
 		modelMesh.vertexCount = vertices.size();
 		modelMesh.indexCount = indices.size();
 
@@ -213,9 +312,7 @@ namespace sludge::utils
 		}
 
 		scene.globalTransforms[newNodeID] = DirectX::XMMatrixIdentity();
-		// To be changed
-		scene.localTransforms[newNodeID] = DirectX::XMMatrixIdentity();
-
+		scene.localTransforms[newNodeID] = aiMatrixToXMMATRIX(node->mTransformation);
 		for (unsigned int n = 0; n < node->mNumChildren; n++)
 		{
 			traverse(sourceScene, scene, node->mChildren[n], newNodeID, atLevel + 1);
@@ -223,7 +320,8 @@ namespace sludge::utils
 	}
 
 	void loadMeshFile(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap,
-		utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, const char* fileName, ModelData& modelData, Scene& ourScene)
+		utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool,
+		const char* fileName, ModelData& modelData, Scene& ourScene)
 	{
 		const aiScene* scene = aiImportFile(fileName, aiProcess_Triangulate | aiProcess_MakeLeftHanded | aiProcess_FlipUVs);
 
@@ -249,11 +347,35 @@ namespace sludge::utils
 		for (unsigned int i = 0; i != scene->mNumMaterials; i++) 
 		{
 			const aiMaterial* m = scene->mMaterials[i];
+			ourScene.materialNames.push_back(m->GetName().C_Str());
 			modelData.materials.push_back(processMeshMaterial(device, cmdList, heap, geometryPool, texPool, m, modelDirectory));
 		}
 
-		// scene hierarchy conversion
+
+		ConstantBuffer<ModelConstants> cb;
+		modelData.cbHolder = cbPool.create(std::move(cb));
+		auto constantBuffer = cbPool.get(modelData.cbHolder);
+		constantBuffer->CreateConstantBuffer(device, cmdList,
+			ModelConstants{ .modelMat = DirectX::XMMatrixIdentity(), .invModelMat = DirectX::XMMatrixIdentity() },
+			heap, L"Model Constants Buffer", modelData.cbHolder.index());
+
 		traverse(scene, ourScene, scene->mRootNode, -1, 0);
 
+	}
+
+	void updateModelData(ModelData& modelData, DirectX::XMMATRIX viewProj, utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool)
+	{
+		auto scaleVector = DirectX::XMLoadFloat3(&modelData.transform.Scale);
+		auto rotVector = DirectX::XMLoadFloat3(&modelData.transform.Rotation);
+		auto translationVector = DirectX::XMLoadFloat3(&modelData.transform.Translation);
+
+		auto cb = cbPool.get(modelData.cbHolder);
+		cb->ConstantBufferData().modelMat = DirectX::XMMatrixScalingFromVector(scaleVector) *
+			DirectX::XMMatrixRotationRollPitchYawFromVector(rotVector) *
+			DirectX::XMMatrixTranslationFromVector(translationVector);
+
+		cb->ConstantBufferData().invModelMat = DirectX::XMMatrixInverse(nullptr, cb->ConstantBufferData().modelMat);
+		cb->ConstantBufferData().viewProjMat = viewProj;
+		cb->UpdateBuffer();
 	}
 }

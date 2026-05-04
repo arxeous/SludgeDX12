@@ -22,24 +22,25 @@ namespace sludge
 		uint32_t indexCount{};
 	};
 
-	//struct Transform
-	//{
-	//	DirectX::XMFLOAT3 Rotation{};
-	//	DirectX::XMFLOAT3 Scale{};
-	//	DirectX::XMFLOAT3 Translation{};
-	//};
+	struct ModelTransform
+	{
+		DirectX::XMFLOAT3 Rotation{};
+		DirectX::XMFLOAT3 Scale{};
+		DirectX::XMFLOAT3 Translation{};
+	};
 
 	// Since we are using a data driven approach, model data will effectively function as our models now. Except now we use indices to index into any given model that
 	// we may want to use. Pretty much the same schtick with how our scene graph works.
 	struct ModelData
 	{
-		std::vector<utils::Holder<utils::ModelConstantHandle>> cbHolders{};
+		//std::vector<utils::Holder<utils::ModelConstantHandle>> cbHolders{};
+		utils::Holder <utils::ModelConstantHandle> cbHolder{};
 		std::vector<std::string> modelDirectories{};
 
 		std::vector<uint32_t> vertexCounts{};
 		std::vector<uint32_t> indexCounts{};
 		std::vector<ModelMesh> meshes{};
-		//std::vector<Transform> transforms;
+		ModelTransform transform;
 		std::vector<MeshMaterial> materials{};
 
 		// This single map will keep a hold of all our textures so we arent reuploading data more than once.

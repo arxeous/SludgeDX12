@@ -66,6 +66,9 @@ namespace sludge
 		void CreateDXGIFactory();
 		void CreateRTVs();
 		void CreateDSVs();
+		void RenderScene(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node);
+		int RenderSceneTreeUI(const Scene& scene, int node, int selectedNode);
+
 
 		static constexpr uint32_t SKYBOX_RESOLUTION = 1024;
 		static constexpr uint32_t IRRADIANCE_MAP_DIMENSION = 32;
