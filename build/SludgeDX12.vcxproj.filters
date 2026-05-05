@@ -85,6 +85,9 @@
     <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_dx12.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\ImGuizmo\ImGuizmo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\core\DirectXClasses.h">

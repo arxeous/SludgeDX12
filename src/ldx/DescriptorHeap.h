@@ -30,6 +30,9 @@ namespace sludge
 		// memory pools. 
 		[[nodiscard]] CD3DX12_CPU_DESCRIPTOR_HANDLE CPUDescriptorHandleEnd(){ return descriptorHandleEnd_.CpuDescriptorHandle; };
 		[[nodiscard]] CD3DX12_GPU_DESCRIPTOR_HANDLE GPUDescriptorHandleEnd() { return descriptorHandleEnd_.GpuDescriptorHandle; };
+
+		[[nodiscard]] CD3DX12_CPU_DESCRIPTOR_HANDLE ImGuiCPUDescriptorHandleStart() { return imGuiDescriptorHandle_.CpuDescriptorHandle; };
+		[[nodiscard]] CD3DX12_GPU_DESCRIPTOR_HANDLE ImGuiGPUDescriptorHandleStart() { return imGuiDescriptorHandle_.GpuDescriptorHandle; };
 		void OffsetHandles(uint32_t idx = 1);
 		D3D12_DESCRIPTOR_HEAP_FLAGS HeapFlags();
 
@@ -38,6 +41,7 @@ namespace sludge
 		//CD3DX12_CPU_DESCRIPTOR_HANDLE cpuEnd_{};
 		//CD3DX12_GPU_DESCRIPTOR_HANDLE gpuEnd_{};
 		DescriptorHandle descriptorHandleEnd_{};
+		DescriptorHandle imGuiDescriptorHandle_{};
 
 		D3D12_DESCRIPTOR_HEAP_FLAGS flags_{};
 		uint32_t descriptorSize_{};

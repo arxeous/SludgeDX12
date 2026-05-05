@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -111,10 +111,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_UNICODE;UNICODE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -158,7 +158,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -184,10 +184,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -231,7 +231,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -257,10 +257,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -304,7 +304,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -329,10 +329,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -1156,6 +1156,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </None>
     <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\lutCompute.cso">
     </None>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\ImGuizmo\ImGuizmo.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

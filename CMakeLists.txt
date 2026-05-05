@@ -93,6 +93,7 @@ add_subdirectory(libs/assimp)
 include_directories(.)
 include_directories(libs)
 include_directories(libs/imgui/)
+include_directories(libs/ImGuizmo/)
 
 set_property(TARGET assimp          PROPERTY FOLDER "third-party")
 if(WIN32)
@@ -134,6 +135,7 @@ set(IMGUI_SRC
     libs/imgui/backends/imgui_impl_dx12.h
     libs/imgui/backends/imgui_impl_dx12.cpp
 )
+
 
 
 # Create the executable
@@ -206,11 +208,18 @@ else()
 endif()
 
 include_directories(.)
-include_directories(libs)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+target_sources(${PROJECT_NAME} PRIVATE
+    libs/ImGuizmo/ImGuizmo.cpp
+)
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+    libs/ImGuizmo
 )
 source_group("entry" FILES ${ENTRY_FILES})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "src" FILES ${SRC_FILES})

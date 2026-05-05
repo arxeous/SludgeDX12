@@ -27,4 +27,10 @@ namespace sludge
 		std::vector<std::string> materialNames{};
 
 	};
+
+	inline std::string GetNodeName(const Scene& scene, int node)
+	{
+		int strID = scene.nameForNode.contains(node) ? scene.nameForNode.at(node) : -1;
+		return (strID > -1) ? scene.nodeNames[strID] : std::string();
+	}
 }

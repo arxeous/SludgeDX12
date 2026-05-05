@@ -20,6 +20,7 @@
 #include "ldx/DepthStencilBuffer.h"
 #include "ldx/Scene.h"
 #include "utils/ModelData.h"
+#include "ImGuizmo.h"
 
 namespace sludge
 {

@@ -23,6 +23,7 @@ namespace sludge
 		Load();
 	}
 
+	int selectedNode = -1;
 	// Draw functions pretty much exactly like every other draw function for DX12 ever.
 	// Go read frank luna for full details on how this works, but its just submitting draw commands to our 
 	// gpu command queue really.
@@ -33,12 +34,17 @@ namespace sludge
 		// have finished executing on the GPU. Multiple allocators means we dont stall.
 		auto commandList_ = commandManager_.GetCommandList();
 		Microsoft::WRL::ComPtr<ID3D12Resource> currBackBuffer = swapChainBuffer_[currentBackBufferIndex_];
-		int selectedNode = -1;
+		int updateMaterialIdx = -1;
+		std::array<ID3D12DescriptorHeap*, 1> descriptorHeaps{ cbvSrvUavHeap_.GetDescriptorHeap() };
+		commandList_->SetDescriptorHeaps(static_cast<uint32_t>(descriptorHeaps.size()), descriptorHeaps.data());
 		imGuiManager_.FrameStart();
-		imGuiManager_.Begin("Scene Graph");
+		const ImGuiViewport* v = ImGui::GetMainViewport();
+		ImGui::SetNextWindowPos(ImVec2(10, 100));
+		ImGui::SetNextWindowSize(ImVec2(v->WorkSize.x / 6, v->WorkSize.y - 210));
+		ImGui::Begin("Scene graph", nullptr, ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
 		ImGui::Separator();
 
-		auto node = RenderSceneTreeUI(scene_, 0, selectedNode);
+		auto node = imGuiManager_.RenderSceneTreeUI(scene_, 0, selectedNode);
 		if (node > -1) {
 			selectedNode = node;
 		}
@@ -57,8 +63,7 @@ namespace sludge
 		//MaterialCB->CopyData(0, matConstants_);
 		//ImGui::End();
 
-		std::array<ID3D12DescriptorHeap*, 1> descriptorHeaps{ cbvSrvUavHeap_.GetDescriptorHeap() };
-		commandList_->SetDescriptorHeaps(static_cast<uint32_t>(descriptorHeaps.size()), descriptorHeaps.data());
+
 
 		// Since every shader uses the same root signature, we bind one and only change the PSO 
 		// to switch out the shaders for the draw commands.
@@ -148,10 +153,11 @@ namespace sludge
 		commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
 
 		// Since imgui gets it own heap, we need to set it before the call to frame end that will then do its draw call.
-		std::array<ID3D12DescriptorHeap*, 1> imGuiDescriptorHeap{ imGuiSrvHeap_.GetDescriptorHeap() };
-		commandList_->SetDescriptorHeaps(static_cast<uint32_t>(imGuiDescriptorHeap.size()), imGuiDescriptorHeap.data());
+		//std::array<ID3D12DescriptorHeap*, 1> imGuiDescriptorHeap{ imGuiSrvHeap_.GetDescriptorHeap() };
+		//commandList_->SetDescriptorHeaps(static_cast<uint32_t>(imGuiDescriptorHeap.size()), imGuiDescriptorHeap.data());
 
 		imGuiManager_.End();
+		imGuiManager_.RenderEditNodeUI(scene_, modelData_, viewProj, projMatrix_, selectedNode, updateMaterialIdx, texturePool_);
 		imGuiManager_.FrameEnd(commandList_.Get());
 		utils::TransitionResource(commandList_.Get(), currBackBuffer.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 		frameCurrentFence_[currentBackBufferIndex_] = commandManager_.ExecuteCommandList(commandList_.Get());
@@ -248,7 +254,6 @@ namespace sludge
 		rtvHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, SwapChainBufferCount_ + 1, L"RTV Heap");
 		dsvHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, 1, L"DSV Heap");
 		cbvSrvUavHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, 10000, L"CBV_SRV_UAV Heap");
-		imGuiSrvHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, 64, L"ImGui Heap");
 		CreateRTVs();
 		CreateDSVs();
 
@@ -272,9 +277,7 @@ namespace sludge
 			.MaxDepth = 1.0f
 		};
 
-		imGuiManager_.CreateImGuiRenderer(device_.Get(), commandManager_.GetCommandQueue().Get(), SwapChainBufferCount_, imGuiSrvHeap_);
-
-
+		imGuiManager_.CreateImGuiRenderer(device_.Get(), commandManager_.GetCommandQueue().Get(), SwapChainBufferCount_, cbvSrvUavHeap_);
 	}
 
 	void DirectXContext::Load()
@@ -647,40 +650,5 @@ namespace sludge
 		}
 	}
 
-	int DirectXContext::RenderSceneTreeUI(const Scene& scene, int node, int selectedNode)
-	{
 
-		int strID = scene.nameForNode.contains(node) ? scene.nameForNode.at(node) : -1;
-		const std::string name = strID > -1 ? scene.nodeNames[strID] : std::string{};
-		const std::string label = name.empty() ? (std::string("Node") + std::to_string(node)) : name;
-		const bool isLeaf = scene.hierarchy[node].firstChild < 0;
-		ImGuiTreeNodeFlags flags = isLeaf ? ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_Bullet : 0;
-		if (node == selectedNode)
-		{
-			flags |= ImGuiTreeNodeFlags_Selected;
-		}
-		ImVec4 color = isLeaf ? ImVec4(0, 1, 0, 1) : ImVec4(1, 1, 1, 1);
-		ImGui::PushStyleColor(ImGuiCol_Text, color);
-		const bool isOpened = ImGui::TreeNodeEx(&scene.hierarchy[node], flags, "%s", label.c_str());
-		ImGui::PopStyleColor();
-		ImGui::PushID(node);
-		if (ImGui::IsItemHovered() && isLeaf)
-		{
-			selectedNode = node;
-		}
-		if (isOpened)
-		{
-			for (int child = scene.hierarchy[node].firstChild; child != -1; child = scene.hierarchy[child].nextSibling)
-			{
-				if (int subNode = RenderSceneTreeUI(scene, child, selectedNode); subNode > -1)
-				{
-					selectedNode = subNode;
-				}
-			}
-			ImGui::TreePop();
-		}
-		ImGui::PopID();
-		return selectedNode;
-
-	}
 } // sludge

@@ -5,10 +5,12 @@ namespace sludge
 {
 	void DescriptorHeap::CreateDescriptorHeap(ID3D12Device* const device, D3D12_DESCRIPTOR_HEAP_TYPE type, D3D12_DESCRIPTOR_HEAP_FLAGS flags, uint32_t descriptorCount, std::wstring_view name)
 	{
+		// One heap handles all of our resources, textures, uavs, etc. Since imgui needs access to this heap to render textures in imgui::image,
+		// we allocated an extra 64 spaces for all of its needs
 		D3D12_DESCRIPTOR_HEAP_DESC desc
 		{
 			.Type = type,
-			.NumDescriptors = descriptorCount,
+			.NumDescriptors = descriptorCount + 64,
 			.Flags = flags,
 			.NodeMask = 0
 		};
@@ -24,6 +26,11 @@ namespace sludge
 		}
 		
 		descriptorSize_ = device->GetDescriptorHandleIncrementSize(type);
+		imGuiDescriptorHandle_.CpuDescriptorHandle = descriptorHandleEnd_.CpuDescriptorHandle;
+		imGuiDescriptorHandle_.GpuDescriptorHandle = descriptorHandleEnd_.GpuDescriptorHandle;
+
+		imGuiDescriptorHandle_.CpuDescriptorHandle.ptr += descriptorCount * descriptorSize_;
+		imGuiDescriptorHandle_.GpuDescriptorHandle.ptr += descriptorCount * descriptorSize_;
 
 	}
 	void DescriptorHeap::OffsetHandles(uint32_t idx)
