@@ -45,7 +45,7 @@ float4 main(VSOutput input) : SV_Target
     
     if(aoID != 0)
     {
-        Texture2D aoMap = ResourceDescriptorHeap[emissiveID];
+        Texture2D aoMap = ResourceDescriptorHeap[aoID];
         aoColor = aoMap.Sample(anisotropic, input.texCoord);
     }
     
@@ -60,7 +60,7 @@ float4 main(VSOutput input) : SV_Target
     float preceptualRoughnessToLOD = mipmapLevels * roughness;
     // Sufficiently small roughness will actually mess up our IBL calculations that accounts for 
     // furnacing of metals. so we clamp it here. It looks weird but it just looks best when its set like so.
-    if (roughness <= 0.015)
+    if (roughness <= 0.025)
     {
         roughness = 0.025;
         preceptualRoughnessToLOD = mipmapLevels * roughness;

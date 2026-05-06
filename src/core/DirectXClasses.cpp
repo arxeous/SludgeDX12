@@ -444,7 +444,7 @@ namespace sludge
 	void DirectXContext::LoadTextures(ID3D12GraphicsCommandList* cmdList)
 	{
 		int maxMipLevel = std::log2(float(PREFILTERED_MAP_DIMENSION));
-		textures_[L"HDR Test"].CreateHDRTexture(device_.Get(), cmdList, cbvSrvUavHeap_,         "../assets/Environment/Environment.hdr", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, L"HDR Test", texturePool_);
+		textures_[L"HDR Test"].CreateHDRTexture(device_.Get(), cmdList, cbvSrvUavHeap_,         "../assets/Environment/Test.hdr", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, L"HDR Test", texturePool_);
 		textures_[L"Skybox UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, SKYBOX_RESOLUTION, SKYBOX_RESOLUTION, 6, 0, DXGI_FORMAT_R16G16B16A16_FLOAT, L"Skybox UAV", texturePool_, true);
 		//textures_[L"Environment UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, SKYBOX_RESOLUTION, SKYBOX_RESOLUTION, 6, 0, DXGI_FORMAT_R16G16B16A16_FLOAT, L"Environment UAV", texturePool_, true);
 		// Since the irradiance map doesnt have a lot of high frequency details, its actually fine to just store it in a small 32x32 texture.
@@ -460,10 +460,10 @@ namespace sludge
 		//models_["Helmet"].GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
 		//auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		//models_["Helmet"].UpdateData(viewProj, cbModelPool_);
-		utils::loadMeshFile(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, texturePool_, cbModelPool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf", modelData_, scene_);
+		utils::loadMeshFile(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, texturePool_, cbModelPool_, "../assets/DamagedHelmet/glTF/DamagedHelmet.gltf", modelData_, scene_);
 		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
-		modelData_.transform.Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
-		modelData_.transform.Rotation = DirectX::XMFLOAT3(1.525, 0, 0);
+		modelData_.transform.Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
+		modelData_.transform.Rotation = DirectX::XMFLOAT3(5, 0, 0);
 		updateModelData(modelData_, viewProj, cbModelPool_);
 
 		//models_["TestSpheres"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");

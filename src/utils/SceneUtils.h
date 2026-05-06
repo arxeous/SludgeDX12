@@ -188,13 +188,12 @@ namespace sludge::utils
 
 		modelMesh.Vertices = vertices;
 		modelMesh.Indices = indices;
-		if (mesh->mTangents != nullptr)
+		modelMesh.vertexCount = vertices.size();
+		modelMesh.indexCount = indices.size();
+		if (mesh->mTangents == nullptr)
 		{
 			calculateMikkTSpace(modelMesh);
 		}
-
-		modelMesh.vertexCount = vertices.size();
-		modelMesh.indexCount = indices.size();
 
 		std::span<const uint32_t> indexSpan{ modelMesh.Indices };
 		std::span<const Vertex> vertexSpan{ modelMesh.Vertices };
@@ -258,7 +257,6 @@ namespace sludge::utils
 		if (aiGetMaterialTexture(mat, aiTextureType_DIFFUSE, 0, &path, &mapping, &uvIndex, &blend, &textureOp, textureMapMode, &textureFlags) == AI_SUCCESS)
 		{
 			procMat.albedo = addTexture(device, cmdList, heap, geometryPool, texPool, path.C_Str(), modelDirectory.data(), true);
-			const std::string albedoMap = std::string(path.C_Str());
 		}
 
 		if (aiGetMaterialTexture(mat, aiTextureType_EMISSIVE, 0, &path, &mapping, &uvIndex, &blend, &textureOp, textureMapMode, &textureFlags) == AI_SUCCESS)
