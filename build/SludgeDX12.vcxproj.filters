@@ -40,6 +40,9 @@
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.cpp">
       <Filter>src\ldx</Filter>
     </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Scene.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.cpp">
       <Filter>src\ldx</Filter>
     </ClCompile>

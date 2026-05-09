@@ -90,9 +90,9 @@ namespace sludge
 		commandList_->OMSetRenderTargets(1, &rtv, FALSE, &dsv);
 		commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		auto passCB = cbPassPool_.get(passConstants[L"Test"]);
-
 		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
-		updateModelData(modelData_, viewProj, cbModelPool_);
+
+		//updateModelData(modelData_, viewProj, cbModelPool_);
 		RenderScene(commandList_.Get(), scene_, modelData_, 0);
 		//ResourceIndices PBRResourceIDs
 		//{
@@ -157,8 +157,12 @@ namespace sludge
 		//commandList_->SetDescriptorHeaps(static_cast<uint32_t>(imGuiDescriptorHeap.size()), imGuiDescriptorHeap.data());
 
 		imGuiManager_.End();
-		imGuiManager_.RenderEditNodeUI(scene_, modelData_, viewProj, projMatrix_, selectedNode, updateMaterialIdx, texturePool_);
+		imGuiManager_.RenderEditNodeUI(scene_, modelData_, viewMatrix_, projMatrix_, selectedNode, updateMaterialIdx, texturePool_);
 		imGuiManager_.FrameEnd(commandList_.Get());
+		if (recalculateGlobalTransforms(scene_))
+		{
+
+		}
 		utils::TransitionResource(commandList_.Get(), currBackBuffer.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 		frameCurrentFence_[currentBackBufferIndex_] = commandManager_.ExecuteCommandList(commandList_.Get());
 		auto syncInterval = vSync_ ? 1u : 0u;
@@ -462,9 +466,9 @@ namespace sludge
 		//models_["Helmet"].UpdateData(viewProj, cbModelPool_);
 		utils::loadMeshFile(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, texturePool_, cbModelPool_, "../assets/DamagedHelmet/glTF/DamagedHelmet.gltf", modelData_, scene_);
 		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
-		modelData_.transform.Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
-		modelData_.transform.Rotation = DirectX::XMFLOAT3(5, 0, 0);
-		updateModelData(modelData_, viewProj, cbModelPool_);
+		//modelData_.transform.Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
+		//modelData_.transform.Rotation = DirectX::XMFLOAT3(5, 0, 0);
+		//updateModelData(modelData_, viewProj, cbModelPool_);
 
 		//models_["TestSpheres"].LoadModel(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, cbModelPool_, texturePool_, "../assets/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf");
 		//models_["TestSpheres"].GetTransformData().Scale = DirectX::XMFLOAT3(0.1, 0.1, 0.1);
@@ -625,6 +629,17 @@ namespace sludge
 			int meshIdx = scene.meshForNode.at(node);
 			int materialIdx = scene.materialForNode.at(node);
 			auto ibv = modelData.meshes[meshIdx].indexBuffer.IndexBufferView();
+			auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
+
+			// So this way of updating every nodes transformation regardless of whether it was changed or not is a result of how my cb are set up.
+			// I will eventually move to a more efficient method, where I actually take into account nodes that have been updated, and
+			// updating that data with one UpdateBuffer() call, rather than the multiple that will occur here for each submesh.
+			auto cb = cbModelPool_.get(modelData.cbHolder);
+			cb->ConstantBufferData().modelMat = scene.globalTransforms[node];
+			cb->ConstantBufferData().invModelMat = DirectX::XMMatrixInverse(nullptr, cb->ConstantBufferData().modelMat);
+			cb->ConstantBufferData().viewProjMat = viewProj;
+			cb->UpdateBuffer();
+
 			cmdList->IASetIndexBuffer(&ibv);
 			ResourceIndices PBRResourceIDs
 			{

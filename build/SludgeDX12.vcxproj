@@ -1099,6 +1099,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Model.h" />
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.cpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Scene.cpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Scene.h" />
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.cpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.h" />

@@ -93,10 +93,20 @@ namespace sludge
 		if (node >= 0)
 		{
 			ImGui::Separator();
+			ImGuizmo::PushID(1);
+			auto globalTransform = scene.globalTransforms[node];
+			auto sourceTransform = globalTransform;
+			auto localTransform = scene.localTransforms[node];
+
+			if (EditTransformsUI(view, proj, globalTransform))
+			{
+				DirectX::XMMATRIX delta = DirectX::XMMatrixInverse(nullptr, sourceTransform) * globalTransform;
+				scene.localTransforms[node] = localTransform * delta;
+				markNodeAsChanged(scene, node);
+			}
 			ImGui::Text("%s", "Material");
 			EditMaterialUI(scene, modelData, node, outUpdateMaterialIndex, ModelData::loadedTextures, pool);
-			// Editing for the mesh and the texture/material are to go in this portion of code
-			//ImGuizmo::PopID();
+			ImGuizmo::PopID();
 		}
 
 
@@ -212,5 +222,34 @@ namespace sludge
 		}
 
 		return updated;
+	}
+
+	bool ImGuiRenderer::EditTransformsUI(const DirectX::XMMATRIX& view, const DirectX::XMMATRIX& projection, DirectX::XMMATRIX& matrix)
+	{
+		static ImGuizmo::OPERATION gizmoOperation(ImGuizmo::TRANSLATE);
+		ImGui::Text("Transforms:");
+
+		if (ImGui::RadioButton("Translate", gizmoOperation == ImGuizmo::TRANSLATE))
+		{
+			gizmoOperation = ImGuizmo::TRANSLATE;
+		}
+
+
+		if (ImGui::RadioButton("Rotate", gizmoOperation == ImGuizmo::ROTATE))
+		{
+			gizmoOperation = ImGuizmo::ROTATE;
+		}
+		ImGuiIO& io = ImGui::GetIO();
+		ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
+		DirectX::XMFLOAT4X4 floatView;
+		DirectX::XMFLOAT4X4 floatProj;
+		DirectX::XMFLOAT4X4 floatMat;
+		DirectX::XMStoreFloat4x4(&floatView, view);
+		DirectX::XMStoreFloat4x4(&floatProj, projection);
+		DirectX::XMStoreFloat4x4(&floatMat, matrix);
+
+		auto res =  ImGuizmo::Manipulate(&floatView._11, &floatProj._11, gizmoOperation, ImGuizmo::WORLD, &floatMat._11);
+		matrix = DirectX::XMLoadFloat4x4(&floatMat);
+		return res;
 	}
 }

@@ -60,7 +60,7 @@ float4 main(VSOutput input) : SV_Target
     float preceptualRoughnessToLOD = mipmapLevels * roughness;
     // Sufficiently small roughness will actually mess up our IBL calculations that accounts for 
     // furnacing of metals. so we clamp it here. It looks weird but it just looks best when its set like so.
-    if (roughness <= 0.025)
+    if (roughness <= 0.015)
     {
         roughness = 0.025;
         preceptualRoughnessToLOD = mipmapLevels * roughness;

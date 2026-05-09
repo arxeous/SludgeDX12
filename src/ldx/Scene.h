@@ -3,6 +3,7 @@
 
 namespace sludge
 {
+	constexpr const int MAX_NODE_LEVEL = 16;
 	struct Hierarchy
 	{
 		int parent{ -1 };
@@ -20,6 +21,7 @@ namespace sludge
 		std::vector<Hierarchy> hierarchy{};
 		std::unordered_map<uint32_t, uint32_t> meshForNode{};
 		std::unordered_map<uint32_t, uint32_t> materialForNode{};
+		std::vector<int> changedNodesAtLevel[MAX_NODE_LEVEL];
 
 		// debugging helpers
 		std::unordered_map<uint32_t, uint32_t> nameForNode{};
@@ -33,4 +35,7 @@ namespace sludge
 		int strID = scene.nameForNode.contains(node) ? scene.nameForNode.at(node) : -1;
 		return (strID > -1) ? scene.nodeNames[strID] : std::string();
 	}
+
+	void markNodeAsChanged(Scene& scene, int node);
+	bool recalculateGlobalTransforms(Scene& scene);
 }

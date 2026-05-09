@@ -6,7 +6,9 @@
 #include "utils/ModelData.h"
 #include "utils/Pool.h"
 #include "utils/Holder.h"
+#include "ConstantBuffer.h"
 #include "imgui.h"
+#include "utils/utils.h"
 #include "backends/imgui_impl_win32.h"
 #include "backends/imgui_impl_dx12.h"
 
@@ -32,5 +34,6 @@ namespace sludge
 	private:
 		bool EditMaterialUI(Scene &scene, ModelData& modelData, int node, int& outUpdateMaterialIndex, std::map<std::string_view, Texture>& textureCache,
 			utils::Pool<utils::TextureTag, DescriptorHandle>& pool);
+		bool EditTransformsUI(const DirectX::XMMATRIX& view, const DirectX::XMMATRIX& projection, DirectX::XMMATRIX& matrix);
 	};
 }
