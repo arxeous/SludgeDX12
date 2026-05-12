@@ -223,6 +223,20 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 source_group("entry" FILES ${ENTRY_FILES})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "src" FILES ${SRC_FILES})
+#tracy 
+option(TRACY_ENABLE "Enable Tracy Profiler" ON)
+option(TRACY_ON_DEMAND "" ON)
+
+if(TRACY_ENABLE)
+    add_definitions("-DTRACY_ENABLE=1")
+    add_subdirectory(libs/tracy)
+endif()
+
+if(TRACY_ENABLE)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC "LDX_WITH_TRACY=1")
+    target_link_libraries(${PROJECT_NAME} PUBLIC Tracy::TracyClient)
+endif()
+
 
 # Windows subsystem settings
 if(MSVC)
@@ -244,3 +258,4 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     d3dcompiler.lib
     assimp
 )
+

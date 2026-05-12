@@ -7088,3 +7088,533 @@ events:
         
       exitCode: 1
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CheckCSourceCompiles.cmake:103 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/FindThreads.cmake:160 (check_c_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/FindThreads.cmake:226 (_threads_check_libc)"
+      - "libs/tracy/CMakeLists.txt:35 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-xq2pss"
+      binary: "E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-xq2pss"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-xq2pss'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_cf22f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.40+3e7442088 for .NET Framework
+        Build started 5/11/2026 4:28:32 PM.
+        
+        Project "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xq2pss\\cmTC_cf22f.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xq2pss\\Debug\\".
+          Creating directory "cmTC_cf22f.dir\\Debug\\cmTC_cf22f.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_cf22f.dir\\Debug\\cmTC_cf22f.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_cf22f.dir\\Debug\\cmTC_cf22f.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_cf22f.dir\\Debug\\\\" /Fd"cmTC_cf22f.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xq2pss\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35223 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_cf22f.dir\\Debug\\\\" /Fd"cmTC_cf22f.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xq2pss\\src.c"
+          src.c
+        E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xq2pss\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xq2pss\\cmTC_cf22f.vcxproj]
+        Done Building Project "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xq2pss\\cmTC_cf22f.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xq2pss\\cmTC_cf22f.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xq2pss\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xq2pss\\cmTC_cf22f.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.47
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CheckLibraryExists.cmake:154 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/FindThreads.cmake:175 (check_library_exists)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/FindThreads.cmake:238 (_threads_check_lib)"
+      - "libs/tracy/CMakeLists.txt:35 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthreads"
+    directories:
+      source: "E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-9e4ref"
+      binary: "E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-9e4ref"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-9e4ref'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ad1d9.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.40+3e7442088 for .NET Framework
+        Build started 5/11/2026 4:28:32 PM.
+        
+        Project "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9e4ref\\cmTC_ad1d9.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9e4ref\\Debug\\".
+          Creating directory "cmTC_ad1d9.dir\\Debug\\cmTC_ad1d9.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_ad1d9.dir\\Debug\\cmTC_ad1d9.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_ad1d9.dir\\Debug\\cmTC_ad1d9.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_ad1d9.dir\\Debug\\\\" /Fd"cmTC_ad1d9.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9e4ref\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35223 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_ad1d9.dir\\Debug\\\\" /Fd"cmTC_ad1d9.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9e4ref\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9e4ref\\Debug\\cmTC_ad1d9.exe" /INCREMENTAL /ILK:"cmTC_ad1d9.dir\\Debug\\cmTC_ad1d9.ilk" /NOLOGO /LIBPATH:"C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\debug\\lib\\manual-link" pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-9e4ref/Debug/cmTC_ad1d9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-9e4ref/Debug/cmTC_ad1d9.lib" /MACHINE:X64  /machine:x64 cmTC_ad1d9.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9e4ref\\cmTC_ad1d9.vcxproj]
+        Done Building Project "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9e4ref\\cmTC_ad1d9.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9e4ref\\cmTC_ad1d9.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9e4ref\\cmTC_ad1d9.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.34
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CheckLibraryExists.cmake:154 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/FindThreads.cmake:175 (check_library_exists)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/FindThreads.cmake:239 (_threads_check_lib)"
+      - "libs/tracy/CMakeLists.txt:35 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthread"
+    directories:
+      source: "E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-q6lnqw"
+      binary: "E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-q6lnqw"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-q6lnqw'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_eda8c.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.40+3e7442088 for .NET Framework
+        Build started 5/11/2026 4:28:33 PM.
+        
+        Project "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q6lnqw\\cmTC_eda8c.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q6lnqw\\Debug\\".
+          Creating directory "cmTC_eda8c.dir\\Debug\\cmTC_eda8c.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_eda8c.dir\\Debug\\cmTC_eda8c.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_eda8c.dir\\Debug\\cmTC_eda8c.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_eda8c.dir\\Debug\\\\" /Fd"cmTC_eda8c.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q6lnqw\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35223 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_eda8c.dir\\Debug\\\\" /Fd"cmTC_eda8c.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q6lnqw\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q6lnqw\\Debug\\cmTC_eda8c.exe" /INCREMENTAL /ILK:"cmTC_eda8c.dir\\Debug\\cmTC_eda8c.ilk" /NOLOGO /LIBPATH:"C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\debug\\lib\\manual-link" pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\src\\vcpkg\\vcpkg\\scripts\\buildsystems\\msbuild\\..\\..\\..\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-q6lnqw/Debug/cmTC_eda8c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"E:/dev/dx12RE/Sludge/build/CMakeFiles/CMakeScratch/TryCompile-q6lnqw/Debug/cmTC_eda8c.lib" /MACHINE:X64  /machine:x64 cmTC_eda8c.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthread.lib' [E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q6lnqw\\cmTC_eda8c.vcxproj]
+        Done Building Project "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q6lnqw\\cmTC_eda8c.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q6lnqw\\cmTC_eda8c.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthread.lib' [E:\\dev\\dx12RE\\Sludge\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q6lnqw\\cmTC_eda8c.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.33
+        
+      exitCode: 1
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "libs/tracy/CMakeLists.txt:36 (find_package)"
+    name: "rocprofiler-sdk"
+    configs:
+      -
+        filename: "rocprofiler-sdkConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "rocprofiler-sdk-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "optional"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "rocprofiler-sdk"
+      search_paths:
+        - "/opt/rocm/lib/cmake"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "E:/dev/dx12RE/Sludge/build/CMakeFiles/pkgRedirects/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "E:/dev/dx12RE/Sludge/build/CMakeFiles/pkgRedirects/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/AdoptOpenJDK/jdk-11.0.10.9-hotspot/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/AdoptOpenJDK/jdk-11.0.10.9-hotspot/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/wbem/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/wbem/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/WindowsPowerShell/v1.0/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/WindowsPowerShell/v1.0/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/OpenSSH/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/OpenSSH/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/dotnet/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/dotnet/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/PuTTY/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/PuTTY/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Git/cmd/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Git/cmd/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/nodejs/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/nodejs/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/MongoDB/Tools/100/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/MongoDB/Tools/100/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Perforce/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Perforce/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/CMake/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/CMake/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/anaconda/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/anaconda/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/anaconda/Library/mingw-w64/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/anaconda/Library/mingw-w64/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/anaconda/Library/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/anaconda/Library/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/anaconda/Library/cmake/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/anaconda/Library/cmake/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/anaconda/Scripts/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/anaconda/Scripts/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/Aaron Gonzalez/AppData/Local/Programs/Python/Python310/Scripts/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/Aaron Gonzalez/AppData/Local/Programs/Python/Python310/Scripts/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/Aaron Gonzalez/AppData/Local/Programs/Python/Python310/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/Aaron Gonzalez/AppData/Local/Programs/Python/Python310/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/Aaron Gonzalez/AppData/Local/Microsoft/WindowsApps/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/Aaron Gonzalez/AppData/Local/Microsoft/WindowsApps/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/Aaron Gonzalez/AppData/Local/Programs/Microsoft VS Code/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/Aaron Gonzalez/AppData/Local/Programs/Microsoft VS Code/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/Aaron Gonzalez/AppData/Roaming/npm/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/Aaron Gonzalez/AppData/Roaming/npm/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/CMake/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/CMake/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files (x86)/rocprofiler-sdkConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files (x86)/rocprofiler-sdk-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+    found: null
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
+        - "C:\\Program Files\\AdoptOpenJDK\\jdk-11.0.10.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "D:\\GCC\\bin"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\MongoDB\\Tools\\100\\bin"
+        - "C:\\Program Files\\Perforce\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\anaconda"
+        - "C:\\anaconda\\Library\\mingw-w64\\bin"
+        - "C:\\anaconda\\Library\\usr\\bin"
+        - "C:\\anaconda\\Library\\bin"
+        - "C:\\anaconda\\Scripts"
+        - "C:\\Users\\Aaron Gonzalez\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\Aaron Gonzalez\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\Aaron Gonzalez\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\Aaron Gonzalez\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "D:\\Downloads\\CodeBlocks\\MinGW\\bin"
+        - "C:\\Users\\Aaron Gonzalez\\AppData\\Roaming\\npm"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/SludgeDX12"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files/SludgeDX12"
+...

@@ -3,6 +3,7 @@
 #include "utils/ReadData.h"
 #include "utils/SceneUtils.h"
 
+
 // Exports for the agility SDK
 extern "C" { __declspec(dllexport) extern const UINT D3D12SDKVersion = 618; }
 
@@ -19,8 +20,18 @@ namespace sludge
 
 	void DirectXContext::Init()
 	{
-		InitRenderer();
-		Load();
+		{
+			TRACY_PROFILER_ZONE("Initilization", TRACY_PROFILER_COLOR_CREATE);
+			InitRenderer();
+			TRACY_PROFILER_ZONE_END();
+		}
+
+		{
+			TRACY_PROFILER_ZONE("Load Resources", TRACY_PROFILER_COLOR_CREATE);
+			Load();
+			TRACY_PROFILER_ZONE_END();
+		}
+		
 	}
 
 	int selectedNode = -1;

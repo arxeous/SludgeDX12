@@ -178,6 +178,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{360F6247-7943-3F30-9700-297D715F0740}</Project>
       <Name>SludgeDX12</Name>
     </ProjectReference>
+    <ProjectReference Include="E:\dev\dx12RE\Sludge\build\libs\tracy\TracyClient.vcxproj">
+      <Project>{C0FA4B8D-70C1-34FA-BFC1-123B3E9AFDE7}</Project>
+      <Name>TracyClient</Name>
+    </ProjectReference>
     <ProjectReference Include="E:\dev\dx12RE\Sludge\build\libs\assimp\code\assimp.vcxproj">
       <Project>{FBE2D878-12A4-370C-9B52-494F9C999DE5}</Project>
       <Name>assimp</Name>

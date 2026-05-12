@@ -11,3 +11,6 @@ E:/dev/dx12RE/Sludge/build/libs/assimp/contrib/zlib/CMakeFiles/INSTALL.dir
 E:/dev/dx12RE/Sludge/build/libs/assimp/contrib/zlib/CMakeFiles/ALL_BUILD.dir
 E:/dev/dx12RE/Sludge/build/libs/assimp/code/CMakeFiles/assimp.dir
 E:/dev/dx12RE/Sludge/build/libs/assimp/code/CMakeFiles/INSTALL.dir
+E:/dev/dx12RE/Sludge/build/libs/tracy/CMakeFiles/TracyClient.dir
+E:/dev/dx12RE/Sludge/build/libs/tracy/CMakeFiles/INSTALL.dir
+E:/dev/dx12RE/Sludge/build/libs/tracy/CMakeFiles/ALL_BUILD.dir

@@ -87,12 +87,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "E:/dev/dx12RE/Sludge/libs/tracy/public"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
       <CallingConvention></CallingConvention>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <FloatingPointModel></FloatingPointModel>
       <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
@@ -105,16 +107,16 @@
       <SupportJustMyCode></SupportJustMyCode>
       <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_UNICODE;UNICODE;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_UNICODE;UNICODE;TRACY_ENABLE;TRACY_ON_DEMAND;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_UNICODE;UNICODE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_UNICODE;UNICODE;TRACY_ENABLE;TRACY_ON_DEMAND;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\libs\tracy\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\libs\tracy\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -138,7 +140,7 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\Debug\assimp-vc143-mtd.lib;libs\assimp\contrib\zlib\Debug\zlibstaticd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\Debug\assimp-vc143-mtd.lib;libs\tracy\Debug\TracyClientd.lib;libs\assimp\contrib\zlib\Debug\zlibstaticd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -159,11 +161,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "E:/dev/dx12RE/Sludge/libs/tracy/public"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
       <CallingConvention></CallingConvention>
       <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <FloatingPointModel></FloatingPointModel>
       <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -176,18 +180,18 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <SupportJustMyCode></SupportJustMyCode>
       <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;TRACY_ENABLE;TRACY_ON_DEMAND;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;TRACY_ENABLE;TRACY_ON_DEMAND;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\libs\tracy\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\libs\tracy\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -211,7 +215,7 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\Release\assimp-vc143-mt.lib;libs\assimp\contrib\zlib\Release\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\Release\assimp-vc143-mt.lib;libs\tracy\Release\TracyClient.lib;libs\assimp\contrib\zlib\Release\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -232,11 +236,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "E:/dev/dx12RE/Sludge/libs/tracy/public"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
       <CallingConvention></CallingConvention>
       <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <FloatingPointModel></FloatingPointModel>
       <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -249,18 +255,18 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <SupportJustMyCode></SupportJustMyCode>
       <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;TRACY_ENABLE;TRACY_ON_DEMAND;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;TRACY_ENABLE;TRACY_ON_DEMAND;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\libs\tracy\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\libs\tracy\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -284,7 +290,7 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\MinSizeRel\assimp-vc143-mt.lib;libs\assimp\contrib\zlib\MinSizeRel\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\MinSizeRel\assimp-vc143-mt.lib;libs\tracy\MinSizeRel\TracyClient.lib;libs\assimp\contrib\zlib\MinSizeRel\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -305,12 +311,14 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "E:/dev/dx12RE/Sludge/libs/tracy/public"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
       <CallingConvention></CallingConvention>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <FloatingPointModel></FloatingPointModel>
       <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -323,16 +331,16 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <SupportJustMyCode></SupportJustMyCode>
       <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;TRACY_ENABLE;TRACY_ON_DEMAND;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_UNICODE;UNICODE;TRACY_ENABLE;TRACY_ON_DEMAND;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\libs\tracy\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\dev\dx12RE\Sludge\.;E:\dev\dx12RE\Sludge\libs;E:\dev\dx12RE\Sludge\libs\imgui;E:\dev\dx12RE\Sludge\libs\ImGuizmo;E:\dev\dx12RE\Sludge;E:\dev\dx12RE\Sludge\src;E:\dev\dx12RE\Sludge\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\build\libs\assimp\code\..\include;E:\dev\dx12RE\Sludge\libs\tracy\public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -356,7 +364,7 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\RelWithDebInfo\assimp-vc143-mt.lib;libs\assimp\contrib\zlib\RelWithDebInfo\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;libs\assimp\lib\RelWithDebInfo\assimp-vc143-mt.lib;libs\tracy\RelWithDebInfo\TracyClient.lib;libs\assimp\contrib\zlib\RelWithDebInfo\zlibstatic.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -1166,6 +1174,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="E:\dev\dx12RE\Sludge\build\libs\tracy\TracyClient.vcxproj">
+      <Project>{C0FA4B8D-70C1-34FA-BFC1-123B3E9AFDE7}</Project>
+      <Name>TracyClient</Name>
     </ProjectReference>
     <ProjectReference Include="E:\dev\dx12RE\Sludge\build\libs\assimp\code\assimp.vcxproj">
       <Project>{FBE2D878-12A4-370C-9B52-494F9C999DE5}</Project>
