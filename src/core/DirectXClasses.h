@@ -3,6 +3,19 @@
 #include "pch.h"
 #include "IContext.h"
 #include "d3dApp.h"
+#if defined(TRACY_ENABLE)
+#include "tracy/public/tracy/TracyD3D12.hpp"
+#define TRACY_PROFILER_GPU_ZONE(name, ctx, cmdList, color) \
+		TracyD3D12ZoneC(ctx, cmdList, name, color);
+#define TRACY_PROFILER_GPU_COLLECT(ctx) \
+		TracyD3D12Collect(ctx);
+#define TRACY_PROFILER_GPU_NEW_FRAME(ctx) \
+		TracyD3D12NewFrame(ctx);
+#else
+#define TARCY_PROFILER_GPU_ZONE(name, ctx, cmdList, color)
+#define TRACY_PROFILER_GPU_COLLECT(ctx)
+#define TRACY_PROFILER_GPU_NEW_FRAME(ctx)
+#endif
 
 // Alot of our initial set up mimics the set up for lvk,lightweight vulkan, because I really like 
 // the Vulkan 3D graphics Rendering Cookbook despite the fact that I'm writing this whole thing in DX12.
@@ -42,6 +55,7 @@ namespace sludge
 	{
 	public:
 		DirectXContext(Config& config);
+		~DirectXContext();
 
 		virtual void Init() override;
 		virtual void Draw() override;
@@ -130,6 +144,10 @@ namespace sludge
 		utils::Pool<ModelConstantTag, ConstantBuffer<ModelConstants>> cbModelPool_;
 
 		std::map<std::wstring_view, Material> materials_;
+
+#if defined(TRACY_ENABLE)
+		TracyD3D12Ctx tracyDX12Ctx_;
+#endif
 		
 		//std::unique_ptr<UploadBuffer<PassConstants>> PassCB{};
 		//std::unique_ptr<UploadBuffer<MaterialConstants>> MaterialCB{};

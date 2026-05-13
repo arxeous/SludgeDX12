@@ -3,7 +3,6 @@
 #include "utils/ReadData.h"
 #include "utils/SceneUtils.h"
 
-
 // Exports for the agility SDK
 extern "C" { __declspec(dllexport) extern const UINT D3D12SDKVersion = 618; }
 
@@ -18,6 +17,11 @@ namespace sludge
 
 	}
 
+	DirectXContext::~DirectXContext()
+	{
+		Destroy();
+	}
+
 	void DirectXContext::Init()
 	{
 		{
@@ -26,6 +30,9 @@ namespace sludge
 			TRACY_PROFILER_ZONE_END();
 		}
 
+#if defined(TRACY_ENABLE)
+		tracyDX12Ctx_ = TracyD3D12Context(device_.Get(), commandManager_.GetCommandQueue().Get());
+#endif
 		{
 			TRACY_PROFILER_ZONE("Load Resources", TRACY_PROFILER_COLOR_CREATE);
 			Load();
@@ -43,21 +50,29 @@ namespace sludge
 		// Refresher: Allocators manage the memory for recording GPU commands
 		// We have multiple allocators as we can not reset an allocator until all the commands its issued
 		// have finished executing on the GPU. Multiple allocators means we dont stall.
+		static std::array<float, 4> clearColor{ 0.1f, 0.1f, 0.1f, 1.0f };
 		auto commandList_ = commandManager_.GetCommandList();
 		Microsoft::WRL::ComPtr<ID3D12Resource> currBackBuffer = swapChainBuffer_[currentBackBufferIndex_];
 		int updateMaterialIdx = -1;
 		std::array<ID3D12DescriptorHeap*, 1> descriptorHeaps{ cbvSrvUavHeap_.GetDescriptorHeap() };
-		commandList_->SetDescriptorHeaps(static_cast<uint32_t>(descriptorHeaps.size()), descriptorHeaps.data());
-		imGuiManager_.FrameStart();
-		const ImGuiViewport* v = ImGui::GetMainViewport();
-		ImGui::SetNextWindowPos(ImVec2(10, 100));
-		ImGui::SetNextWindowSize(ImVec2(v->WorkSize.x / 6, v->WorkSize.y - 210));
-		ImGui::Begin("Scene graph", nullptr, ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
-		ImGui::Separator();
+		
+		TRACY_PROFILER_GPU_NEW_FRAME(tracyDX12Ctx_);
+		{
+			TRACY_PROFILER_FUNCTION();
+			TRACY_PROFILER_GPU_ZONE("ImGui Tree GUI Pass", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_CMD_DRAW);
+			commandList_->SetDescriptorHeaps(static_cast<uint32_t>(descriptorHeaps.size()), descriptorHeaps.data());
+			imGuiManager_.FrameStart();
+			const ImGuiViewport* v = ImGui::GetMainViewport();
+			ImGui::SetNextWindowPos(ImVec2(10, 100));
+			ImGui::SetNextWindowSize(ImVec2(v->WorkSize.x / 6, v->WorkSize.y - 210));
+			ImGui::Begin("Scene graph", nullptr, ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
+			ImGui::Separator();
 
-		auto node = imGuiManager_.RenderSceneTreeUI(scene_, 0, selectedNode);
-		if (node > -1) {
-			selectedNode = node;
+			auto node = imGuiManager_.RenderSceneTreeUI(scene_, 0, selectedNode);
+			imGuiManager_.SetClearColor(clearColor);
+			if (node > -1) {
+				selectedNode = node;
+			}
 		}
 
 		//for (auto& [name, model] : models_)
@@ -75,36 +90,36 @@ namespace sludge
 		//ImGui::End();
 
 
-
-		// Since every shader uses the same root signature, we bind one and only change the PSO 
-		// to switch out the shaders for the draw commands.
-		Material::BindRootSignature(commandList_.Get());
-		materials_[L"PBR Materials"].BindPSO(commandList_.Get());
-
-		//auto helmetTexture = texturePool_.get(textures_[L"Helmet_Albedo"]);
-		//commandList_->SetGraphicsRootDescriptorTable(4, helmetTexture->GPUDescriptorHandle());
-
-		commandList_->RSSetViewports(1, &screenViewport_);
-		commandList_->RSSetScissorRects(1, &scissorRect_);
-
-		// Get our offscreen buffer ready to be drawn into.
-		utils::TransitionResource(commandList_.Get(), offScreenRT_.Resource(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_RENDER_TARGET);
-
+		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		CD3DX12_CPU_DESCRIPTOR_HANDLE rtv = offScreenRT_.RTVCPUDescriptorHandle();
 		CD3DX12_CPU_DESCRIPTOR_HANDLE dsv{ depthStencilBuffer_.BufferHandle() };
 
+		{
+			// Since every shader uses the same root signature, we bind one and only change the PSO 
+			// to switch out the shaders for the draw commands.
+			TRACY_PROFILER_FUNCTION();
+			TRACY_PROFILER_GPU_ZONE("PBR Scene", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_CMD_DRAW);
+			Material::BindRootSignature(commandList_.Get());
+			materials_[L"PBR Materials"].BindPSO(commandList_.Get());
 
-		static std::array<float, 4> clearColor{ 0.1f, 0.1f, 0.1f, 1.0f };
-		imGuiManager_.SetClearColor(clearColor);
-		commandList_->ClearRenderTargetView(rtv, clearColor.data(), 0, nullptr);
-		commandList_->ClearDepthStencilView(dsv, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
-		commandList_->OMSetRenderTargets(1, &rtv, FALSE, &dsv);
-		commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		auto passCB = cbPassPool_.get(passConstants[L"Test"]);
-		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
+			//auto helmetTexture = texturePool_.get(textures_[L"Helmet_Albedo"]);
+			//commandList_->SetGraphicsRootDescriptorTable(4, helmetTexture->GPUDescriptorHandle());
 
-		//updateModelData(modelData_, viewProj, cbModelPool_);
-		RenderScene(commandList_.Get(), scene_, modelData_, 0);
+			commandList_->RSSetViewports(1, &screenViewport_);
+			commandList_->RSSetScissorRects(1, &scissorRect_);
+
+			// Get our offscreen buffer ready to be drawn into.
+			utils::TransitionResource(commandList_.Get(), offScreenRT_.Resource(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_RENDER_TARGET);
+
+			commandList_->ClearRenderTargetView(rtv, clearColor.data(), 0, nullptr);
+			commandList_->ClearDepthStencilView(dsv, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+			commandList_->OMSetRenderTargets(1, &rtv, FALSE, &dsv);
+			commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+			auto passCB = cbPassPool_.get(passConstants[L"Test"]);
+			
+			//updateModelData(modelData_, viewProj, cbModelPool_);
+			RenderScene(commandList_.Get(), scene_, modelData_, 0);
+		}
 		//ResourceIndices PBRResourceIDs
 		//{
 		//	.albedoID = 0,
@@ -126,47 +141,49 @@ namespace sludge
 		//	model.DrawNodes(commandList_.Get(), PBRResourceIDs);
 		//}
 
-		materials_[L"Skybox Material"].BindPSO(commandList_.Get());
-		skybox_.UpdateData(viewProj, cbModelPool_);
-
-		// The problem is that the rt index and the index of the other structured buffers (the first one) that hold the vertices are both 101. The latter overwrites the RT and so we get a 
-		// byte stride mismatch. SOLUTION: Forgot to delete the model level vertex holder, which is no longer valid. So we change the function to retrieve the correct vertex.
-		SkyBoxIndices skyboxIndices
 		{
-			.VertexBufferID = skybox_.VertexHolder().index(),
-			.ModelConstantID = skybox_.ModelConstantHolder().index(),
-			.TextureID = textures_[L"Skybox UAV"].SRVHandle().index()
-		};
-		commandList_->SetGraphicsRoot32BitConstants(0, 3, &skyboxIndices, 0);
-		skybox_.Draw(commandList_.Get());
+			TRACY_PROFILER_FUNCTION();
+			TRACY_PROFILER_GPU_ZONE("Skybox", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_CMD_DRAW);
+			materials_[L"Skybox Material"].BindPSO(commandList_.Get());
+			skybox_.UpdateData(viewProj, cbModelPool_);
 
+			// The problem is that the rt index and the index of the other structured buffers (the first one) that hold the vertices are both 101. The latter overwrites the RT and so we get a 
+			// byte stride mismatch. SOLUTION: Forgot to delete the model level vertex holder, which is no longer valid. So we change the function to retrieve the correct vertex.
+			SkyBoxIndices skyboxIndices
+			{
+				.VertexBufferID = skybox_.VertexHolder().index(),
+				.ModelConstantID = skybox_.ModelConstantHolder().index(),
+				.TextureID = textures_[L"Skybox UAV"].SRVHandle().index()
+			};
+			commandList_->SetGraphicsRoot32BitConstants(0, 3, &skyboxIndices, 0);
+			skybox_.Draw(commandList_.Get());
+		}
 
-		utils::TransitionResource(commandList_.Get(), offScreenRT_.Resource(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
-		utils::TransitionResource(commandList_.Get(), currBackBuffer.Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
-
-		// Final offscreen render
-		materials_[L"Offscreen RT Material"].BindPSO(commandList_.Get());
-		rtv = rtvHeap_.CPUDescriptorHandleStart();
-		rtv.Offset(currentBackBufferIndex_, rtvHeap_.IncrementSize());
-
-		commandList_->ClearRenderTargetView(rtv, clearColor.data(), 0, nullptr);
-		commandList_->ClearDepthStencilView(dsv, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
-
-		commandList_->OMSetRenderTargets(1, &rtv, FALSE, &dsv);
-		offScreenRT_.Bind(commandList_.Get());
-
-		RTIndices rtIndices
 		{
-			.VertexBufferID = RenderTarget::VertexHolder().index(),
-			.TextureID = RenderTarget::TextureHolder().index()
-		};
-		commandList_->SetGraphicsRoot32BitConstants(0, 2, &rtIndices, 0);
-		commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
+			TRACY_PROFILER_FUNCTION();
+			TRACY_PROFILER_GPU_ZONE("Offscreen Target", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_CMD_DRAW);
+			utils::TransitionResource(commandList_.Get(), offScreenRT_.Resource(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+			utils::TransitionResource(commandList_.Get(), currBackBuffer.Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 
-		// Since imgui gets it own heap, we need to set it before the call to frame end that will then do its draw call.
-		//std::array<ID3D12DescriptorHeap*, 1> imGuiDescriptorHeap{ imGuiSrvHeap_.GetDescriptorHeap() };
-		//commandList_->SetDescriptorHeaps(static_cast<uint32_t>(imGuiDescriptorHeap.size()), imGuiDescriptorHeap.data());
+			// Final offscreen render
+			materials_[L"Offscreen RT Material"].BindPSO(commandList_.Get());
+			rtv = rtvHeap_.CPUDescriptorHandleStart();
+			rtv.Offset(currentBackBufferIndex_, rtvHeap_.IncrementSize());
 
+			commandList_->ClearRenderTargetView(rtv, clearColor.data(), 0, nullptr);
+			commandList_->ClearDepthStencilView(dsv, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+			commandList_->OMSetRenderTargets(1, &rtv, FALSE, &dsv);
+			offScreenRT_.Bind(commandList_.Get());
+
+			RTIndices rtIndices
+			{
+				.VertexBufferID = RenderTarget::VertexHolder().index(),
+				.TextureID = RenderTarget::TextureHolder().index()
+			};
+			commandList_->SetGraphicsRoot32BitConstants(0, 2, &rtIndices, 0);
+			commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
+		}
 		imGuiManager_.End();
 		imGuiManager_.RenderEditNodeUI(scene_, modelData_, viewMatrix_, projMatrix_, selectedNode, updateMaterialIdx, texturePool_);
 		imGuiManager_.FrameEnd(commandList_.Get());
@@ -174,8 +191,14 @@ namespace sludge
 		{
 
 		}
-		utils::TransitionResource(commandList_.Get(), currBackBuffer.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+		{
+			TRACY_PROFILER_FUNCTION();
+			TRACY_PROFILER_GPU_ZONE("Resource Barrier", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_SUBMIT);
+			utils::TransitionResource(commandList_.Get(), currBackBuffer.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+		}
+			
 		frameCurrentFence_[currentBackBufferIndex_] = commandManager_.ExecuteCommandList(commandList_.Get());
+		
 		auto syncInterval = vSync_ ? 1u : 0u;
 		//auto presentFlags = DXGI_PRESENT_ALLOW_TEARING;
 
@@ -188,8 +211,10 @@ namespace sludge
 		// What we are waiting on here is NOT for whether this frames commands are done executing, but if the frame we will be rendering into on the NEXT passes
 		// instructions are done executing. At the very least were ensuring that the GPU is saturated by making the code stall out CPU side, which is what we want
 		// in such cases.
+
 		commandManager_.WaitForFenceValue(frameCurrentFence_[currentBackBufferIndex_]);
 		frameIndex_++;
+		TRACY_PROFILER_GPU_COLLECT(tracyDX12Ctx_);
 	}
 
 	void DirectXContext::Update()
@@ -215,6 +240,10 @@ namespace sludge
 	void DirectXContext::Destroy()
 	{
 		commandManager_.FlushCommandQueue();
+		TRACY_PROFILER_FUNCTION();
+#if defined(TRACY_ENABLE)
+		TracyD3D12Destroy(tracyDX12Ctx_);
+#endif
 		imGuiManager_.Shutdown();
 	}
 
