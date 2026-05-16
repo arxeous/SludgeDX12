@@ -67,6 +67,9 @@
     <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Timer.cpp">
       <Filter>src\utils</Filter>
     </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\utils.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
     <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

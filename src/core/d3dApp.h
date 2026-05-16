@@ -71,6 +71,7 @@ namespace sludge
 
 		static double DeltaTime();
 		static double TotalTime();
+		static float GetFPS();
 
 
 	private:

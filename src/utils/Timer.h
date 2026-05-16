@@ -8,7 +8,8 @@ namespace sludge
 	{
 	public:
 		void Tick();
-
+		bool GetFPS();
+		inline float FPS() const { return currentFPS_; };
 		inline double DeltaTime() const { return deltaTime_; };
 		inline double TotalTime() const { return totalTime_; };
 
@@ -18,7 +19,11 @@ namespace sludge
 		std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::duration<double>> currFrameTime_; // time point will get the the point in time for a given clock in whatever format we decide
 		std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::duration<double>> prevFrameTime_; // in this case we want the duration in double. i.e. the time since the clocks epoch
 
-		double deltaTime_{};
-		double totalTime_{};
+		double deltaTime_{0};
+		double totalTime_{0};
+		float currentFPS_{0};
+		float avgInterval_{0.5f};
+		bool printFPS_{ true };
+		unsigned int numFrames_{0};
 	};
 } //namespace 

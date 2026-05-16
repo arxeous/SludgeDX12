@@ -147,6 +147,30 @@ namespace sludge
 		return selectedNode;
 	}
 
+	void ImGuiRenderer::RenderFPSCounter(float fps)
+	{
+		if (const ImGuiViewport* v = ImGui::GetMainViewport())
+		{
+			ImGui::SetNextWindowPos(ImVec2(v->WorkPos.x + v->WorkSize.x - 15.0f, v->WorkPos.y + 15.0f), ImGuiCond_Always, ImVec2(1.0f, 0.0f));
+		}
+		ImGui::SetNextWindowBgAlpha(0.30f);
+		ImGui::SetNextWindowSize(ImVec2(ImGui::CalcTextSize("FPS :       ").x, 0));
+
+		if (ImGui::Begin("##FPS", nullptr,
+			ImGuiWindowFlags_NoDecoration |
+			ImGuiWindowFlags_AlwaysAutoResize |
+			ImGuiWindowFlags_NoSavedSettings |
+			ImGuiWindowFlags_NoFocusOnAppearing |
+			ImGuiWindowFlags_NoNav |
+			ImGuiWindowFlags_NoMove))
+		{
+			ImGui::Text("FPS : %i", (int)fps);
+			ImGui::Text("ms  : %.1f", 1000.0 / fps);
+		}
+
+		ImGui::End();
+	}
+
 	bool ImGuiRenderer::EditMaterialUI(Scene& scene, ModelData& modelData, int node, int& outUpdateMaterialIndex, std::map<std::string_view, Texture>& textureCache,
 		utils::Pool<utils::TextureTag, DescriptorHandle>& pool)
 	{

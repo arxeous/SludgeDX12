@@ -1134,6 +1134,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Timer.h" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\json.hpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\tiny_gltf.h" />
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\utils.cpp" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\utils.h" />
     <ClInclude Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui.h" />
     <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui.cpp" />

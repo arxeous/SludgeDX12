@@ -14,7 +14,7 @@ namespace sludge
 			.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE,
 			.NodeMask = 0
 		};
-
+		commandArgBuffer_ = std::make_unique<UploadBuffer<CommandArgumentBuffer>>(device, 50, false, L"Command Argument Buffer");
 		ThrowIfFailed(device_->CreateCommandQueue(&desc, IID_PPV_ARGS(&commandQueue_)));
 		commandQueue_->SetName(name.data());
 
@@ -97,6 +97,17 @@ namespace sludge
 		ThrowIfFailed(commandQueue_->Signal(fence_.Get(), fenceForSignal));
 
 		return fenceForSignal;
+	}
+
+	void CommandManager::CreateCommandSignature(ID3D12Device* const device, uint32_t rootSigID, ID3D12RootSignature* rootSig)
+	{
+		// For now were testing indirect drawing with just the pbr materials. 
+		utils::D3D12IndirectArgumentDesc drawDescs[2];
+		drawDescs[0].asConstant(rootSigID, 0, 11);
+		drawDescs[1].asDrawIndexed();
+
+		utils::D3D12CommandSigDesc commandSig{drawDescs, 2, sizeof(CommandArgumentBuffer)};
+		commandSignature_ = commandSig.create(device, rootSig);
 	}
 
 	bool CommandManager::IsFenceComplete(uint64_t fenceValue)

@@ -137,6 +137,65 @@ namespace sludge::utils
 		return { width, height };
 	}
 
+	ID3D12CommandSignature* CreateCommandSignature(ID3D12Device* const device, const D3D12_COMMAND_SIGNATURE_DESC& desc, ID3D12RootSignature* rootSig);
+
+	struct D3D12IndirectArgumentDesc : public D3D12_INDIRECT_ARGUMENT_DESC
+	{
+		constexpr void asConstant(uint32_t rootParameterIdx, uint32_t offset, uint32_t count)
+		{
+			Type = D3D12_INDIRECT_ARGUMENT_TYPE_CONSTANT;
+			Constant.RootParameterIndex = rootParameterIdx;
+			Constant.DestOffsetIn32BitValues = offset;
+			Constant.Num32BitValuesToSet = count;
+		}
+
+		constexpr void asCBV(uint32_t rootParameterIdx)
+		{
+			Type = D3D12_INDIRECT_ARGUMENT_TYPE_CONSTANT_BUFFER_VIEW;
+			ConstantBufferView.RootParameterIndex = rootParameterIdx;
+		}
+
+		constexpr void asSRV(uint32_t rootParameterIdx)
+		{
+			Type = D3D12_INDIRECT_ARGUMENT_TYPE_SHADER_RESOURCE_VIEW;
+			ShaderResourceView.RootParameterIndex = rootParameterIdx;
+		}
+
+		constexpr void asUAV(uint32_t rootParameterIdx)
+		{
+			Type = D3D12_INDIRECT_ARGUMENT_TYPE_UNORDERED_ACCESS_VIEW;
+			UnorderedAccessView.RootParameterIndex = rootParameterIdx;
+		}
+
+		constexpr void asIBV()
+		{
+			Type = D3D12_INDIRECT_ARGUMENT_TYPE_INDEX_BUFFER_VIEW;
+		}
+
+		constexpr void asDrawIndexed()
+		{
+			Type = D3D12_INDIRECT_ARGUMENT_TYPE_DRAW_INDEXED;
+		}
+
+		constexpr void asDispatch()
+		{
+			Type = D3D12_INDIRECT_ARGUMENT_TYPE_DISPATCH;
+		}
+	};
+
+	struct D3D12CommandSigDesc : public D3D12_COMMAND_SIGNATURE_DESC
+	{
+		constexpr explicit D3D12CommandSigDesc(const D3D12IndirectArgumentDesc* desc, uint32_t argCount, uint32_t byteStride) :
+			D3D12_COMMAND_SIGNATURE_DESC{ byteStride, argCount, desc, 0 }
+		{
+		}
+
+		ID3D12CommandSignature* create(ID3D12Device* const device, ID3D12RootSignature* rootSig)
+		{
+			return utils::CreateCommandSignature(device, *this, rootSig);
+		}
+	};
+
 	struct ResourceIndices
 	{
 		uint32_t albedoID;
@@ -187,4 +246,4 @@ namespace sludge::utils
 		uint32_t TextureID{};
 	};
 
-}
+} // sludge::utils

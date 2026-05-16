@@ -182,7 +182,7 @@ namespace sludge
 		while (message.message != WM_QUIT)
 		{
 			timer_.Tick();
-
+			timer_.GetFPS();
 			if (::PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE))
 			{
 				::TranslateMessage(&message);
@@ -207,5 +207,10 @@ namespace sludge
 	double d3dApp::TotalTime()
 	{
 		return timer_.TotalTime();
+	}
+
+	float d3dApp::GetFPS()
+	{
+		return timer_.GetFPS();
 	}
 } // namespace

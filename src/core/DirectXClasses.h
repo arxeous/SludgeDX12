@@ -11,10 +11,13 @@
 		TracyD3D12Collect(ctx);
 #define TRACY_PROFILER_GPU_NEW_FRAME(ctx) \
 		TracyD3D12NewFrame(ctx);
+#define TRACY_PROFILER_GPU_END_FRAME \
+		FrameMark;
 #else
 #define TARCY_PROFILER_GPU_ZONE(name, ctx, cmdList, color)
 #define TRACY_PROFILER_GPU_COLLECT(ctx)
 #define TRACY_PROFILER_GPU_NEW_FRAME(ctx)
+#define TRACY_PROFILER_GPU_END_FRAME
 #endif
 
 // Alot of our initial set up mimics the set up for lvk,lightweight vulkan, because I really like 

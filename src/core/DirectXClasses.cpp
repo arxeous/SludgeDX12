@@ -74,6 +74,7 @@ namespace sludge
 				selectedNode = node;
 			}
 		}
+		imGuiManager_.RenderFPSCounter(d3dApp::GetTimer().FPS());
 
 		//for (auto& [name, model] : models_)
 		//{
@@ -108,14 +109,16 @@ namespace sludge
 			commandList_->RSSetViewports(1, &screenViewport_);
 			commandList_->RSSetScissorRects(1, &scissorRect_);
 
-			// Get our offscreen buffer ready to be drawn into.
-			utils::TransitionResource(commandList_.Get(), offScreenRT_.Resource(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_RENDER_TARGET);
-
+			{
+				TRACY_PROFILER_GPU_ZONE("Resource Barrier", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_SUBMIT);
+				// Get our offscreen buffer ready to be drawn into.
+				utils::TransitionResource(commandList_.Get(), offScreenRT_.Resource(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_RENDER_TARGET);
+			}
 			commandList_->ClearRenderTargetView(rtv, clearColor.data(), 0, nullptr);
 			commandList_->ClearDepthStencilView(dsv, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 			commandList_->OMSetRenderTargets(1, &rtv, FALSE, &dsv);
 			commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-			auto passCB = cbPassPool_.get(passConstants[L"Test"]);
+			//auto passCB = cbPassPool_.get(passConstants[L"Test"]);
 			
 			//updateModelData(modelData_, viewProj, cbModelPool_);
 			RenderScene(commandList_.Get(), scene_, modelData_, 0);
@@ -162,8 +165,11 @@ namespace sludge
 		{
 			TRACY_PROFILER_FUNCTION();
 			TRACY_PROFILER_GPU_ZONE("Offscreen Target", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_CMD_DRAW);
-			utils::TransitionResource(commandList_.Get(), offScreenRT_.Resource(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
-			utils::TransitionResource(commandList_.Get(), currBackBuffer.Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+			{
+				TRACY_PROFILER_GPU_ZONE("Resource Barrier", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_SUBMIT);
+				utils::TransitionResource(commandList_.Get(), offScreenRT_.Resource(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+				utils::TransitionResource(commandList_.Get(), currBackBuffer.Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+			}
 
 			// Final offscreen render
 			materials_[L"Offscreen RT Material"].BindPSO(commandList_.Get());
@@ -215,6 +221,7 @@ namespace sludge
 		commandManager_.WaitForFenceValue(frameCurrentFence_[currentBackBufferIndex_]);
 		frameIndex_++;
 		TRACY_PROFILER_GPU_COLLECT(tracyDX12Ctx_);
+		TRACY_PROFILER_GPU_END_FRAME;
 	}
 
 	void DirectXContext::Update()
@@ -242,6 +249,10 @@ namespace sludge
 		commandManager_.FlushCommandQueue();
 		TRACY_PROFILER_FUNCTION();
 #if defined(TRACY_ENABLE)
+		while (tracy::GetProfiler().IsConnected())
+		{
+			std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		}
 		TracyD3D12Destroy(tracyDX12Ctx_);
 #endif
 		imGuiManager_.Shutdown();
@@ -368,7 +379,7 @@ namespace sludge
 			// Recall that dispatch means were calling x * y *z groups total. The shader itself declares how large any given group will be.
 			cmdList->Dispatch(SKYBOX_RESOLUTION / 32, SKYBOX_RESOLUTION / 32, 6);
 			utils::TransitionResource(cmdList, textures_[L"Skybox UAV"].TextureResource(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON);
-			commandManager_.ExecuteCommandList(cmdList);
+			auto temp = commandManager_.ExecuteCommandList(cmdList);
 			commandManager_.FlushCommandQueue();
 		}
 		
@@ -394,7 +405,7 @@ namespace sludge
 			utils::TransitionResource(cmdList, textures_[L"Irradiance Map UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
 			cmdList->SetComputeRoot32BitConstants(0, 8, &II, 0);
 			cmdList->Dispatch(1, 1, 6);
-			commandManager_.ExecuteCommandList(cmdList);
+			auto temp = commandManager_.ExecuteCommandList(cmdList);
 			commandManager_.FlushCommandQueue();
 		}
 		
@@ -438,7 +449,7 @@ namespace sludge
 				cmdList->SetComputeRoot32BitConstants(0, 3, &MipLevelI, 0);
 				cmdList->Dispatch(threadGroupSize, threadGroupSize, 6);
 			}
-			commandManager_.ExecuteCommandList(cmdList);
+			auto temp = commandManager_.ExecuteCommandList(cmdList);
 			commandManager_.FlushCommandQueue();
 		}
 
@@ -467,7 +478,7 @@ namespace sludge
 			utils::TransitionResource(cmdList, textures_[L"Skybox UAV"].TextureResource(), D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
 			utils::TransitionResource(cmdList, textures_[L"LUT UAV"].TextureResource(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
 
-			commandManager_.ExecuteCommandList(cmdList);
+			auto temp = commandManager_.ExecuteCommandList(cmdList);
 			commandManager_.FlushCommandQueue();
 		}
 
@@ -476,6 +487,7 @@ namespace sludge
 	void DirectXContext::LoadMaterials()
 	{
 		Material::CreateBindlessRootSignature(device_.Get(), L"../src/shaders/cso/vs.cso");
+		commandManager_.CreateCommandSignature(device_.Get(), 0, Material::BindlessRootSignature.Get());
 		materials_[L"PBR Materials"] = Material::CreateMaterial(device_.Get(), L"../src/shaders/cso/vs.cso", L"../src/shaders/cso/ps.cso", L"PBR Material");
 		materials_[L"Skybox Material"] = Material::CreateMaterial(device_.Get(), L"../src/shaders/cso/sbVS.cso", L"../src/shaders/cso/sbPS.cso", L"Skybox Material", true);
 		materials_[L"Irradiance Compute Material"] = Material::CreateComputeMaterial(device_.Get(), L"../src/shaders/cso/irradianceCompute.cso", L"Irradiance Compute Material");

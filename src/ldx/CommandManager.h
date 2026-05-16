@@ -1,8 +1,14 @@
 #pragma once
 #include "pch.h"
-
+#include "UploadBuffer.h"
+#include "utils/utils.h"
 namespace sludge
 {
+	struct CommandArgumentBuffer
+	{
+		utils::ResourceIndices indices;
+		D3D12_DRAW_INDEXED_ARGUMENTS drawArgs;
+	};
 	struct CommandAllocator
 	{
 		uint64_t fenceValue{};
@@ -27,7 +33,7 @@ namespace sludge
 
 		[[nodiscard]]
 		uint64_t Signal();
-
+		void CreateCommandSignature(ID3D12Device* const device, uint32_t rootSigID, ID3D12RootSignature* rootSig);
 		bool IsFenceComplete(uint64_t fenceValue);
 		void WaitForFenceValue(uint64_t fenceValue);
 		void FlushCommandQueue();
@@ -45,6 +51,11 @@ namespace sludge
 		Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue_;
 
 		Microsoft::WRL::ComPtr<ID3D12Fence> fence_;
+
+		// To use indirect drawing, we need a command signature for every root signature used in our engine. Given that we are on a bindless model
+		// that only ever needs a single root signature, we also only ever need a single commandSignature.
+		Microsoft::WRL::ComPtr<ID3D12CommandSignature> commandSignature_;
+		std::unique_ptr<UploadBuffer<CommandArgumentBuffer>> commandArgBuffer_;
 		HANDLE fenceEvent_{};
 		uint64_t fenceValue_{};
 

@@ -31,6 +31,8 @@ namespace sludge
 		void RenderEditNodeUI(Scene& scene, ModelData& modelData, const DirectX::XMMATRIX& view, const DirectX::XMMATRIX proj, int node, int& outUpdateMaterialIndex,
 			utils::Pool<utils::TextureTag, DescriptorHandle>& pool);
 		int RenderSceneTreeUI(const Scene& scene, int node, int selectedNode);
+
+		void RenderFPSCounter(float fps);
 	private:
 		bool EditMaterialUI(Scene &scene, ModelData& modelData, int node, int& outUpdateMaterialIndex, std::map<std::string_view, Texture>& textureCache,
 			utils::Pool<utils::TextureTag, DescriptorHandle>& pool);
