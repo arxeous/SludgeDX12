@@ -120,8 +120,13 @@ namespace sludge
 			commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 			//auto passCB = cbPassPool_.get(passConstants[L"Test"]);
 			
-			//updateModelData(modelData_, viewProj, cbModelPool_);
-			RenderScene(commandList_.Get(), scene_, modelData_, 0);
+			updateModelData(modelData_, viewProj, cbModelPool_);
+			//RenderScene(commandList_.Get(), scene_, modelData_, 0);
+			int count = 0;
+			RenderSceneIndirect(commandList_.Get(), scene_, modelData_, 0, count);
+			CommandArgumentBuffer test;
+			commandManager_.GetCommandArgumentBuffer()->GetData(0, test);
+			commandList_->ExecuteIndirect(commandManager_.GetCommandSignature().Get(), count, commandManager_.GetCommandArgumentBuffer()->Resource(), 0, nullptr, 0);
 		}
 		//ResourceIndices PBRResourceIDs
 		//{
@@ -714,6 +719,60 @@ namespace sludge
 		for (int child = scene.hierarchy[node].firstChild; child != -1; child = scene.hierarchy[child].nextSibling)
 		{
 			RenderScene(cmdList, scene, modelData, child);
+		}
+	}
+
+	void DirectXContext::RenderSceneIndirect(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node, int& count)
+	{
+		
+		if (scene.meshForNode.find(node) != scene.meshForNode.end())
+		{
+			CommandArgumentBuffer cmdArgBuff{};
+			int meshIdx = scene.meshForNode.at(node);
+			int materialIdx = scene.materialForNode.at(node);
+			auto ibv = modelData.meshes[meshIdx].indexBuffer.IndexBufferView();
+			auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
+			cmdList->IASetIndexBuffer(&ibv);
+			// So this way of updating every nodes transformation regardless of whether it was changed or not is a result of how my cb are set up.
+			// I will eventually move to a more efficient method, where I actually take into account nodes that have been updated, and
+			// updating that data with one UpdateBuffer() call, rather than the multiple that will occur here for each submesh.
+			auto cb = cbModelPool_.get(modelData.cbHolder);
+			cb->ConstantBufferData().modelMat = scene.globalTransforms[node];
+			cb->ConstantBufferData().invModelMat = DirectX::XMMatrixInverse(nullptr, cb->ConstantBufferData().modelMat);
+			cb->ConstantBufferData().viewProjMat = viewProj;
+			cb->UpdateBuffer();
+
+
+			
+			{
+				cmdArgBuff.indices.albedoID = !modelData.materials[materialIdx].albedo.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].albedo].SRVHandle().index() : 0;
+				cmdArgBuff.indices.roughnessID = !modelData.materials[materialIdx].metallicRoughnessMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].metallicRoughnessMap].SRVHandle().index() : 0;
+				cmdArgBuff.indices.VertexBufferID = modelData.meshes[meshIdx].vbHolder.index();
+				cmdArgBuff.indices.passConstantID = passConstants[L"Test"].index();
+				cmdArgBuff.indices.modelConstantID = modelData.cbHolder.index();
+				cmdArgBuff.indices.IrradianceID = textures_[L"Irradiance Map UAV"].SRVHandle().index();
+				cmdArgBuff.indices.PrefilterID = textures_[L"Prefiltered UAV"].SRVHandle().index();
+				cmdArgBuff.indices.LutID = textures_[L"LUT UAV"].SRVHandle().index();
+				cmdArgBuff.indices.NormalID = !modelData.materials[materialIdx].normalMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].normalMap].SRVHandle().index() : 0;
+				cmdArgBuff.indices.EmissiveID = !modelData.materials[materialIdx].emissiveMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].emissiveMap].SRVHandle().index() : 0;
+				cmdArgBuff.indices.AoID = !modelData.materials[materialIdx].aoMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].aoMap].SRVHandle().index() : 0;
+			}
+
+			{
+				cmdArgBuff.drawArgs.IndexCountPerInstance = modelData.meshes[meshIdx].indexCount;
+				cmdArgBuff.drawArgs.InstanceCount = 1;
+				cmdArgBuff.drawArgs.StartIndexLocation = 0;
+				cmdArgBuff.drawArgs.BaseVertexLocation = 0;
+				cmdArgBuff.drawArgs.StartInstanceLocation = 0;
+			}
+			// Put command into our arg buffer
+			commandManager_.GetCommandArgumentBuffer()->CopyData(count, cmdArgBuff);
+			count++;
+		}
+
+		for (int child = scene.hierarchy[node].firstChild; child != -1; child = scene.hierarchy[child].nextSibling)
+		{
+			RenderSceneIndirect(cmdList, scene, modelData, child, count);
 		}
 	}
 

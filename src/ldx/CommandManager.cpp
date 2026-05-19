@@ -14,7 +14,7 @@ namespace sludge
 			.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE,
 			.NodeMask = 0
 		};
-		commandArgBuffer_ = std::make_unique<UploadBuffer<CommandArgumentBuffer>>(device, 50, false, L"Command Argument Buffer");
+		commandArgBuffer_ = std::make_shared<UploadBuffer<CommandArgumentBuffer>>(device, 50, false, L"Command Argument Buffer");
 		ThrowIfFailed(device_->CreateCommandQueue(&desc, IID_PPV_ARGS(&commandQueue_)));
 		commandQueue_->SetName(name.data());
 
@@ -67,6 +67,11 @@ namespace sludge
 		return commandList;
 	}
 
+	std::shared_ptr<UploadBuffer<CommandArgumentBuffer>> CommandManager::GetCommandArgumentBuffer()
+	{
+		return commandArgBuffer_;
+	}
+
 	uint64_t CommandManager::ExecuteCommandList(ID3D12GraphicsCommandList* const cmdList)
 	{
 		ThrowIfFailed(cmdList->Close());
@@ -102,8 +107,8 @@ namespace sludge
 	void CommandManager::CreateCommandSignature(ID3D12Device* const device, uint32_t rootSigID, ID3D12RootSignature* rootSig)
 	{
 		// For now were testing indirect drawing with just the pbr materials. 
-		utils::D3D12IndirectArgumentDesc drawDescs[2];
-		drawDescs[0].asConstant(rootSigID, 0, 11);
+		utils::D3D12IndirectArgumentDesc drawDescs[2] = {};
+		drawDescs[0].asConstant(rootSigID, 0, sizeof(utils::ResourceIndices)/4);
 		drawDescs[1].asDrawIndexed();
 
 		utils::D3D12CommandSigDesc commandSig{drawDescs, 2, sizeof(CommandArgumentBuffer)};

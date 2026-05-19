@@ -26,7 +26,13 @@ namespace sludge
 		Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetCommandList();
 
 		[[nodiscard]]
+		std::shared_ptr<UploadBuffer<CommandArgumentBuffer>> GetCommandArgumentBuffer();
+
+		[[nodiscard]]
 		Microsoft::WRL::ComPtr<ID3D12CommandQueue> GetCommandQueue() const { return commandQueue_; };
+
+		[[nodiscard]]
+		Microsoft::WRL::ComPtr<ID3D12CommandSignature> GetCommandSignature() const { return commandSignature_; };
 
 		[[nodiscard]]
 		uint64_t ExecuteCommandList(ID3D12GraphicsCommandList* const cmdList);
@@ -55,7 +61,7 @@ namespace sludge
 		// To use indirect drawing, we need a command signature for every root signature used in our engine. Given that we are on a bindless model
 		// that only ever needs a single root signature, we also only ever need a single commandSignature.
 		Microsoft::WRL::ComPtr<ID3D12CommandSignature> commandSignature_;
-		std::unique_ptr<UploadBuffer<CommandArgumentBuffer>> commandArgBuffer_;
+		std::shared_ptr<UploadBuffer<CommandArgumentBuffer>> commandArgBuffer_;
 		HANDLE fenceEvent_{};
 		uint64_t fenceValue_{};
 

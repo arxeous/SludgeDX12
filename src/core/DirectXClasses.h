@@ -84,6 +84,7 @@ namespace sludge
 		void CreateRTVs();
 		void CreateDSVs();
 		void RenderScene(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node);
+		void RenderSceneIndirect(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node, int& count);
 
 
 
