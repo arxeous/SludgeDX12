@@ -63,11 +63,12 @@ namespace sludge
 		void UpdateFromUI(std::string name, utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool);
 		void Draw(ID3D12GraphicsCommandList* const cmdList);
 		void DrawNodes(ID3D12GraphicsCommandList* const cmdList, utils::ResourceIndices& modelResources);
+		void SetIBV(ID3D12GraphicsCommandList* const cmdList, int idx = 0);
 		D3D12_GPU_VIRTUAL_ADDRESS ConstantBufferGPUVirtualAddress(utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool);
 		uint32_t IndexCount() const { return indexCount_; }
 		utils::Holder<utils::GeometryHandle>& VertexHolder(int idx = 0) { return meshes_[idx].vbHolder; }
 		utils::Holder<utils::ModelConstantHandle>& ModelConstantHolder() { return cbHolder_; }
-
+		
 	private:
 		void ProcessNode(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap, utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool,
 			utils::Pool<utils::TextureTag, DescriptorHandle>& texPool, aiNode* node, const aiScene* scene);

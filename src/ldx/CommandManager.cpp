@@ -14,7 +14,10 @@ namespace sludge
 			.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE,
 			.NodeMask = 0
 		};
-		commandArgBuffer_ = std::make_shared<UploadBuffer<CommandArgumentBuffer>>(device, 50, false, L"Command Argument Buffer");
+		pbrCommandArgBuffer_ = std::make_shared<UploadBuffer<PBRCommandArgumentBuffer>>(device, 50, false, L"Command Argument Buffer");
+		skyBoxCommandArgBuffer_ = std::make_shared<UploadBuffer<SkyBoxCommandArgumentBuffer>>(device, 50, false, L"Command Argument Buffer");
+		offScreenCommandArgBuffer_ = std::make_shared<UploadBuffer<OffscreenCommandArgumentBuffer>>(device, 50, false, L"Command Argument Buffer");
+
 		ThrowIfFailed(device_->CreateCommandQueue(&desc, IID_PPV_ARGS(&commandQueue_)));
 		commandQueue_->SetName(name.data());
 
@@ -67,11 +70,6 @@ namespace sludge
 		return commandList;
 	}
 
-	std::shared_ptr<UploadBuffer<CommandArgumentBuffer>> CommandManager::GetCommandArgumentBuffer()
-	{
-		return commandArgBuffer_;
-	}
-
 	uint64_t CommandManager::ExecuteCommandList(ID3D12GraphicsCommandList* const cmdList)
 	{
 		ThrowIfFailed(cmdList->Close());
@@ -106,14 +104,27 @@ namespace sludge
 
 	void CommandManager::CreateCommandSignature(ID3D12Device* const device, uint32_t rootSigID, ID3D12RootSignature* rootSig)
 	{
-		// For now were testing indirect drawing with just the pbr materials. 
+		// PBR
 		utils::D3D12IndirectArgumentDesc drawDescs[2] = {};
 		drawDescs[0].asConstant(rootSigID, 0, sizeof(utils::ResourceIndices)/4);
 		drawDescs[1].asDrawIndexed();
 
-		utils::D3D12CommandSigDesc commandSig{drawDescs, 2, sizeof(CommandArgumentBuffer)};
-		commandSignature_ = commandSig.create(device, rootSig);
+		utils::D3D12CommandSigDesc commandSig{drawDescs, 2, sizeof(PBRCommandArgumentBuffer)};
+		pbrCommandSignature_ = commandSig.create(device, rootSig);
+
+		// Skybox
+		drawDescs[0].asConstant(rootSigID, 0, sizeof(utils::SkyBoxIndices) / 4);
+		commandSig = utils::D3D12CommandSigDesc{ drawDescs, 2, sizeof(SkyBoxCommandArgumentBuffer) };
+		skyBoxCommandSignature_ = commandSig.create(device, rootSig);
+
+		// Offscreen
+		drawDescs[0].asConstant(rootSigID, 0, sizeof(utils::RTIndices) / 4);
+		commandSig = utils::D3D12CommandSigDesc{ drawDescs, 2, sizeof(OffscreenCommandArgumentBuffer) };
+		offScreenCommandSignature_ = commandSig.create(device, rootSig);
+
 	}
+
+	
 
 	bool CommandManager::IsFenceComplete(uint64_t fenceValue)
 	{

@@ -141,13 +141,12 @@ namespace sludge::utils
 	}
 
 	ModelMesh processMesh(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap,
-		utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool,
-		aiMesh* mesh)
+		utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool, std::vector<uint32_t>& globalIndices, aiMesh* mesh)
 	{
 		ModelMesh modelMesh;
 		std::vector<Vertex> vertices{};
 		std::vector<uint32_t> indices{};
-
+		modelMesh.indexStart = (uint32_t)globalIndices.size();
 		for (uint32_t j = 0; j < mesh->mNumVertices; j++)
 		{
 			Vertex vertex;
@@ -197,6 +196,7 @@ namespace sludge::utils
 
 		std::span<const uint32_t> indexSpan{ modelMesh.Indices };
 		std::span<const Vertex> vertexSpan{ modelMesh.Vertices };
+		globalIndices.insert(globalIndices.end(), modelMesh.Indices.begin(), modelMesh.Indices.end());
 		// There is a good chance we will cut this part of the code out to some other function. possibly within the actual DX12 context code.
 		// Since all this really does is create the GPU side resources, and the mesh shouldnt be concerned with that functionality. IT should only care about
 		// loading in the mesh data and storing it.
@@ -207,7 +207,6 @@ namespace sludge::utils
 		auto structuredBuffer = geometryPool.get(handle);
 		structuredBuffer->CreateStructuredBuffer(device, cmdList, vertexSpan, L"Model Structured Buffer");
 		modelMesh.vbHolder = handle;
-		auto index = modelMesh.vbHolder.index();
 		auto descriptorLocation = heap.CPUDescriptorHandleStart().Offset(modelMesh.vbHolder.index(), heap.IncrementSize());
 		D3D12_BUFFER_SRV bufferDesc
 		{
@@ -330,13 +329,14 @@ namespace sludge::utils
 		}
 		std::string mPath = fileName;
 		modelData.meshes.reserve(scene->mNumMeshes);
-
+		std::vector<uint32_t> globalIndices{};
 
 		for (unsigned int i = 0; i != scene->mNumMeshes; i++) 
 		{
-			modelData.meshes.push_back(processMesh(device, cmdList, heap, geometryPool, texPool, scene->mMeshes[i]));
+			modelData.meshes.push_back(processMesh(device, cmdList, heap, geometryPool, globalIndices, scene->mMeshes[i]));
 		}
-
+		std::span<uint32_t> indexSpan{ globalIndices };
+		modelData.globalIB.CreateIndexBuffer(device, cmdList, indexSpan, L"Global Index Buffer");
 		// extract base model path
 		const std::size_t pathSeparator = std::string(fileName).find_last_of("/\\");
 		const std::string modelDirectory = (pathSeparator != std::string::npos) ? std::string(fileName).substr(0, pathSeparator + 1) : std::string();

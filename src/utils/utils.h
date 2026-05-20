@@ -246,4 +246,11 @@ namespace sludge::utils
 		uint32_t TextureID{};
 	};
 
+	struct RTIndices
+	{
+		uint32_t VertexBufferID;
+		uint32_t TextureID;
+	};
+
+
 } // sludge::utils

@@ -99,7 +99,7 @@ namespace sludge
 			// Since every shader uses the same root signature, we bind one and only change the PSO 
 			// to switch out the shaders for the draw commands.
 			TRACY_PROFILER_FUNCTION();
-			TRACY_PROFILER_GPU_ZONE("PBR Scene", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_CMD_DRAW);
+			TRACY_PROFILER_GPU_ZONE("PBR Indirect Scene", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_CMD_DRAW);
 			Material::BindRootSignature(commandList_.Get());
 			materials_[L"PBR Materials"].BindPSO(commandList_.Get());
 
@@ -123,10 +123,10 @@ namespace sludge
 			updateModelData(modelData_, viewProj, cbModelPool_);
 			//RenderScene(commandList_.Get(), scene_, modelData_, 0);
 			int count = 0;
+			auto ibv = modelData_.globalIB.IndexBufferView();
+			commandList_->IASetIndexBuffer(&ibv);
 			RenderSceneIndirect(commandList_.Get(), scene_, modelData_, 0, count);
-			CommandArgumentBuffer test;
-			commandManager_.GetCommandArgumentBuffer()->GetData(0, test);
-			commandList_->ExecuteIndirect(commandManager_.GetCommandSignature().Get(), count, commandManager_.GetCommandArgumentBuffer()->Resource(), 0, nullptr, 0);
+			commandList_->ExecuteIndirect(commandManager_.pbrCommandSignature_.Get(), count, commandManager_.pbrCommandArgBuffer_->Resource(), 0, nullptr, 0);
 		}
 		//ResourceIndices PBRResourceIDs
 		//{
@@ -157,14 +157,23 @@ namespace sludge
 
 			// The problem is that the rt index and the index of the other structured buffers (the first one) that hold the vertices are both 101. The latter overwrites the RT and so we get a 
 			// byte stride mismatch. SOLUTION: Forgot to delete the model level vertex holder, which is no longer valid. So we change the function to retrieve the correct vertex.
-			SkyBoxIndices skyboxIndices
+			skybox_.SetIBV(commandList_.Get(), 0);
+			SkyBoxCommandArgumentBuffer cmdArgBuff{};
 			{
-				.VertexBufferID = skybox_.VertexHolder().index(),
-				.ModelConstantID = skybox_.ModelConstantHolder().index(),
-				.TextureID = textures_[L"Skybox UAV"].SRVHandle().index()
-			};
-			commandList_->SetGraphicsRoot32BitConstants(0, 3, &skyboxIndices, 0);
-			skybox_.Draw(commandList_.Get());
+				cmdArgBuff.indices.VertexBufferID = skybox_.VertexHolder().index();
+				cmdArgBuff.indices.ModelConstantID = skybox_.ModelConstantHolder().index();
+				cmdArgBuff.indices.TextureID = textures_[L"Skybox UAV"].SRVHandle().index();
+			}
+			{
+				cmdArgBuff.drawArgs.BaseVertexLocation = 0;
+				// VERY NOT GOOD. IndexCount will eventually be deprecated and we will ahve to get an index count for a given mesh another way. for now we just use this.
+				cmdArgBuff.drawArgs.IndexCountPerInstance = skybox_.IndexCount();
+				cmdArgBuff.drawArgs.InstanceCount = 1;
+				cmdArgBuff.drawArgs.StartIndexLocation = 0;
+				cmdArgBuff.drawArgs.StartInstanceLocation = 0;
+			}
+			commandManager_.skyBoxCommandArgBuffer_->CopyData(0, cmdArgBuff);
+			commandList_->ExecuteIndirect(commandManager_.skyBoxCommandSignature_.Get(), 1, commandManager_.skyBoxCommandArgBuffer_->Resource(), 0, nullptr, 0);
 		}
 
 		{
@@ -187,13 +196,22 @@ namespace sludge
 			commandList_->OMSetRenderTargets(1, &rtv, FALSE, &dsv);
 			offScreenRT_.Bind(commandList_.Get());
 
-			RTIndices rtIndices
+			OffscreenCommandArgumentBuffer cmdArgBuff{};
+
 			{
-				.VertexBufferID = RenderTarget::VertexHolder().index(),
-				.TextureID = RenderTarget::TextureHolder().index()
-			};
-			commandList_->SetGraphicsRoot32BitConstants(0, 2, &rtIndices, 0);
-			commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
+				cmdArgBuff.indices.VertexBufferID = RenderTarget::VertexHolder().index();
+				cmdArgBuff.indices.TextureID = RenderTarget::TextureHolder().index();
+			}
+			{
+				cmdArgBuff.drawArgs.BaseVertexLocation = 0;
+				cmdArgBuff.drawArgs.IndexCountPerInstance = 6;
+				cmdArgBuff.drawArgs.InstanceCount = 1;
+				cmdArgBuff.drawArgs.StartIndexLocation = 0;
+				cmdArgBuff.drawArgs.StartInstanceLocation = 0;
+			}
+
+			commandManager_.offScreenCommandArgBuffer_->CopyData(0, cmdArgBuff);
+			commandList_->ExecuteIndirect(commandManager_.offScreenCommandSignature_.Get(), 1, commandManager_.offScreenCommandArgBuffer_->Resource(), 0, nullptr, 0);
 		}
 		imGuiManager_.End();
 		imGuiManager_.RenderEditNodeUI(scene_, modelData_, viewMatrix_, projMatrix_, selectedNode, updateMaterialIdx, texturePool_);
@@ -724,15 +742,12 @@ namespace sludge
 
 	void DirectXContext::RenderSceneIndirect(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node, int& count)
 	{
-		
 		if (scene.meshForNode.find(node) != scene.meshForNode.end())
 		{
-			CommandArgumentBuffer cmdArgBuff{};
+			PBRCommandArgumentBuffer cmdArgBuff{};
 			int meshIdx = scene.meshForNode.at(node);
 			int materialIdx = scene.materialForNode.at(node);
-			auto ibv = modelData.meshes[meshIdx].indexBuffer.IndexBufferView();
 			auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
-			cmdList->IASetIndexBuffer(&ibv);
 			// So this way of updating every nodes transformation regardless of whether it was changed or not is a result of how my cb are set up.
 			// I will eventually move to a more efficient method, where I actually take into account nodes that have been updated, and
 			// updating that data with one UpdateBuffer() call, rather than the multiple that will occur here for each submesh.
@@ -742,8 +757,6 @@ namespace sludge
 			cb->ConstantBufferData().viewProjMat = viewProj;
 			cb->UpdateBuffer();
 
-
-			
 			{
 				cmdArgBuff.indices.albedoID = !modelData.materials[materialIdx].albedo.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].albedo].SRVHandle().index() : 0;
 				cmdArgBuff.indices.roughnessID = !modelData.materials[materialIdx].metallicRoughnessMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].metallicRoughnessMap].SRVHandle().index() : 0;
@@ -761,12 +774,12 @@ namespace sludge
 			{
 				cmdArgBuff.drawArgs.IndexCountPerInstance = modelData.meshes[meshIdx].indexCount;
 				cmdArgBuff.drawArgs.InstanceCount = 1;
-				cmdArgBuff.drawArgs.StartIndexLocation = 0;
+				cmdArgBuff.drawArgs.StartIndexLocation = modelData.meshes[meshIdx].indexStart;
 				cmdArgBuff.drawArgs.BaseVertexLocation = 0;
 				cmdArgBuff.drawArgs.StartInstanceLocation = 0;
 			}
 			// Put command into our arg buffer
-			commandManager_.GetCommandArgumentBuffer()->CopyData(count, cmdArgBuff);
+			commandManager_.pbrCommandArgBuffer_->CopyData(count, cmdArgBuff);
 			count++;
 		}
 

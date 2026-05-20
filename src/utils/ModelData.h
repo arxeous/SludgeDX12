@@ -13,6 +13,7 @@ namespace sludge
 	struct ModelMesh
 	{
 		IndexBuffer indexBuffer{};
+		uint32_t indexStart{};
 		utils::Holder<utils::GeometryHandle> vbHolder{};
 		// needed for mikktspace lib for tangent calculations
 		std::vector<Vertex> Vertices{};
@@ -41,6 +42,7 @@ namespace sludge
 		std::vector<uint32_t> indexCounts{};
 		std::vector<ModelMesh> meshes{};
 		ModelTransform transform;
+		IndexBuffer globalIB{};
 		std::vector<MeshMaterial> materials{};
 
 		// This single map will keep a hold of all our textures so we arent reuploading data more than once.

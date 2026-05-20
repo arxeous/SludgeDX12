@@ -4,9 +4,19 @@
 #include "utils/utils.h"
 namespace sludge
 {
-	struct CommandArgumentBuffer
+	struct PBRCommandArgumentBuffer
 	{
 		utils::ResourceIndices indices;
+		D3D12_DRAW_INDEXED_ARGUMENTS drawArgs;
+	};
+	struct SkyBoxCommandArgumentBuffer
+	{
+		utils::SkyBoxIndices indices;
+		D3D12_DRAW_INDEXED_ARGUMENTS drawArgs;
+	};
+	struct OffscreenCommandArgumentBuffer
+	{
+		utils::RTIndices indices;
 		D3D12_DRAW_INDEXED_ARGUMENTS drawArgs;
 	};
 	struct CommandAllocator
@@ -26,13 +36,7 @@ namespace sludge
 		Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetCommandList();
 
 		[[nodiscard]]
-		std::shared_ptr<UploadBuffer<CommandArgumentBuffer>> GetCommandArgumentBuffer();
-
-		[[nodiscard]]
 		Microsoft::WRL::ComPtr<ID3D12CommandQueue> GetCommandQueue() const { return commandQueue_; };
-
-		[[nodiscard]]
-		Microsoft::WRL::ComPtr<ID3D12CommandSignature> GetCommandSignature() const { return commandSignature_; };
 
 		[[nodiscard]]
 		uint64_t ExecuteCommandList(ID3D12GraphicsCommandList* const cmdList);
@@ -40,9 +44,20 @@ namespace sludge
 		[[nodiscard]]
 		uint64_t Signal();
 		void CreateCommandSignature(ID3D12Device* const device, uint32_t rootSigID, ID3D12RootSignature* rootSig);
+
 		bool IsFenceComplete(uint64_t fenceValue);
 		void WaitForFenceValue(uint64_t fenceValue);
 		void FlushCommandQueue();
+
+		// To use indirect drawing, we need a command signature for every root signature used in our engine. Given that we are on a bindless model
+		// that only ever needs a single root signature, we also only ever need a single commandSignature.
+		Microsoft::WRL::ComPtr<ID3D12CommandSignature> pbrCommandSignature_;
+		Microsoft::WRL::ComPtr<ID3D12CommandSignature> skyBoxCommandSignature_;
+		Microsoft::WRL::ComPtr<ID3D12CommandSignature> offScreenCommandSignature_;
+
+		std::shared_ptr<UploadBuffer<PBRCommandArgumentBuffer>> pbrCommandArgBuffer_;
+		std::shared_ptr<UploadBuffer<SkyBoxCommandArgumentBuffer>> skyBoxCommandArgBuffer_;
+		std::shared_ptr<UploadBuffer<OffscreenCommandArgumentBuffer>> offScreenCommandArgBuffer_;
 
 	private:
 		Microsoft::WRL::ComPtr<ID3D12CommandAllocator> CreateCommandAllocator();
@@ -58,10 +73,6 @@ namespace sludge
 
 		Microsoft::WRL::ComPtr<ID3D12Fence> fence_;
 
-		// To use indirect drawing, we need a command signature for every root signature used in our engine. Given that we are on a bindless model
-		// that only ever needs a single root signature, we also only ever need a single commandSignature.
-		Microsoft::WRL::ComPtr<ID3D12CommandSignature> commandSignature_;
-		std::shared_ptr<UploadBuffer<CommandArgumentBuffer>> commandArgBuffer_;
 		HANDLE fenceEvent_{};
 		uint64_t fenceValue_{};
 

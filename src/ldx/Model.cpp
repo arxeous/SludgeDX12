@@ -178,6 +178,12 @@ namespace sludge
 		}
 	}
 
+	void Model::SetIBV(ID3D12GraphicsCommandList* const cmdList, int idx)
+	{
+		auto ibv = meshes_[0].indexBuffer.IndexBufferView();
+		cmdList->IASetIndexBuffer(&ibv);
+	}
+
 	D3D12_GPU_VIRTUAL_ADDRESS Model::ConstantBufferGPUVirtualAddress(utils::Pool<utils::ModelConstantTag, ConstantBuffer<ModelConstants>>& cbPool)
 	{
 		auto cb = cbPool.get(cbHolder_);
@@ -268,6 +274,7 @@ namespace sludge
 
 		modelMesh.Vertices = vertices;
 		modelMesh.Indices = indices;
+		indexCount_ = indices.size();
 		modelMesh.vertexCount = vertices.size();
 		modelMesh.indexCount = indices.size();
 		if (mesh->mTangents != nullptr)
