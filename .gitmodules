@@ -1,3 +1,9 @@
 [submodule "libs/tracy"]
 	path = libs/tracy
 	url = https://github.com/wolfpld/tracy.git
+[submodule "libs/libs/meshoptimizer"]
+	path = libs/libs/meshoptimizer
+	url = https://github.com/zeux/meshoptimizer.git
+[submodule "libs/meshoptimizer"]
+	path = libs/meshoptimizer
+	url = https://github.com/zeux/meshoptimizer.git

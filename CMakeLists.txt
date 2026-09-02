@@ -88,6 +88,14 @@ set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "")
 set(ASSIMP_BUILD_OBJ_IMPORTER ON CACHE BOOL "")
 set(ASSIMP_BUILD_GLTF_IMPORTER ON CACHE BOOL "")
 set(ASSIMP_BUILD_ZLIB ON CACHE BOOL "")
+
+set(MESHOPT_BUILD_DEMO OFF CACHE BOOL "" FORCE)
+set(MESHOPT_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
+set(MESHOPT_BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+add_subdirectory(libs/meshoptimizer)
+
+set_property(TARGET meshoptimizer PROPERTY FOLDER "third-party")
+
 add_subdirectory(libs/assimp)
 
 include_directories(.)
@@ -257,5 +265,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     dxguid.lib
     d3dcompiler.lib
     assimp
+    meshoptimizer
 )
 

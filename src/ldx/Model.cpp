@@ -285,6 +285,7 @@ namespace sludge
 			// and therefore dont need the tangents.
 			calculateMikkTSpace(modelMesh);
 		}
+
 		std::span<const uint32_t> indexSpan{ modelMesh.Indices };
 		std::span<const Vertex> vertexSpan{ modelMesh.Vertices };
 		modelMesh.indexBuffer.CreateIndexBuffer(device, cmdList, indexSpan, L"Index Buffer");

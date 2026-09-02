@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\allocator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\clusterizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\indexanalyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\indexcodec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\indexgenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\meshletcodec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\meshletutils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\opacitymap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\overdrawoptimizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\partition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\quantization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\rasterizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\remesher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\simplifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\spatialorder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\stripifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\tangentspace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\vcacheoptimizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\vertexcodec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\vertexfilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\vfetchoptimizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\src\meshoptimizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\libs\meshoptimizer\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{E3B6C850-528C-3E79-BB8C-75E0F4A7CF79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0505C4E8-EBCB-3B3C-A823-4B9B03AD74B1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
