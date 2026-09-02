@@ -400,6 +400,11 @@ FodyWeavers.xsd
 *.sln.iml
 
 ### VisualStudio Patch ###
+CMakeFiles/
+CMakeCache.txt
+CMakePresets.json
+build/
+
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio
