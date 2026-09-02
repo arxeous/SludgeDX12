@@ -5,7 +5,6 @@
 		"E:/dev/dx12RE/Sludge/build/libs/assimp/cmake_install.cmake",
 		"E:/dev/dx12RE/Sludge/build/libs/assimp/contrib/zlib/cmake_install.cmake",
 		"E:/dev/dx12RE/Sludge/build/libs/assimp/code/cmake_install.cmake",
-		"E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-build/cmake_install.cmake",
 		"E:/dev/dx12RE/Sludge/build/libs/tracy/cmake_install.cmake"
 	],
 	"Parallel" : false

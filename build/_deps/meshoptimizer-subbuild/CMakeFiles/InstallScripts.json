@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

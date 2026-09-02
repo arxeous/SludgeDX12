@@ -39,11 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-build/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
   include("E:/dev/dx12RE/Sludge/build/libs/tracy/cmake_install.cmake")
 endif()
 

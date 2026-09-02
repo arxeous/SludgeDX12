@@ -95,16 +95,6 @@ include_directories(libs)
 include_directories(libs/imgui/)
 include_directories(libs/ImGuizmo/)
 
-include(FetchContent)
-
-FetchContent_Declare(
-    meshoptimizer
-    GIT_REPOSITORY https://github.com/zeux/meshoptimizer.git
-    GIT_TAG        v1.1  # latest release
-)
-FetchContent_MakeAvailable(meshoptimizer)
-
-
 set_property(TARGET assimp          PROPERTY FOLDER "third-party")
 if(WIN32)
   if(TARGET zlibstatic)
@@ -267,6 +257,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     dxguid.lib
     d3dcompiler.lib
     assimp
-    meshoptimizer
 )
 
