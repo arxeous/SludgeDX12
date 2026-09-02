@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/meshoptimizer-populate"
+		},
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/dd4757b03989c51ac43ae7823690e2ae/meshoptimizer-populate.rule"
+		},
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/700920107c4f66024fbd4c2d749dd2dd/meshoptimizer-populate-complete.rule"
+		},
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/64c7dd0967190dc972b57a8cfb116df3/meshoptimizer-populate-build.rule"
+		},
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/64c7dd0967190dc972b57a8cfb116df3/meshoptimizer-populate-configure.rule"
+		},
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/64c7dd0967190dc972b57a8cfb116df3/meshoptimizer-populate-download.rule"
+		},
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/64c7dd0967190dc972b57a8cfb116df3/meshoptimizer-populate-install.rule"
+		},
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/64c7dd0967190dc972b57a8cfb116df3/meshoptimizer-populate-mkdir.rule"
+		},
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/64c7dd0967190dc972b57a8cfb116df3/meshoptimizer-populate-patch.rule"
+		},
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/64c7dd0967190dc972b57a8cfb116df3/meshoptimizer-populate-test.rule"
+		},
+		{
+			"file" : "E:/dev/dx12RE/Sludge/build/_deps/meshoptimizer-subbuild/CMakeFiles/64c7dd0967190dc972b57a8cfb116df3/meshoptimizer-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"meshoptimizer-populate"
+		],
+		"name" : "meshoptimizer-populate"
+	}
+}

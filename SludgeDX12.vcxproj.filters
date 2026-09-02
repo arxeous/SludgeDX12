@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\entry\main.cpp">
+      <Filter>entry</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\core\DirectXClasses.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\core\IContext.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\core\d3dApp.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\CommandManager.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\CubeMap.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\DepthStencilBuffer.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\DescriptorHeap.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\ImGuiRenderer.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\IndexBuffer.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Material.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Model.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Scene.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\Texture.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\TextureUAV.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\ldx\VertexBuffer.cpp">
+      <Filter>src\ldx</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\thirdparty\MikkTSpace\mikktspace.c">
+      <Filter>src\thirdparty\MikkTSpace</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Camera.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Holder.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\Timer.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\src\utils\utils.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_win32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_dx12.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\dev\dx12RE\Sludge\libs\ImGuizmo\ImGuizmo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\core\DirectXClasses.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\core\IContext.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\core\d3dApp.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\errors.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\CommandManager.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\ConstantBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\CubeMap.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\DepthStencilBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\DescriptorHeap.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\ImGuiRenderer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\IndexBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Material.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Model.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\RenderTarget.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Scene.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\StructuredBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\Texture.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\TextureUAV.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\UploadBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\ldx\VertexBuffer.h">
+      <Filter>src\ldx</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\pch.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\thirdparty\MikkTSpace\mikktspace.h">
+      <Filter>src\thirdparty\MikkTSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Camera.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Handle.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Holder.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\ModelData.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Pool.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\ReadData.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\SceneUtils.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\Timer.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\json.hpp">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\tiny_gltf.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\src\utils\utils.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\imgui\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\dev\dx12RE\Sludge\libs\imgui\backends\imgui_impl_dx12.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\vs.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\ps.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\osVS.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\osPS.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\sbVS.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\sbPS.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\skyboxCompute.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\irradianceCompute.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\prefilterCompute.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\lutCompute.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\vs.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\ps.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\osVS.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\osPS.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\sbVS.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\sbPS.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\skyboxCompute.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\irradianceCompute.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\prefilterCompute.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\lutCompute.cso" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F22B8713-A6A5-346C-B239-F57BBBB339C7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{BCE3C661-FE32-3343-9C7C-147D13710ECF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{99F1E651-9B50-3FA0-A86B-00C6B7A870A3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entry">
+      <UniqueIdentifier>{78B40FB0-243F-3533-84B2-92663B27D6C0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{EAC66AF9-6DBA-34B2-8542-F43AB625E000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{9D448346-1D89-3BA9-AC54-312A9E82B2A5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ldx">
+      <UniqueIdentifier>{D6B3A5A2-8FF9-3FEC-9459-E15174072050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thirdparty">
+      <UniqueIdentifier>{68FFD584-B8B0-3478-86BD-7D2F45D2CF14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thirdparty\MikkTSpace">
+      <UniqueIdentifier>{CE5A3A44-0A01-3372-8F17-09753E38C1DA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{BDE9EB30-ADEE-377F-80EF-2E93D5C44CDE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

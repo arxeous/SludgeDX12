@@ -252,11 +252,10 @@ namespace sludge
 		camera_.Update(d3dApp::GetTimer().DeltaTime());
 
 		static DirectX::XMVECTOR rotationAxis = DirectX::XMVectorSet(0.0f, 1.0f, 1.0f, 0.0f);
-		modelMatrix_ = DirectX::XMMatrixScaling(0.5f, 0.5f, 0.5f);
 		viewMatrix_ = camera_.ViewMatrix();
 		projMatrix_ = DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(fov_), aspectRatio_, 0.1f, 1000.0f);
 
-		DirectX::XMMATRIX mvpMatrix = DirectX::XMMatrixMultiply(modelMatrix_, viewMatrix_);
+		
 		// Set lighting data.
 		auto passCB = cbPassPool_.get(passConstants[L"Test"]);
 		passCB->ConstantBufferData().EyePosW = camera_.CamPos();
@@ -328,10 +327,12 @@ namespace sludge
 		CreateDevice();
 		commandManager_.CreateCommandManager(device_.Get());
 		CreateSwapChain();
-		// Swap chain count + 1 extra for the offscreen render target.
+		// Swap chain count + 1 extra for the offscreen render target. NOTE: Well have to change the CreateDescHeap function below to add the extra descriptor counts
+		// only in the case where we are creating the cbvSrvUav heap, as the rtv and dsv heaps don't need the extra room for imgui.
 		rtvHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, SwapChainBufferCount_ + 1, L"RTV Heap");
 		dsvHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, 1, L"DSV Heap");
 		cbvSrvUavHeap_.CreateDescriptorHeap(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, 10000, L"CBV_SRV_UAV Heap");
+		// Should probably clean up how the RTV and other views are created that use the old "cpu view end" tracking convention, as they legit just waste space on resize.
 		CreateRTVs();
 		CreateDSVs();
 
@@ -523,7 +524,7 @@ namespace sludge
 	void DirectXContext::LoadTextures(ID3D12GraphicsCommandList* cmdList)
 	{
 		int maxMipLevel = std::log2(float(PREFILTERED_MAP_DIMENSION));
-		textures_[L"HDR Test"].CreateHDRTexture(device_.Get(), cmdList, cbvSrvUavHeap_,         "../assets/Environment/Test.hdr", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, L"HDR Test", texturePool_);
+		textures_[L"HDR Test"].CreateHDRTexture(device_.Get(), cmdList, cbvSrvUavHeap_,         "../assets/Environment/SkyOnFire.hdr", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, L"HDR Test", texturePool_);
 		textures_[L"Skybox UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, SKYBOX_RESOLUTION, SKYBOX_RESOLUTION, 6, 0, DXGI_FORMAT_R16G16B16A16_FLOAT, L"Skybox UAV", texturePool_, true);
 		//textures_[L"Environment UAV"].CreateEmptyTexture(device_.Get(), cbvSrvUavHeap_, SKYBOX_RESOLUTION, SKYBOX_RESOLUTION, 6, 0, DXGI_FORMAT_R16G16B16A16_FLOAT, L"Environment UAV", texturePool_, true);
 		// Since the irradiance map doesnt have a lot of high frequency details, its actually fine to just store it in a small 32x32 texture.
@@ -539,7 +540,7 @@ namespace sludge
 		//models_["Helmet"].GetTransformData().Rotation = DirectX::XMFLOAT3(5, 0, 0);
 		//auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		//models_["Helmet"].UpdateData(viewProj, cbModelPool_);
-		utils::loadMeshFile(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, texturePool_, cbModelPool_, "../assets/DamagedHelmet/glTF/DamagedHelmet.gltf", modelData_, scene_);
+		utils::loadMeshFile(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, texturePool_, cbModelPool_, "../assets/SciFiHelmet/glTF/SciFiHelmet.gltf", modelData_, scene_);
 		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		//modelData_.transform.Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
 		//modelData_.transform.Rotation = DirectX::XMFLOAT3(5, 0, 0);

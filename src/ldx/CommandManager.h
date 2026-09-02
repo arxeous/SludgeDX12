@@ -50,7 +50,7 @@ namespace sludge
 		void FlushCommandQueue();
 
 		// To use indirect drawing, we need a command signature for every root signature used in our engine. Given that we are on a bindless model
-		// that only ever needs a single root signature, we also only ever need a single commandSignature.
+		// that only ever needs a single root signature, we initialize these command signatures all with the same bindless signature. 
 		Microsoft::WRL::ComPtr<ID3D12CommandSignature> pbrCommandSignature_;
 		Microsoft::WRL::ComPtr<ID3D12CommandSignature> skyBoxCommandSignature_;
 		Microsoft::WRL::ComPtr<ID3D12CommandSignature> offScreenCommandSignature_;

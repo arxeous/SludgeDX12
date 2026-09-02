@@ -12,6 +12,7 @@
 #include "thirdparty/MikkTSpace/mikktspace.h"
 #include "UploadBuffer.h"
 #include "utils/tiny_gltf.h"
+#include <meshoptimizer.h>
 #define TINYGLTF_USE_CPP14
 #define TINYGLTF_NO_EXTERNAL_IMAGE
 

@@ -138,6 +138,7 @@ namespace sludge
 		auto psoName = materialName.data() + std::wstring(L" PSO");
 		pso->SetName(psoName.c_str());
 
+		// below is an example of aggregate intilization 
 		return { pso };
 	}
 

@@ -214,7 +214,7 @@ namespace sludge
 		Mesh modelMesh;
 		std::vector<Vertex> vertices{};
 		std::vector<uint32_t> indices{};
-
+		
 		for (uint32_t j = 0; j < mesh->mNumVertices; j++)
 		{
 			Vertex vertex;
@@ -272,11 +272,7 @@ namespace sludge
 				material, aiTextureType_EMISSIVE, texPool);
 		}
 
-		modelMesh.Vertices = vertices;
-		modelMesh.Indices = indices;
-		indexCount_ = indices.size();
-		modelMesh.vertexCount = vertices.size();
-		modelMesh.indexCount = indices.size();
+
 		if (mesh->mTangents != nullptr)
 		{
 			// MikkTspace is actually pretty costly to run all things considered.
@@ -285,8 +281,33 @@ namespace sludge
 			// and therefore dont need the tangents.
 			calculateMikkTSpace(modelMesh);
 		}
+
+		// Mesh Optimizations: 
+		std::vector<uint32_t> remap(indices.size());
+
+		// The returned vertexCount value corresponds to the number of unique vertices that have remained after remapping!
+		const size_t vertexCount = meshopt_generateVertexRemap(
+			remap.data(), indices.data(), indices.size(),
+			vertices.data(), indices.size(), sizeof(Vertex));
+
+		std::vector<uint32_t> remappedIndices(indices.size());
+		std::vector<Vertex> remappedVertices(vertexCount);
+		meshopt_remapIndexBuffer(remappedIndices.data(),
+			indices.data(), indices.size(), remap.data());
+		meshopt_remapVertexBuffer(remappedVertices.data(),
+			vertices.data(), vertices.size(),
+			sizeof(Vertex), remap.data());
+
+		modelMesh.Vertices = remappedVertices;
+		modelMesh.Indices = remappedIndices;
+		indexCount_ = remappedIndices.size();
+		modelMesh.vertexCount = remappedVertices.size();
+		modelMesh.indexCount = remappedIndices.size();
+
 		std::span<const uint32_t> indexSpan{ modelMesh.Indices };
 		std::span<const Vertex> vertexSpan{ modelMesh.Vertices };
+
+
 		modelMesh.indexBuffer.CreateIndexBuffer(device, cmdList, indexSpan, L"Index Buffer");
 
 		StructuredBuffer structBuf{};

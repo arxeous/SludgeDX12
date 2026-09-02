@@ -64,7 +64,7 @@ namespace sludge
 		}
 
 		// apparently you can freely create associations between the list and the allocator,
-		// doing this will then allows you to just check which allocator this list was allocated from 
+		// doing this will then allow you to just check which allocator this list was allocated from 
 		ThrowIfFailed(commandList->SetPrivateDataInterface(__uuidof(ID3D12CommandAllocator), commandAllocator.Get()));
 
 		return commandList;
