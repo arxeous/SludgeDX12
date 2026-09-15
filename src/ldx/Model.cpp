@@ -272,6 +272,7 @@ namespace sludge
 				material, aiTextureType_EMISSIVE, texPool);
 		}
 
+
 		modelMesh.Vertices = vertices;
 		modelMesh.Indices = indices;
 		indexCount_ = indices.size();

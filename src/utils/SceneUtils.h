@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#include <meshoptimizer.h>
 #include "ldx/Scene.h"
 #include "ldx/VertexBuffer.h"
 #include "ldx/IndexBuffer.h"
@@ -184,11 +185,40 @@ namespace sludge::utils
 				indices.push_back(face.mIndices[k]);
 			}
 		}
+		std::vector<uint32_t> remap(indices.size());
+		const size_t vertexCount = meshopt_generateVertexRemap(remap.data(), indices.data(),
+			indices.size(), vertices.data(), indices.size(), sizeof(Vertex));
 
-		modelMesh.Vertices = vertices;
-		modelMesh.Indices = indices;
-		modelMesh.vertexCount = vertices.size();
-		modelMesh.indexCount = indices.size();
+		std::vector <uint32_t> remappedIndices(indices.size());
+		std::vector<Vertex> remappedVertices(vertexCount);
+		meshopt_remapIndexBuffer(remappedIndices.data(), indices.data(), indices.size(), remap.data());
+		meshopt_remapVertexBuffer(remappedVertices.data(), vertices.data(), vertices.size(), sizeof(Vertex), remap.data());
+		// We can do a couple of things here to optimize our mesh. First is to optimize the vertex cache
+		// in the GPU by reordering the triangles (hence why only the indices are sent in) for locality.
+		meshopt_optimizeVertexCache(remappedIndices.data(), remappedIndices.data(), indices.size(), vertexCount);
+		// We can optimize for overdraw in a similar manner by again reordering the triangles.
+		meshopt_optimizeOverdraw(remappedIndices.data(), remappedIndices.data(), indices.size(), &remappedVertices[0].Pos.x, vertexCount, sizeof(Vertex), 1.05f);
+		// Finally we can optimize the actual vertex buffer for memory efficiency. As the GPU must fetch these attributes from the vertex buffer and pass it into the 
+		// shader, we can speed up the fetch by again optimizeing the locality of the vertex buffer.
+		meshopt_optimizeVertexFetch(remappedVertices.data(), remappedIndices.data(), indices.size(), remappedVertices.data(), vertexCount, sizeof(Vertex));
+
+		// With all these optimizations the final thing we can do is actually create an LOD from our new index buffer that uses
+		// the existing vertices with a reduced number of triangles.
+
+		const float threshold = 0.005f;
+		const size_t targetIndexCount = size_t(remappedIndices.size() * threshold);
+		const float targetError = 0.01f;
+		std::vector<uint32_t> indicesLOD;
+		indicesLOD.resize(remappedIndices.size());
+		indicesLOD.resize(meshopt_simplify(&indicesLOD[0],
+			remappedIndices.data(), remappedIndices.size(),
+			&remappedVertices[0].Pos.x, vertexCount, sizeof(Vertex),
+			targetIndexCount, targetError));
+
+		modelMesh.Vertices = remappedVertices;
+		modelMesh.Indices = indicesLOD;
+		modelMesh.vertexCount = remappedVertices.size();
+		modelMesh.indexCount = indicesLOD.size();
 		if (mesh->mTangents == nullptr)
 		{
 			calculateMikkTSpace(modelMesh);
