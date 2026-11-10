@@ -4,6 +4,10 @@
 #include "errors.h"
 namespace sludge::utils
 {
+#define CDX12DEFAULT        1  // 2^0, bit 0
+#define CUBEMAP				2  // 2^1, bit 1
+#define WIREFRAME			4  // 2^2, bit 2
+
 
 	template<typename T>
 	static constexpr std::underlying_type<T>::type  EnumClassValue(const T& value)
@@ -250,6 +254,12 @@ namespace sludge::utils
 	{
 		uint32_t VertexBufferID;
 		uint32_t TextureID;
+	};
+
+	struct WireframeIndices
+	{
+		uint32_t VertexBufferID;
+		uint32_t ModelConstantID;
 	};
 
 

@@ -218,6 +218,12 @@
     <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\osPS.cso.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\wfVS.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\wfPS.cso.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
     <CustomBuild Include="E:\dev\dx12RE\Sludge\build\CMakeFiles\530ff0dfb3ac4ea3f7acc5384835ada0\sbVS.cso.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
@@ -243,6 +249,8 @@
     <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\ps.cso" />
     <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\osVS.cso" />
     <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\osPS.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\wfVS.cso" />
+    <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\wfPS.cso" />
     <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\sbVS.cso" />
     <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\sbPS.cso" />
     <None Include="E:\dev\dx12RE\Sludge\src\shaders\cso\skyboxCompute.cso" />

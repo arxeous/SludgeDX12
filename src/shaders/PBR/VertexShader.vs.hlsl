@@ -13,7 +13,7 @@ VSOutput main(uint vertexID : SV_VertexID)
     float4 posW = mul(modelConstant.World, float4(input.position, 1.0f));
     output.positionW = posW.xyz;
 
-    // Assumes nonuniform scaling; otherwise, need to use inverse-transpose of world matrix.
+    //  need to use inverse-transpose of world matrix for general normal transformations.
     output.normalW = mul(transpose((float3x3) modelConstant.InvWorld), input.normal);
 
     // Transform to homogeneous clip space.

@@ -204,9 +204,8 @@ namespace sludge
 		{
 			ProcessNode(device, cmdList, heap, geometryPool, texPool, node->mChildren[i], scene);
 		}
-
-
 	}
+
 	Mesh Model::ProcessMesh(ID3D12Device* const device, ID3D12GraphicsCommandList* const cmdList, DescriptorHeap& heap,
 		utils::Pool<utils::GeometryTag, StructuredBuffer>& geometryPool, utils::Pool<utils::TextureTag, DescriptorHandle>& texPool,
 		aiMesh* mesh, const aiScene* scene)

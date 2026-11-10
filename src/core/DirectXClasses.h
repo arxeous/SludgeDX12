@@ -84,7 +84,7 @@ namespace sludge
 		void CreateRTVs();
 		void CreateDSVs();
 		void RenderScene(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node);
-		void RenderSceneIndirect(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node, int& count);
+		void RenderSceneIndirect(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node, int& count, int& wfCount);
 
 
 
@@ -133,12 +133,14 @@ namespace sludge
 		ImGuiRenderer imGuiManager_{};
 		Scene scene_{};
 		ModelData modelData_;
+		ModelData cstmModelData_;
 
 		//MaterialConstants matConstants_{};
 		//PassConstants passConstants_{};
 		std::map<std::string_view, Model> models_;
 		Model skybox_{};
 		utils::Pool<GeometryTag, StructuredBuffer> geoPool_{};
+		
 
 		std::map<std::wstring_view, Texture> textures_;
 		utils::Pool<TextureTag, DescriptorHandle> texturePool_{};

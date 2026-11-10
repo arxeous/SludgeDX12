@@ -50,10 +50,11 @@ namespace sludge
 		};
 	}
 
-	D3D12_GRAPHICS_PIPELINE_STATE_DESC Material::CreatePSODesc(ID3DBlob* const vsCSO, ID3DBlob* const psCSO, ID3D12RootSignature* const rootSignature, DXGI_FORMAT rtvFormat, bool depthEnable, bool cubemap)
+	// I have half a mind to just use a bitmask to set a flag as to what kind of pso description is going to be made. 
+	D3D12_GRAPHICS_PIPELINE_STATE_DESC Material::CreatePSODesc(ID3DBlob* const vsCSO, ID3DBlob* const psCSO, ID3D12RootSignature* const rootSignature, DXGI_FORMAT rtvFormat, bool depthEnable, uint8_t psoFlag)
 	{
 
-		if (cubemap)
+		if ((psoFlag & CUBEMAP) == CUBEMAP)
 		{
 			D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc
 			{
@@ -82,6 +83,44 @@ namespace sludge
 				.StencilEnable = FALSE,
 			};
 
+			return psoDesc;
+		}
+		else if ((psoFlag & WIREFRAME) == WIREFRAME)
+		{
+			D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc
+			{
+				.pRootSignature = rootSignature,
+				.VS = CD3DX12_SHADER_BYTECODE(vsCSO),
+				.PS = CD3DX12_SHADER_BYTECODE(psCSO),
+				.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT),
+				.SampleMask = UINT_MAX,
+				.RasterizerState =
+				{
+					.FillMode = D3D12_FILL_MODE_WIREFRAME,
+					.CullMode = D3D12_CULL_MODE_NONE,
+					.FrontCounterClockwise = TRUE,
+					.DepthBias = -1000,
+					.DepthBiasClamp = 0.0f,
+					.SlopeScaledDepthBias = -1.0f,
+					.DepthClipEnable = TRUE,
+					.MultisampleEnable = FALSE,
+					.AntialiasedLineEnable = TRUE,
+					.ForcedSampleCount = 0,
+					.ConservativeRaster = D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF,
+				},
+				.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT),
+				.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_LINE,
+				.NumRenderTargets = 1,
+				.RTVFormats = rtvFormat,
+				.DSVFormat = {DXGI_FORMAT_D32_FLOAT},
+				.SampleDesc
+				{
+					.Count = 1,
+					.Quality = 0
+				},
+				.NodeMask = 0,
+			};
+			psoDesc.DepthStencilState.DepthEnable = depthEnable;
 			return psoDesc;
 		}
 
@@ -123,7 +162,7 @@ namespace sludge
 	}
 
 
-	Material Material::CreateMaterial(ID3D12Device* const device, std::wstring_view vsFile, std::wstring_view psFile, std::wstring_view materialName, bool cubemap, DXGI_FORMAT format)
+	Material Material::CreateMaterial(ID3D12Device* const device, std::wstring_view vsFile, std::wstring_view psFile, std::wstring_view materialName, uint8_t psoFlag, DXGI_FORMAT format)
 	{
 		Microsoft::WRL::ComPtr<ID3DBlob> vs;
 		Microsoft::WRL::ComPtr<ID3DBlob> ps;
@@ -132,7 +171,7 @@ namespace sludge
 
 
 		Microsoft::WRL::ComPtr<ID3D12PipelineState> pso;
-		D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = CreatePSODesc(vs.Get(), ps.Get(), Material::BindlessRootSignature.Get(), format, true, cubemap);
+		D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = CreatePSODesc(vs.Get(), ps.Get(), Material::BindlessRootSignature.Get(), format, true, psoFlag);
 
 		ThrowIfFailed(device->CreateGraphicsPipelineState(&psoDesc, IID_PPV_ARGS(&pso)));
 		auto psoName = materialName.data() + std::wstring(L" PSO");

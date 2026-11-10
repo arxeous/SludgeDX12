@@ -1,7 +1,12 @@
 #pragma once
-
+#include <limits>
 namespace sludge
 {
+	struct BoundingBox
+	{
+		DirectX::XMVECTOR min{std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), 1.0f};
+		DirectX::XMVECTOR max{ std::numeric_limits<float>::min(),std::numeric_limits<float>::min() ,std::numeric_limits<float>::min(), 1.0f};
+	};
 	struct MeshMaterial
 	{
 		std::string albedo{};
@@ -13,14 +18,18 @@ namespace sludge
 	struct ModelMesh
 	{
 		IndexBuffer indexBuffer{};
+		IndexBuffer wireFrameIBuffer{};
 		uint32_t indexStart{};
+		uint32_t wireFrameIStart{};
 		utils::Holder<utils::GeometryHandle> vbHolder{};
+		utils::Holder<utils::GeometryHandle> wfHolder{};
 		// needed for mikktspace lib for tangent calculations
 		std::vector<Vertex> Vertices{};
 		std::vector<uint32_t> Indices{};
 
 		uint32_t vertexCount{};
 		uint32_t indexCount{};
+		BoundingBox bb{};
 	};
 
 	struct ModelTransform
@@ -35,7 +44,7 @@ namespace sludge
 	struct ModelData
 	{
 		//std::vector<utils::Holder<utils::ModelConstantHandle>> cbHolders{};
-		utils::Holder <utils::ModelConstantHandle> cbHolder{};
+		utils::Holder <utils::ModelConstantHandle> cbHolder{}; // One single cb is not enough and were going to need more to reflect the change in the subnodes. 
 		std::vector<std::string> modelDirectories{};
 
 		std::vector<uint32_t> vertexCounts{};

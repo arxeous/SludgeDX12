@@ -19,6 +19,11 @@ namespace sludge
 		utils::RTIndices indices;
 		D3D12_DRAW_INDEXED_ARGUMENTS drawArgs;
 	};
+	struct WireframeCommandArguementBuffer
+	{
+		utils::WireframeIndices indices;
+		D3D12_DRAW_INDEXED_ARGUMENTS drawArgs;
+	};
 	struct CommandAllocator
 	{
 		uint64_t fenceValue{};
@@ -54,10 +59,12 @@ namespace sludge
 		Microsoft::WRL::ComPtr<ID3D12CommandSignature> pbrCommandSignature_;
 		Microsoft::WRL::ComPtr<ID3D12CommandSignature> skyBoxCommandSignature_;
 		Microsoft::WRL::ComPtr<ID3D12CommandSignature> offScreenCommandSignature_;
+		Microsoft::WRL::ComPtr<ID3D12CommandSignature> wireframeCommandSiganture_;
 
 		std::shared_ptr<UploadBuffer<PBRCommandArgumentBuffer>> pbrCommandArgBuffer_;
 		std::shared_ptr<UploadBuffer<SkyBoxCommandArgumentBuffer>> skyBoxCommandArgBuffer_;
 		std::shared_ptr<UploadBuffer<OffscreenCommandArgumentBuffer>> offScreenCommandArgBuffer_;
+		std::shared_ptr<UploadBuffer<WireframeCommandArguementBuffer>> wireFrameCommandArgBuffer_;
 
 	private:
 		Microsoft::WRL::ComPtr<ID3D12CommandAllocator> CreateCommandAllocator();

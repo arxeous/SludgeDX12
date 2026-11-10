@@ -147,6 +147,9 @@ namespace sludge::utils
 		ModelMesh modelMesh;
 		std::vector<Vertex> vertices{};
 		std::vector<uint32_t> indices{};
+
+		std::vector<Vertex> wfVertices{};
+		std::vector<uint32_t> wfIndices{};
 		modelMesh.indexStart = (uint32_t)globalIndices.size();
 		for (uint32_t j = 0; j < mesh->mNumVertices; j++)
 		{
@@ -171,6 +174,14 @@ namespace sludge::utils
 			}
 
 			vertex.Pos = DirectX::XMFLOAT3(p.x, p.y, p.z);
+			modelMesh.bb.min = DirectX::XMVectorSetX(modelMesh.bb.min, std::min(p.x, DirectX::XMVectorGetX(modelMesh.bb.min)));
+			modelMesh.bb.min = DirectX::XMVectorSetY(modelMesh.bb.min, std::min(p.y, DirectX::XMVectorGetY(modelMesh.bb.min)));
+			modelMesh.bb.min = DirectX::XMVectorSetZ(modelMesh.bb.min, std::min(p.z, DirectX::XMVectorGetZ(modelMesh.bb.min)));
+
+			modelMesh.bb.max = DirectX::XMVectorSetX(modelMesh.bb.max, std::max(p.x, DirectX::XMVectorGetX(modelMesh.bb.max)));
+			modelMesh.bb.max = DirectX::XMVectorSetY(modelMesh.bb.max, std::max(p.y, DirectX::XMVectorGetY(modelMesh.bb.max)));
+			modelMesh.bb.max = DirectX::XMVectorSetZ(modelMesh.bb.max, std::max(p.z, DirectX::XMVectorGetZ(modelMesh.bb.max)));
+
 			vertex.Normal = DirectX::XMFLOAT3(n.x, n.y, n.z);
 			vertex.TexC = DirectX::XMFLOAT2(t.x, t.y);
 
@@ -185,6 +196,9 @@ namespace sludge::utils
 				indices.push_back(face.mIndices[k]);
 			}
 		}
+		
+
+
 		std::vector<uint32_t> remap(indices.size());
 		const size_t vertexCount = meshopt_generateVertexRemap(remap.data(), indices.data(),
 			indices.size(), vertices.data(), indices.size(), sizeof(Vertex));
@@ -253,6 +267,76 @@ namespace sludge::utils
 			.Buffer = bufferDesc,
 		};
 		device->CreateShaderResourceView(structuredBuffer->Buffer(), &srvDesc, descriptorLocation);
+
+		// bb wireframe set up
+		{
+
+			Vertex v;
+			v.Pos = DirectX::XMFLOAT3{ DirectX::XMVectorGetX(modelMesh.bb.min), DirectX::XMVectorGetY(modelMesh.bb.min), DirectX::XMVectorGetZ(modelMesh.bb.min) };
+			wfVertices.push_back(v);
+			v.Pos = DirectX::XMFLOAT3{ DirectX::XMVectorGetX(modelMesh.bb.max), DirectX::XMVectorGetY(modelMesh.bb.min), DirectX::XMVectorGetZ(modelMesh.bb.min) };
+			wfVertices.push_back(v);
+			v.Pos = DirectX::XMFLOAT3{ DirectX::XMVectorGetX(modelMesh.bb.max), DirectX::XMVectorGetY(modelMesh.bb.min), DirectX::XMVectorGetZ(modelMesh.bb.max) };
+			wfVertices.push_back(v);
+			v.Pos = DirectX::XMFLOAT3{ DirectX::XMVectorGetX(modelMesh.bb.min), DirectX::XMVectorGetY(modelMesh.bb.min), DirectX::XMVectorGetZ(modelMesh.bb.max) };
+			wfVertices.push_back(v);
+			v.Pos = DirectX::XMFLOAT3{ DirectX::XMVectorGetX(modelMesh.bb.min), DirectX::XMVectorGetY(modelMesh.bb.max), DirectX::XMVectorGetZ(modelMesh.bb.min) };
+			wfVertices.push_back(v);
+			v.Pos = DirectX::XMFLOAT3{ DirectX::XMVectorGetX(modelMesh.bb.max), DirectX::XMVectorGetY(modelMesh.bb.max), DirectX::XMVectorGetZ(modelMesh.bb.min) };
+			wfVertices.push_back(v);
+			v.Pos = DirectX::XMFLOAT3{ DirectX::XMVectorGetX(modelMesh.bb.max), DirectX::XMVectorGetY(modelMesh.bb.max), DirectX::XMVectorGetZ(modelMesh.bb.max) };
+			wfVertices.push_back(v);
+			v.Pos = DirectX::XMFLOAT3{ DirectX::XMVectorGetX(modelMesh.bb.min), DirectX::XMVectorGetY(modelMesh.bb.max), DirectX::XMVectorGetZ(modelMesh.bb.max) };
+			wfVertices.push_back(v);
+
+			std::vector<uint32_t> i =
+			{     
+				0, 1,
+				1, 2,
+				2, 3,
+				3, 0,
+				4, 5,
+				5, 6,
+				6, 7,
+				7, 4,
+				0, 4,
+				1, 5,
+				2, 6,
+				3, 7
+			};
+
+			wfIndices = i;
+
+			std::span<const uint32_t> indexSpan{ wfIndices };
+			std::span<const Vertex> vertexSpan{ wfVertices };
+
+			modelMesh.wireFrameIStart = (uint32_t)globalIndices.size();
+			globalIndices.insert(globalIndices.end(), wfIndices.begin(), wfIndices.end());
+			modelMesh.wireFrameIBuffer.CreateIndexBuffer(device, cmdList, indexSpan, L"WF Index Buffer"); // Technically this isnt needed. The globalIB is what is used as the ibv for our renders. But its good to have this for now JIC.
+
+			StructuredBuffer structBuf{};
+			auto handle = geometryPool.create(std::move(structBuf));
+			auto structuredBuffer = geometryPool.get(handle);
+			structuredBuffer->CreateStructuredBuffer(device, cmdList, vertexSpan, L"WF Structured Buffer");
+			modelMesh.wfHolder = handle;
+			auto descriptorLocation = heap.CPUDescriptorHandleStart().Offset(modelMesh.wfHolder.index(), heap.IncrementSize());
+			D3D12_BUFFER_SRV bufferDesc
+			{
+				.FirstElement = 0,
+				.NumElements = 8,
+				.StructureByteStride = sizeof(Vertex)
+			};
+
+			D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc
+			{
+				.Format = DXGI_FORMAT_UNKNOWN,
+				.ViewDimension = D3D12_SRV_DIMENSION_BUFFER,
+				.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING,
+				.Buffer = bufferDesc,
+			};
+			device->CreateShaderResourceView(structuredBuffer->Buffer(), &srvDesc, descriptorLocation);
+		}
+
 
 		return modelMesh;
 	}
@@ -405,5 +489,96 @@ namespace sludge::utils
 		cb->ConstantBufferData().invModelMat = DirectX::XMMatrixInverse(nullptr, cb->ConstantBufferData().modelMat);
 		cb->ConstantBufferData().viewProjMat = viewProj;
 		cb->UpdateBuffer();
+	}
+
+	void getFrustrumPlanes(DirectX::XMMATRIX vp, std::vector<DirectX::XMVECTOR>& planes)
+	{
+		planes.push_back(DirectX::XMVectorAdd(vp.r[3], vp.r[0]));		// left plane
+		planes.push_back(DirectX::XMVectorSubtract(vp.r[3], vp.r[0]));	// right plane
+		planes.push_back(DirectX::XMVectorAdd(vp.r[3], vp.r[1]));		// bottom plane
+		planes.push_back(DirectX::XMVectorSubtract(vp.r[3], vp.r[1]));  // top plane
+		planes.push_back(vp.r[2]);										// near plane
+		planes.push_back(DirectX::XMVectorSubtract(vp.r[3], vp.r[2]));  // far plane
+
+		planes[0] = DirectX::XMPlaneNormalize(planes[0]);
+		planes[1] = DirectX::XMPlaneNormalize(planes[1]);
+		planes[2] = DirectX::XMPlaneNormalize(planes[2]);
+		planes[3] = DirectX::XMPlaneNormalize(planes[3]);
+		planes[4] = DirectX::XMPlaneNormalize(planes[4]);
+		planes[5] = DirectX::XMPlaneNormalize(planes[5]);
+
+	}
+
+	void getFrustrumCorners(DirectX::XMMATRIX vp, std::vector<DirectX::XMVECTOR>& points)
+	{
+		const std::vector<DirectX::XMVECTOR> corners =
+		{
+			DirectX::XMVECTOR{-1, 1, 0, 1}, DirectX::XMVECTOR{1, 1, 0, 1},	// top left top right near plane
+			DirectX::XMVECTOR{-1,-1, 0, 1}, DirectX::XMVECTOR{1,-1, 0, 1}, // bottom left bottom right near plane
+			DirectX::XMVECTOR{-1, 1, 1, 1}, DirectX::XMVECTOR{1, 1, 1, 1},  // top left top right far plane
+			DirectX::XMVECTOR{-1,-1, 1, 1}, DirectX::XMVECTOR{1,-1, 1, 1}   // bottom left bottom right far plane
+		};
+		DirectX::XMMATRIX inverseVP = DirectX::XMMatrixInverse(nullptr, vp);
+
+		for (int i = 0; i != 8; i++)
+		{
+			DirectX::XMVECTOR q = DirectX::XMVector4Transform(corners[i], inverseVP);
+			q = DirectX::XMVectorSetW(q, DirectX::XMVectorGetW(q));
+			q = DirectX::XMVectorScale(q, 1/DirectX::XMVectorGetW(q));
+			points.push_back(q);
+		}
+	}
+
+	bool isBoxInFrustrum(std::vector<DirectX::XMVECTOR>& planes, std::vector<DirectX::XMVECTOR>& corners, const BoundingBox bb)
+	{
+		using DirectX::XMVector4Dot;
+		using DirectX::XMVectorGetX;
+		using DirectX::XMVectorGetY;
+		using DirectX::XMVectorGetZ;
+
+		// check if bb is completely outside of the frustrum.
+		for (int i = 0; i < 6; i++)
+		{
+			int r = 0;
+			r += (XMVectorGetX(XMVector4Dot(planes[i], DirectX::XMVECTOR{DirectX::XMVectorGetX(bb.max), DirectX::XMVectorGetY(bb.min), DirectX::XMVectorGetZ(bb.min), 0.0f})) < 0) ? 1 : 0;
+			r += (XMVectorGetX(XMVector4Dot(planes[i], DirectX::XMVECTOR{DirectX::XMVectorGetX(bb.max), DirectX::XMVectorGetY(bb.max), DirectX::XMVectorGetZ(bb.min), 0.0f})) < 0) ? 1 : 0;
+			r += (XMVectorGetX(XMVector4Dot(planes[i], DirectX::XMVECTOR{DirectX::XMVectorGetX(bb.max), DirectX::XMVectorGetY(bb.min), DirectX::XMVectorGetZ(bb.max), 0.0f})) < 0) ? 1 : 0;
+			r += (XMVectorGetX(XMVector4Dot(planes[i], DirectX::XMVECTOR{DirectX::XMVectorGetX(bb.max), DirectX::XMVectorGetY(bb.max), DirectX::XMVectorGetZ(bb.max), 0.0f})) < 0) ? 1 : 0;
+			r += (XMVectorGetX(XMVector4Dot(planes[i], DirectX::XMVECTOR{DirectX::XMVectorGetX(bb.min), DirectX::XMVectorGetY(bb.min), DirectX::XMVectorGetZ(bb.min), 0.0f})) < 0) ? 1 : 0;
+			r += (XMVectorGetX(XMVector4Dot(planes[i], DirectX::XMVECTOR{DirectX::XMVectorGetX(bb.min), DirectX::XMVectorGetY(bb.max), DirectX::XMVectorGetZ(bb.max), 0.0f})) < 0) ? 1 : 0;
+			r += (XMVectorGetX(XMVector4Dot(planes[i], DirectX::XMVECTOR{DirectX::XMVectorGetX(bb.min), DirectX::XMVectorGetY(bb.max), DirectX::XMVectorGetZ(bb.min), 0.0f})) < 0) ? 1 : 0;
+			r += (XMVectorGetX(XMVector4Dot(planes[i], DirectX::XMVECTOR{DirectX::XMVectorGetX(bb.min), DirectX::XMVectorGetY(bb.min), DirectX::XMVectorGetZ(bb.max), 0.0f})) < 0) ? 1 : 0;
+
+			if (r == 8) return false;
+		}
+
+		// check if frustrum is completely inside of the bb;
+		int r = 0;
+		r = 0;
+		for (int i = 0; i < 8; i++)
+			r += ((XMVectorGetX(corners[i]) > XMVectorGetX(bb.max)) ? 1 : 0);
+		if (r == 8) return false;
+		r = 0;
+		for (int i = 0; i < 8; i++)
+			r += ((XMVectorGetX(corners[i]) < XMVectorGetX(bb.min)) ? 1 : 0);
+		if (r == 8) return false;
+		r = 0;
+		for (int i = 0; i < 8; i++)
+			r += ((XMVectorGetY(corners[i]) > XMVectorGetY(bb.max)) ? 1 : 0);
+		if (r == 8) return false;
+		r = 0;
+		for (int i = 0; i < 8; i++)
+			r += ((XMVectorGetY(corners[i]) < XMVectorGetY(bb.min)) ? 1 : 0);
+		if (r == 8) return false;
+		r = 0;
+		for (int i = 0; i < 8; i++)
+			r += ((XMVectorGetZ(corners[i]) > XMVectorGetZ(bb.max)) ? 1 : 0);
+		if (r == 8) return false;
+		r = 0;
+		for (int i = 0; i < 8; i++)
+			r += ((XMVectorGetZ(corners[i]) < XMVectorGetZ(bb.min)) ? 1 : 0);
+		if (r == 8) return false;
+
+		return true;
 	}
 }

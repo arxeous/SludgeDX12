@@ -94,7 +94,7 @@ namespace sludge
 		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		CD3DX12_CPU_DESCRIPTOR_HANDLE rtv = offScreenRT_.RTVCPUDescriptorHandle();
 		CD3DX12_CPU_DESCRIPTOR_HANDLE dsv{ depthStencilBuffer_.BufferHandle() };
-
+		int wfCount = 0;
 		{
 			// Since every shader uses the same root signature, we bind one and only change the PSO 
 			// to switch out the shaders for the draw commands.
@@ -120,12 +120,13 @@ namespace sludge
 			commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 			//auto passCB = cbPassPool_.get(passConstants[L"Test"]);
 			
-			updateModelData(modelData_, viewProj, cbModelPool_);
+			//updateModelData(modelData_, viewProj, cbModelPool_);
 			//RenderScene(commandList_.Get(), scene_, modelData_, 0);
 			int count = 0;
 			auto ibv = modelData_.globalIB.IndexBufferView();
+
 			commandList_->IASetIndexBuffer(&ibv);
-			RenderSceneIndirect(commandList_.Get(), scene_, modelData_, 0, count);
+			RenderSceneIndirect(commandList_.Get(), scene_, modelData_, 0, count, wfCount);
 			commandList_->ExecuteIndirect(commandManager_.pbrCommandSignature_.Get(), count, commandManager_.pbrCommandArgBuffer_->Resource(), 0, nullptr, 0);
 		}
 		//ResourceIndices PBRResourceIDs
@@ -148,10 +149,41 @@ namespace sludge
 		//{
 		//	model.DrawNodes(commandList_.Get(), PBRResourceIDs);
 		//}
-
 		{
 			TRACY_PROFILER_FUNCTION();
+			TRACY_PROFILER_GPU_ZONE("Wireframe", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_CMD_DRAW);
+			materials_[L"Wireframe Material"].BindPSO(commandList_.Get());
+			commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+			commandList_->ExecuteIndirect(commandManager_.wireframeCommandSiganture_.Get(), wfCount, commandManager_.wireFrameCommandArgBuffer_->Resource(), 0, nullptr, 0);
+			
+			auto cb = cbModelPool_.get(cstmModelData_.cbHolder);
+			cb->ConstantBufferData().modelMat = DirectX::XMMatrixIdentity();
+			cb->ConstantBufferData().invModelMat = DirectX::XMMatrixInverse(nullptr, viewProj);
+			cb->ConstantBufferData().viewProjMat = viewProj;
+
+
+			WireframeCommandArguementBuffer wfArgBuff{};
+			{
+				wfArgBuff.indices.VertexBufferID = cstmModelData_.meshes[0].wfHolder.index();
+				wfArgBuff.indices.ModelConstantID = modelData_.cbHolder.index();
+
+				wfArgBuff.drawArgs.IndexCountPerInstance = 36;
+				wfArgBuff.drawArgs.InstanceCount = 1;
+				wfArgBuff.drawArgs.StartIndexLocation = cstmModelData_.meshes[0].wireFrameIStart;
+				wfArgBuff.drawArgs.BaseVertexLocation = 0;
+				wfArgBuff.drawArgs.StartInstanceLocation = 0;
+			}
+			auto ibv = cstmModelData_.globalIB.IndexBufferView();
+			commandList_->IASetIndexBuffer(&ibv);
+			commandManager_.wireFrameCommandArgBuffer_->CopyData(wfCount, wfArgBuff);
+			wfCount++;
+			commandList_->ExecuteIndirect(commandManager_.wireframeCommandSiganture_.Get(), wfCount, commandManager_.wireFrameCommandArgBuffer_->Resource(), 0, nullptr, 0);
+		}
+		{
+
+			TRACY_PROFILER_FUNCTION();
 			TRACY_PROFILER_GPU_ZONE("Skybox", tracyDX12Ctx_, commandList_.Get(), TRACY_PROFILER_COLOR_CMD_DRAW);
+			commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 			materials_[L"Skybox Material"].BindPSO(commandList_.Get());
 			skybox_.UpdateData(viewProj, cbModelPool_);
 
@@ -166,7 +198,7 @@ namespace sludge
 			}
 			{
 				cmdArgBuff.drawArgs.BaseVertexLocation = 0;
-				// VERY NOT GOOD. IndexCount will eventually be deprecated and we will ahve to get an index count for a given mesh another way. for now we just use this.
+				// VERY NOT GOOD. IndexCount will eventually be deprecated and we will have to get an index count for a given mesh another way. for now we just use this.
 				cmdArgBuff.drawArgs.IndexCountPerInstance = skybox_.IndexCount();
 				cmdArgBuff.drawArgs.InstanceCount = 1;
 				cmdArgBuff.drawArgs.StartIndexLocation = 0;
@@ -252,11 +284,10 @@ namespace sludge
 		camera_.Update(d3dApp::GetTimer().DeltaTime());
 
 		static DirectX::XMVECTOR rotationAxis = DirectX::XMVectorSet(0.0f, 1.0f, 1.0f, 0.0f);
-		modelMatrix_ = DirectX::XMMatrixScaling(0.5f, 0.5f, 0.5f);
+		//modelMatrix_ = DirectX::XMMatrixScaling(0.5f, 0.5f, 0.5f);
 		viewMatrix_ = camera_.ViewMatrix();
 		projMatrix_ = DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(fov_), aspectRatio_, 0.1f, 1000.0f);
 
-		DirectX::XMMATRIX mvpMatrix = DirectX::XMMatrixMultiply(modelMatrix_, viewMatrix_);
 		// Set lighting data.
 		auto passCB = cbPassPool_.get(passConstants[L"Test"]);
 		passCB->ConstantBufferData().EyePosW = camera_.CamPos();
@@ -287,7 +318,7 @@ namespace sludge
 		{
 			if (keycode == VK_SPACE)
 			{
-				fov_ -= static_cast<float>(d3dApp::GetTimer().DeltaTime() * 10);
+				fov_ += static_cast<float>(d3dApp::GetTimer().DeltaTime() * 10);
 			}
 		}
 		camera_.HandleInput(keycode, isKeyDown);
@@ -512,12 +543,13 @@ namespace sludge
 		Material::CreateBindlessRootSignature(device_.Get(), L"../src/shaders/cso/vs.cso");
 		commandManager_.CreateCommandSignature(device_.Get(), 0, Material::BindlessRootSignature.Get());
 		materials_[L"PBR Materials"] = Material::CreateMaterial(device_.Get(), L"../src/shaders/cso/vs.cso", L"../src/shaders/cso/ps.cso", L"PBR Material");
-		materials_[L"Skybox Material"] = Material::CreateMaterial(device_.Get(), L"../src/shaders/cso/sbVS.cso", L"../src/shaders/cso/sbPS.cso", L"Skybox Material", true);
+		materials_[L"Skybox Material"] = Material::CreateMaterial(device_.Get(), L"../src/shaders/cso/sbVS.cso", L"../src/shaders/cso/sbPS.cso", L"Skybox Material", CUBEMAP);
 		materials_[L"Irradiance Compute Material"] = Material::CreateComputeMaterial(device_.Get(), L"../src/shaders/cso/irradianceCompute.cso", L"Irradiance Compute Material");
 		materials_[L"Equirect Compute Material"] = Material::CreateComputeMaterial(device_.Get(), L"../src/shaders/cso/skyboxCompute.cso", L"Equirect Compute Material");
 		materials_[L"Prefiltered Compute Material"] = Material::CreateComputeMaterial(device_.Get(), L"../src/shaders/cso/prefilterCompute.cso", L"Prefiltered Compute Material");
 		materials_[L"LUT Material"] = Material::CreateComputeMaterial(device_.Get(), L"../src/shaders/cso/lutCompute.cso", L"LUT Compute Material");
-		materials_[L"Offscreen RT Material"] = Material::CreateMaterial(device_.Get(), L"../src/shaders/cso/osVS.cso", L"../src/shaders/cso/osPS.cso", L"OffScreen RT Material", false, DXGI_FORMAT_R8G8B8A8_UNORM);
+		materials_[L"Offscreen RT Material"] = Material::CreateMaterial(device_.Get(), L"../src/shaders/cso/osVS.cso", L"../src/shaders/cso/osPS.cso", L"OffScreen RT Material", CDX12DEFAULT, DXGI_FORMAT_R8G8B8A8_UNORM);
+		materials_[L"Wireframe Material"] = Material::CreateMaterial(device_.Get(), L"../src/shaders/cso/wfVS.cso", L"../src/shaders/cso/wfPS.cso", L"Wireframe Material", WIREFRAME);
 	}
 
 	void DirectXContext::LoadTextures(ID3D12GraphicsCommandList* cmdList)
@@ -540,6 +572,101 @@ namespace sludge
 		//auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		//models_["Helmet"].UpdateData(viewProj, cbModelPool_);
 		utils::loadMeshFile(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, texturePool_, cbModelPool_, "../assets/DamagedHelmet/glTF/DamagedHelmet.gltf", modelData_, scene_);
+
+		std::vector<Vertex> wfVertices{};
+		std::vector<uint32_t> frustumIndices{};
+		/************************************************************/
+		{
+			camera_.Update(d3dApp::GetTimer().DeltaTime());
+
+			static DirectX::XMVECTOR rotationAxis = DirectX::XMVectorSet(0.0f, 1.0f, 1.0f, 0.0f);
+			//modelMatrix_ = DirectX::XMMatrixScaling(0.5f, 0.5f, 0.5f);
+			viewMatrix_ = camera_.ViewMatrix();
+			projMatrix_ = DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(10.0f), aspectRatio_, 0.1f, 1000.0f);
+
+			
+			//v.Pos = DirectX::XMFLOAT3{ -1, -1, 0 };
+			//wfVertices.push_back(v);
+			//v.Pos = DirectX::XMFLOAT3{ 1, -1, 0 };
+			//wfVertices.push_back(v);
+			//v.Pos = DirectX::XMFLOAT3{ -1, 1, 0 };
+			//wfVertices.push_back(v);
+			//v.Pos = DirectX::XMFLOAT3{ 1, 1, 0 };
+			//wfVertices.push_back(v);
+			//v.Pos = DirectX::XMFLOAT3{ -1, -1, 1 };
+			//wfVertices.push_back(v);
+			//v.Pos = DirectX::XMFLOAT3{ 1, -1, 1 };
+			//wfVertices.push_back(v);
+			//v.Pos = DirectX::XMFLOAT3{ -1, 1, 1 };
+			//wfVertices.push_back(v);
+			//v.Pos = DirectX::XMFLOAT3{ 1, 1, 1 };
+			//wfVertices.push_back(v);
+
+			std::vector<uint32_t> i =
+			{
+				0,1, 1,3, 3,2, 2,0,
+				4,5, 5,7, 7,6, 6,4,
+				0,4, 1,5, 2,6, 3,7
+			};
+
+			auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
+
+			DirectX::XMMATRIX inverseVP = DirectX::XMMatrixInverse(nullptr, viewProj);
+			const std::vector<DirectX::XMVECTOR> corners =
+			{
+				DirectX::XMVECTOR{ -1, -1, 0, 1 }, DirectX::XMVECTOR{ 1, -1, 0, 1 },	
+				DirectX::XMVECTOR{ -1,1, 0, 1 }, DirectX::XMVECTOR{ 1,1, 0, 1 },
+				DirectX::XMVECTOR{ -1, -1, 1, 1 }, DirectX::XMVECTOR{ 1, -1, 1, 1 }, 
+				DirectX::XMVECTOR{ -1, 1, 1, 1 }, DirectX::XMVECTOR{ 1,1, 1, 1 }  
+			};
+			for (int i = 0; i != 8; i++)
+			{
+				Vertex v;
+				DirectX::XMVECTOR q = DirectX::XMVector4Transform(corners[i], inverseVP);
+				q = DirectX::XMVectorSetW(q, DirectX::XMVectorGetW(q));
+				q = DirectX::XMVectorScale(q, 1 / DirectX::XMVectorGetW(q));
+				v.Pos = DirectX::XMFLOAT3{ DirectX::XMVectorGetX(q),DirectX::XMVectorGetY(q),DirectX::XMVectorGetZ(q) };
+				wfVertices.push_back(v);
+			}
+
+			std::span<const uint32_t> indexSpan{ i };
+			std::span<const Vertex> vertexSpan{ wfVertices };
+			cstmModelData_.meshes.push_back(ModelMesh{});
+			cstmModelData_.meshes[0].wireFrameIStart = (uint32_t)frustumIndices.size();
+			frustumIndices.insert(frustumIndices.end(), i.begin(), i.end());
+			cstmModelData_.globalIB.CreateIndexBuffer(device_.Get(), cmdList, indexSpan, L"Frustum Index Buffer");
+
+			StructuredBuffer structBuf{};
+			auto handle = geoPool_.create(std::move(structBuf));
+			auto structuredBuffer = geoPool_.get(handle);
+			structuredBuffer->CreateStructuredBuffer(device_.Get(), cmdList, vertexSpan, L"WF Structured Buffer");
+			cstmModelData_.meshes[0].wfHolder = handle;
+			auto descriptorLocation = cbvSrvUavHeap_.CPUDescriptorHandleStart().Offset(cstmModelData_.meshes[0].wfHolder.index(), cbvSrvUavHeap_.IncrementSize());
+			D3D12_BUFFER_SRV bufferDesc
+			{
+				.FirstElement = 0,
+				.NumElements = 8,
+				.StructureByteStride = sizeof(Vertex)
+			};
+
+			D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc
+			{
+				.Format = DXGI_FORMAT_UNKNOWN,
+				.ViewDimension = D3D12_SRV_DIMENSION_BUFFER,
+				.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING,
+				.Buffer = bufferDesc,
+			};
+			device_->CreateShaderResourceView(structuredBuffer->Buffer(), &srvDesc, descriptorLocation);
+
+			ConstantBuffer<ModelConstants> cb;
+			cstmModelData_.cbHolder = cbModelPool_.create(std::move(cb));
+			auto constantBuffer = cbModelPool_.get(cstmModelData_.cbHolder);
+			constantBuffer->CreateConstantBuffer(device_.Get(), cmdList,
+				ModelConstants{ .modelMat = DirectX::XMMatrixIdentity(), .invModelMat = DirectX::XMMatrixIdentity() },
+				cbvSrvUavHeap_, L"Model Constants Buffer", cstmModelData_.cbHolder.index());
+		}
+		/***********************************************************/
+		//utils::loadMeshFile(device_.Get(), cmdList, cbvSrvUavHeap_, geoPool_, texturePool_, cbModelPool_, "../assets/Cube/glTF/Cube.gltf", cstmModelData_, scene_);
 		auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 		//modelData_.transform.Scale = DirectX::XMFLOAT3(0.5, 0.5, 0.5);
 		//modelData_.transform.Rotation = DirectX::XMFLOAT3(5, 0, 0);
@@ -591,7 +718,7 @@ namespace sludge
 		{
 			infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, TRUE);
 			infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, TRUE);
-			infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, TRUE);
+			//infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, TRUE);
 
 			// Configure queue filter to ignore info message severity.
 			std::array<D3D12_MESSAGE_SEVERITY, 1> ignoreMessageSeverities
@@ -740,52 +867,89 @@ namespace sludge
 		}
 	}
 
-	void DirectXContext::RenderSceneIndirect(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node, int& count)
+	void DirectXContext::RenderSceneIndirect(ID3D12GraphicsCommandList* cmdList, const Scene& scene, ModelData& modelData, int node, int& count, int& wfCount)
 	{
 		if (scene.meshForNode.find(node) != scene.meshForNode.end())
 		{
 			PBRCommandArgumentBuffer cmdArgBuff{};
+			WireframeCommandArguementBuffer wfArgBuff{};
 			int meshIdx = scene.meshForNode.at(node);
 			int materialIdx = scene.materialForNode.at(node);
 			auto viewProj = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
+			//projMatrix_.r[0] = DirectX::XMVectorScale(projMatrix_.r[0], 1 / 3.0f);
+			auto scaledVP = DirectX::XMMatrixMultiply(viewMatrix_, projMatrix_);
 			// So this way of updating every nodes transformation regardless of whether it was changed or not is a result of how my cb are set up.
 			// I will eventually move to a more efficient method, where I actually take into account nodes that have been updated, and
 			// updating that data with one UpdateBuffer() call, rather than the multiple that will occur here for each submesh.
 			auto cb = cbModelPool_.get(modelData.cbHolder);
+			std::vector<DirectX::XMVECTOR> planes{};
+			std::vector<DirectX::XMVECTOR> points{};
 			cb->ConstantBufferData().modelMat = scene.globalTransforms[node];
-			cb->ConstantBufferData().invModelMat = DirectX::XMMatrixInverse(nullptr, cb->ConstantBufferData().modelMat);
+			cb->ConstantBufferData().invModelMat = DirectX::XMMatrixInverse(nullptr, scene.globalTransforms[node]);
 			cb->ConstantBufferData().viewProjMat = viewProj;
-			cb->UpdateBuffer();
+			DirectX::XMStoreFloat3(&cb->ConstantBufferData().min, modelData.meshes[meshIdx].bb.min);
+			DirectX::XMStoreFloat3(&cb->ConstantBufferData().max, modelData.meshes[meshIdx].bb.max);
+			planes.reserve(6);
+			points.reserve(8);
+			modelData.meshes[meshIdx].bb.min = DirectX::XMVector4Transform(modelData.meshes[meshIdx].bb.min, scene.globalTransforms[node]);
+			modelData.meshes[meshIdx].bb.max = DirectX::XMVector4Transform(modelData.meshes[meshIdx].bb.max, scene.globalTransforms[node]);
 
-			{
-				cmdArgBuff.indices.albedoID = !modelData.materials[materialIdx].albedo.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].albedo].SRVHandle().index() : 0;
-				cmdArgBuff.indices.roughnessID = !modelData.materials[materialIdx].metallicRoughnessMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].metallicRoughnessMap].SRVHandle().index() : 0;
-				cmdArgBuff.indices.VertexBufferID = modelData.meshes[meshIdx].vbHolder.index();
-				cmdArgBuff.indices.passConstantID = passConstants[L"Test"].index();
-				cmdArgBuff.indices.modelConstantID = modelData.cbHolder.index();
-				cmdArgBuff.indices.IrradianceID = textures_[L"Irradiance Map UAV"].SRVHandle().index();
-				cmdArgBuff.indices.PrefilterID = textures_[L"Prefiltered UAV"].SRVHandle().index();
-				cmdArgBuff.indices.LutID = textures_[L"LUT UAV"].SRVHandle().index();
-				cmdArgBuff.indices.NormalID = !modelData.materials[materialIdx].normalMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].normalMap].SRVHandle().index() : 0;
-				cmdArgBuff.indices.EmissiveID = !modelData.materials[materialIdx].emissiveMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].emissiveMap].SRVHandle().index() : 0;
-				cmdArgBuff.indices.AoID = !modelData.materials[materialIdx].aoMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].aoMap].SRVHandle().index() : 0;
-			}
+			getFrustrumPlanes(scaledVP, planes);
+			getFrustrumCorners(scaledVP, points);
 
+			if (isBoxInFrustrum(planes, points, modelData.meshes[meshIdx].bb))
 			{
-				cmdArgBuff.drawArgs.IndexCountPerInstance = modelData.meshes[meshIdx].indexCount;
-				cmdArgBuff.drawArgs.InstanceCount = 1;
-				cmdArgBuff.drawArgs.StartIndexLocation = modelData.meshes[meshIdx].indexStart;
-				cmdArgBuff.drawArgs.BaseVertexLocation = 0;
-				cmdArgBuff.drawArgs.StartInstanceLocation = 0;
+				
+				cb->UpdateBuffer();
+
+				{
+					cmdArgBuff.indices.albedoID = !modelData.materials[materialIdx].albedo.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].albedo].SRVHandle().index() : 0;
+					cmdArgBuff.indices.roughnessID = !modelData.materials[materialIdx].metallicRoughnessMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].metallicRoughnessMap].SRVHandle().index() : 0;
+					cmdArgBuff.indices.VertexBufferID = modelData.meshes[meshIdx].vbHolder.index();
+					cmdArgBuff.indices.passConstantID = passConstants[L"Test"].index();
+					cmdArgBuff.indices.modelConstantID = modelData.cbHolder.index();
+					cmdArgBuff.indices.IrradianceID = textures_[L"Irradiance Map UAV"].SRVHandle().index();
+					cmdArgBuff.indices.PrefilterID = textures_[L"Prefiltered UAV"].SRVHandle().index();
+					cmdArgBuff.indices.LutID = textures_[L"LUT UAV"].SRVHandle().index();
+					cmdArgBuff.indices.NormalID = !modelData.materials[materialIdx].normalMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].normalMap].SRVHandle().index() : 0;
+					cmdArgBuff.indices.EmissiveID = !modelData.materials[materialIdx].emissiveMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].emissiveMap].SRVHandle().index() : 0;
+					cmdArgBuff.indices.AoID = !modelData.materials[materialIdx].aoMap.empty() ? ModelData::loadedTextures[modelData.materials[materialIdx].aoMap].SRVHandle().index() : 0;
+				}
+
+				{
+					cmdArgBuff.drawArgs.IndexCountPerInstance = modelData.meshes[meshIdx].indexCount;
+					cmdArgBuff.drawArgs.InstanceCount = 1;
+					cmdArgBuff.drawArgs.StartIndexLocation = modelData.meshes[meshIdx].indexStart;
+					cmdArgBuff.drawArgs.BaseVertexLocation = 0;
+					cmdArgBuff.drawArgs.StartInstanceLocation = 0;
+				}
+				// Put command into our arg buffer
+				commandManager_.pbrCommandArgBuffer_->CopyData(count, cmdArgBuff);
+				count++;
+
+
+				{
+					wfArgBuff.indices.VertexBufferID = modelData.meshes[meshIdx].wfHolder.index();
+					wfArgBuff.indices.ModelConstantID = modelData.cbHolder.index();
+
+					wfArgBuff.drawArgs.IndexCountPerInstance = 36;
+					wfArgBuff.drawArgs.InstanceCount = 1;
+					wfArgBuff.drawArgs.StartIndexLocation = modelData.meshes[meshIdx].wireFrameIStart;
+					wfArgBuff.drawArgs.BaseVertexLocation = 0;
+					wfArgBuff.drawArgs.StartInstanceLocation = 0;
+				}
+				commandManager_.wireFrameCommandArgBuffer_->CopyData(wfCount, wfArgBuff);
+				wfCount++;
 			}
-			// Put command into our arg buffer
-			commandManager_.pbrCommandArgBuffer_->CopyData(count, cmdArgBuff);
-			count++;
+			else
+			{
+				OutputDebugString(L"Mesh is outside the frustrum.\n");
+			}
 		}
 
 		for (int child = scene.hierarchy[node].firstChild; child != -1; child = scene.hierarchy[child].nextSibling)
 		{
-			RenderSceneIndirect(cmdList, scene, modelData, child, count);
+			RenderSceneIndirect(cmdList, scene, modelData, child, count, wfCount);
 		}
 	}
 

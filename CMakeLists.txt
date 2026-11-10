@@ -167,6 +167,13 @@ compile_shader(${PROJECT_NAME} src/shaders/Offscreen/OSPixel.ps.hlsl
 OUTPUT_NAME "osPS"
 DEFINES "")
 
+compile_shader(${PROJECT_NAME} src/shaders/Utils/WireframeVS.vs.hlsl
+OUTPUT_NAME "wfVS"
+DEFINES "")
+
+compile_shader(${PROJECT_NAME} src/shaders/Utils/WireframePS.ps.hlsl
+OUTPUT_NAME "wfPS"
+DEFINES "")
 
 compile_shader(${PROJECT_NAME} src/shaders/PBR/SkyBoxVS.vs.hlsl
 OUTPUT_NAME "sbVS"

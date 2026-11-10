@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "utils/utils.h"
+
 namespace sludge
 {
 	// Materials really capture pipeline states more than anything. The concept of a material and a pipeline state are so
@@ -14,8 +15,8 @@ namespace sludge
 
 		static D3D12_COMPUTE_PIPELINE_STATE_DESC CreateComputePSODesc(ID3D12RootSignature* const rootSignature, ID3DBlob* const csCSO);
 		static D3D12_GRAPHICS_PIPELINE_STATE_DESC CreatePSODesc(ID3DBlob* const vsCSO, ID3DBlob* const psCSO, ID3D12RootSignature* const rootSignature, DXGI_FORMAT rtvFormat = DXGI_FORMAT_R16G16B16A16_FLOAT,
-			bool depthEnable = true, bool cubemap = false);
-		static Material CreateMaterial(ID3D12Device* const device, std::wstring_view vsFile, std::wstring_view psFile, std::wstring_view materialName, bool cubemap = false, DXGI_FORMAT format = DXGI_FORMAT_R16G16B16A16_FLOAT);
+			bool depthEnable = true, uint8_t psoFlag = 0x00);
+		static Material CreateMaterial(ID3D12Device* const device, std::wstring_view vsFile, std::wstring_view psFile, std::wstring_view materialName, uint8_t psoFlag = 0x00, DXGI_FORMAT format = DXGI_FORMAT_R16G16B16A16_FLOAT);
 		static Material CreateComputeMaterial(ID3D12Device* const device, std::wstring_view csFile, std::wstring_view materialName);
 		static void CreateBindlessRootSignature(ID3D12Device* const device, std::wstring_view bindlessShader);
 

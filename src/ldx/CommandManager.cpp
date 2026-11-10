@@ -17,6 +17,7 @@ namespace sludge
 		pbrCommandArgBuffer_ = std::make_shared<UploadBuffer<PBRCommandArgumentBuffer>>(device, 50, false, L"Command Argument Buffer");
 		skyBoxCommandArgBuffer_ = std::make_shared<UploadBuffer<SkyBoxCommandArgumentBuffer>>(device, 50, false, L"Command Argument Buffer");
 		offScreenCommandArgBuffer_ = std::make_shared<UploadBuffer<OffscreenCommandArgumentBuffer>>(device, 50, false, L"Command Argument Buffer");
+		wireFrameCommandArgBuffer_ = std::make_shared<UploadBuffer<WireframeCommandArguementBuffer>>(device, 50, false, L"Command Argument Buffer");
 
 		ThrowIfFailed(device_->CreateCommandQueue(&desc, IID_PPV_ARGS(&commandQueue_)));
 		commandQueue_->SetName(name.data());
@@ -121,6 +122,11 @@ namespace sludge
 		drawDescs[0].asConstant(rootSigID, 0, sizeof(utils::RTIndices) / 4);
 		commandSig = utils::D3D12CommandSigDesc{ drawDescs, 2, sizeof(OffscreenCommandArgumentBuffer) };
 		offScreenCommandSignature_ = commandSig.create(device, rootSig);
+
+		// Wireframe
+		drawDescs[0].asConstant(rootSigID, 0, sizeof(utils::WireframeIndices) / 4);
+		commandSig = utils::D3D12CommandSigDesc{ drawDescs, 2, sizeof(WireframeCommandArguementBuffer) };
+		wireframeCommandSiganture_ = commandSig.create(device, rootSig);
 
 	}
 

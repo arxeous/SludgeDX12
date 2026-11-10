@@ -17,6 +17,7 @@
 
 namespace sludge
 {
+
 	struct PBRMaterial
 	{
 		std::string albedo{};
@@ -44,6 +45,8 @@ namespace sludge
 		DirectX::XMMATRIX viewProjMat{};
 		DirectX::XMMATRIX invModelMat{};
 		DirectX::XMFLOAT4 albedo{1.0f, 1.0f, 1.0f, 1.0f};
+		DirectX::XMFLOAT3 max{};
+		DirectX::XMFLOAT3 min{};
 	};
 
 	struct Transform
